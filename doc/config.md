@@ -43,14 +43,14 @@ All properties should be in an object keyed by the layer identifier used in the 
 
 The minimum set of required properties are as follows:
 
-- **id**: The layer identifier used in the WMTS or WMS call
+- **id**: The layer identifier used in the WMTS or WMS call;  for TM2 layers, this is the TM2 project name
 - **title**: Title of the layer displayed to the end user. This is the first line displayed in the active layers list.
 - **subtitle**: Subtitle of the layer displayed to the end user. This is the second line displayed in the active layers list and usually includes platform, sensor, and/or attribution information.
 - **group**: The group this layer should be found in, either *baselayers* or *overlays*
 
 The following properties are required if this information is not available via the GIBS WMTS GetCapabilities document:
 
-- **type**: Tile service type, either *wmts* or *wms*.
+- **type**: Tile service type, either *wmts* or *wms*.  *tm2* can also be used to prototype TileMill2 / Mapbox Studio Classic layers
 - **format**: Image format type, either *image/png* or *image/jpeg*.
 - **tileSize**: For WMS layers only, an array of pixel dimensions used to tile the requests. For example, *[512, 512]*
 - **period**: Use *daily* for layers that have new content each day, otherwise use *static*.
