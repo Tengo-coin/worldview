@@ -262,7 +262,10 @@ wv.map.ui = wv.map.ui || function(models, config) {
                 layer = createLayerWMTS(def, options);
             } else if ( def.type === "wms" ) {
                 layer = createLayerWMS(def, options);
-            } else {
+            } else if ( def.type === "tm2" ) {
+                layer = createLayerTM2(def, options);
+            }
+             else {
                 throw new Error("Unknown layer type: " + def.type);
             }
             var date = options.date || models.date.selected;
@@ -359,6 +362,46 @@ wv.map.ui = wv.map.ui || function(models, config) {
         });
         return layer;
     };
+    
+    // Create a "TM2" tile layer - TileMill2 aka Mapbox Studio Classic 
+    // Used for rapidly prototyping new styles in TM2 then evaluating results in Worldview
+    // Makes calls to TM2's localhost web server when TM2 is running
+    var createLayerTM2 = function(def, options) {
+        var proj = models.proj.selected;
+        var source = config.sources[def.source];
+        if ( !source )
+            throw new Error(def.id + ": Invalid source: " + def.source);
+        if ( !source.stylePath )
+            throw new Error(def.id + ": No stylePath provided for: " + def.source + ": " + def.source.stylePath);
+
+        var transparent = ( def.format === "image/png" );
+
+        var extra = "";
+        var stylePathSlash = "";
+        
+        // Add a slash after the URL in case it wasn't specified in sources.json
+        if (!source.url.endsWith("/"))
+        	extra = "/";
+
+        if (!source.stylePath.endsWith("/"))
+        	stylePathSlash = "/";
+        
+        // Add timestamp to prevent caching of these tiles so that any changes are immediately visible
+        extra = extra + "{z}/{x}/{y}.png?id=tmstyle:" +
+        	source.stylePath + stylePathSlash + def.id + ".tm2" + 
+        	"?time="+ new Date().getTime();
+                
+        // Create layer
+        var layer = new ol.layer.Tile({
+            extent: proj.maxExtent,
+            source: new ol.source.XYZ({
+                url: source.url + extra,
+                opaque: !transparent
+            })
+        });
+        return layer;
+    };
+
 
     var isGraticule = function(def) {
         var proj = models.proj.selected.id;
