@@ -381,14 +381,13 @@ wv.map.ui = wv.map.ui || function(models, config) {
         
         // Add a slash after the URL in case it wasn't specified in sources.json
         if (!source.url.endsWith("/"))
-        	extra = "/";
+			extra = "/";
         if (!source.stylePath.endsWith("/"))
-        	stylePathSlash = "/";
+			stylePathSlash = "/";
         
         // Add timestamp to prevent caching of these tiles so that any changes are immediately visible
         extra = extra + "{z}/{x}/{y}.png?id=tmstyle:" +
-        	source.stylePath + stylePathSlash + def.id + ".tm2" + 
-        	"?time="+ new Date().getTime();
+			source.stylePath + stylePathSlash + def.id + ".tm2" + "?time="+ new Date().getTime();
                 
         // Create layer
         var layer = new ol.layer.Tile({
