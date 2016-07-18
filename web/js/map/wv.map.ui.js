@@ -363,7 +363,7 @@ wv.map.ui = wv.map.ui || function(models, config) {
         return layer;
     };
     
-    // Create a "TM2" tile layer - TileMill2 aka Mapbox Studio Classic 
+    // Create a Mapbox Studio Classic / TileMill2 ("TM2") tile layer
     // Used for rapidly prototyping new styles in TM2 then evaluating results in Worldview
     // Makes calls to TM2's localhost web server when TM2 is running
     var createLayerTM2 = function(def, options) {
@@ -382,7 +382,6 @@ wv.map.ui = wv.map.ui || function(models, config) {
         // Add a slash after the URL in case it wasn't specified in sources.json
         if (!source.url.endsWith("/"))
         	extra = "/";
-
         if (!source.stylePath.endsWith("/"))
         	stylePathSlash = "/";
         
