@@ -142,6 +142,10 @@ For WMTS layers that cannot be configured with a GetCapabilities document, a *ma
 - **resolutions**: Array of resolutions for each zoom level as defined in the OpenLayers 2 documentation.
 - **tileSize**: Array of pixel dimensions for each tile. Example *[512, 512]*
 
+For TileMill2 / Mapbox Studio Classic layers ("tm2" source), in addition to the **url** property, the following property is required:
+
+- **stylePath**: Full path to the base directory containing your Mapbox Studio Classic project folders;  note that this is a local path (e.g., "///Users/username/my-mb-studio-layers/") and not a "localhost"-prefixed path.
+
 ### Full Example
 ```json
 {
