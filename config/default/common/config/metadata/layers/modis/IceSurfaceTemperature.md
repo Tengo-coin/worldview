@@ -6,6 +6,7 @@ The MODIS Sea Ice Surface Temperature layer shows the surface temperature of Arc
 The MODIS Ice Surface Temperature product is available from both the Terra (MOD29) and Aqua (MYD29) satellites. The sensor and imagery resolution is 1km, and the temporal resolution is daily.
 
 References: [NSIDC – MOD29](http://nsidc.org/data/MOD29); [NSIDC – MYD29](http://nsidc.org/data/MYD29)
+<<<<<<< HEAD
 
 ### MODIS (Terra/Aqua) Ice Surface Temperature (Level 3, Daily, Day | Night)
 Temporal Coverage: 24 February 2000 - present (Terra); 3 July 2002 - present (Aqua)
@@ -17,3 +18,5 @@ The Moderate Resolution Imaging Spectroradiometer (MODIS) is a 36-band visible t
 Ice Surface Temperature (IST) is useful for understanding snow metamorphosis and melt, the rate of sea ice growth, and air–sea heat exchange.
 
 References:  [doi: 10.5067/MODIS/MOD29P1D.006](http://dx.doi.org/10.5067/MODIS/MOD29P1D.006); [doi: 10.5067/MODIS/MOD29P1N.006](http://dx.doi.org/10.5067/MODIS/MOD29P1N.006); [doi: 10.5067/MODIS/MYD29P1N.006](http://dx.doi.org/10.5067/MODIS/MYD29P1N.006); [doi: 10.5067/MODIS/MYD29P1D.006](http://dx.doi.org/10.5067/MODIS/MYD29P1D.006)
+=======
+>>>>>>> Add orbit track endpoints
