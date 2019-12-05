@@ -3,7 +3,7 @@ import {
   find as lodashFind,
   get as lodashGet
 } from 'lodash';
-import { Stroke, Style, Fill, Circle } from 'ol/style';
+import { Stroke, Style, Fill, Circle, Text } from 'ol/style';
 import { setStyleFunction } from './selectors';
 import { isFromActiveCompareRegion } from '../compare/util';
 export function getVectorStyleAttributeArray(layer) {
@@ -72,6 +72,15 @@ export function selectedPolygonStyle(style) {
   stroke.setWidth(0.5);
   fill.setColor(color);
   return style;
+}
+export function offsetLineStringStyle(feature, styleArray) {
+  return styleArray.map(style => {
+    const text = style.getText();
+    if (text) {
+      text.setOffsetX(25)
+    }
+    return style;
+  });
 }
 export function selectedStyleFunction(feature, styleArray) {
   if (styleArray.length !== 1) return styleArray;
@@ -164,7 +173,7 @@ export function onMapClickGetVectorFeatures(pixels, map, state, swipeOffset) {
     offsetTop = y - modalHeight;
   }
 
-  map.forEachFeatureAtPixel(pixels, function(feature, layer) {
+  map.forEachFeatureAtPixel(pixels, function (feature, layer) {
     const def = lodashGet(layer, 'wv.def');
     if (!def) return;
     if (!isFromActiveCompareRegion(map, pixels, layer.wv, state.compare, swipeOffset)) return;
