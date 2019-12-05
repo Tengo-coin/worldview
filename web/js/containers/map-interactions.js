@@ -9,13 +9,24 @@ import { selectVectorFeatures } from '../modules/vector-styles/actions';
 import { groupBy as lodashGroupBy, debounce as lodashDebounce, get as lodashGet } from 'lodash';
 import { changeCursor } from '../modules/map/actions';
 import { isFromActiveCompareRegion } from '../modules/compare/util';
+import VectorTooltip from '../components/map/vector-label';
 
+const tooltipDefaultProps = {
+  active: false,
+  offsetLeft: 0,
+  offsetTop: 0,
+  label: '',
+  id: null
+};
 export class MapInteractions extends React.Component {
   constructor(props) {
     super(props);
     this.mouseMove = lodashDebounce(this.mouseMove.bind(this), 8);
     this.singleClick = this.singleClick.bind(this);
     this.registerMouseListeners();
+    this.state = {
+      tooltip: tooltipDefaultProps
+    }
   }
 
   registerMouseListeners() {
@@ -50,36 +61,56 @@ export class MapInteractions extends React.Component {
     const pixels = map.getEventPixel(event);
     const coord = map.getCoordinateFromPixel(pixels);
     const { isShowingClick, changeCursor, measureIsActive, compareState, swipeOffset, proj } = this.props;
+    const { tooltip } = this.state;
     const [lon, lat] = coord;
     if (lon < -250 || lon > 250 || lat < -90 || lat > 90) {
       return;
     }
     const hasFeatures = map.hasFeatureAtPixel(pixels);
+    let newTooltip = tooltipDefaultProps;
     if (hasFeatures && !isShowingClick && !measureIsActive) {
       let isActiveLayer = false;
-      map.forEachFeatureAtPixel(pixels, function(feature, layer) {
+      map.forEachFeatureAtPixel(pixels, function (feature, layer) {
         const def = lodashGet(layer, 'wv.def');
         if (!def) return;
         const isWrapped = proj.id === 'geographic' && (def.wrapadjacentdays || def.wrapX);
         const isRenderedFeature = isWrapped ? (lon > -250 || lon < 250 || lat > -90 || lat < 90) : true;
         if (isRenderedFeature && isFromActiveCompareRegion(map, pixels, layer.wv, compareState, swipeOffset)) {
           isActiveLayer = true;
+          const vectorDataId = lodashGet(layer, 'wv.def.vectorData.id');
+          if (vectorDataId && vectorDataId === 'OrbitTracks') {
+            const label = feature.getProperties().label;
+            if (label) {
+              newTooltip = {
+                label,
+                active: true,
+                offsetLeft: pixels[0],
+                offsetTop: pixels[1] - 10,
+                id: feature.ol_uid
+              }
+            }
+          }
         }
       });
-      if (isActiveLayer) changeCursor(true);
+      if (isActiveLayer && !isShowingClick) changeCursor(true);
     } else if (!hasFeatures && isShowingClick) {
       changeCursor(false);
+    }
+    if (newTooltip.id !== tooltip.id) {
+      this.setState({ tooltip: newTooltip });
     }
   }
 
   render() {
     const { isShowingClick, mouseEvents } = this.props;
+    const { tooltip } = this.state;
     const mapClasses = isShowingClick ? 'wv-map' + ' cursor-pointer' : 'wv-map';
 
     return (
       <React.Fragment>
         <div id="wv-map" className={mapClasses} />
         <OlCoordinates mouseEvents={mouseEvents} />
+        <VectorTooltip {...tooltip} />
       </React.Fragment>
     );
   }
