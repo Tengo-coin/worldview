@@ -16,21 +16,23 @@ import {
   uniqBy as lodashUniqBy
 } from 'lodash';
 
-const sortEvents = function(events) {
-  return events.map(function(e) {
+const sortEvents = function (events) {
+  return events.map(function (e) {
+    console.log(e);
     e.geometries = lodashOrderBy(e.geometries, 'date', 'desc');
     // Discard duplicate geometry dates
-    e.geometries = lodashUniqBy(e.geometries, function(g) {
+    e.geometries = lodashUniqBy(e.geometries, function (g) {
       return g.date.split('T')[0];
     });
     return e;
   });
 };
-const formatResponse = function(item, ignored) {
-  if (item.categories) {
-    var category = Array.isArray(item.categories)
-      ? item.categories[0]
-      : item.categories;
+const formatResponse = function (item, ignored) {
+  if (item.properties.categories) {
+    const categories = item.properties.categories;
+    var category = Array.isArray(categories)
+      ? categories[0]
+      : categories;
     // Add slug to categories
     category.slug = category.title
       .toLowerCase()
@@ -120,7 +122,7 @@ export function eventsRequestReducer(actionName, state, action) {
     case SUCCESS: {
       const key =
         actionName === REQUEST_EVENTS
-          ? 'events'
+          ? 'features'
           : actionName === REQUEST_CATEGORIES
             ? 'categories'
             : 'sources';
