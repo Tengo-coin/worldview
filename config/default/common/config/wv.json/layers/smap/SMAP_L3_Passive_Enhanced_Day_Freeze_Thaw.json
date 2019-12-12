@@ -10,10 +10,7 @@
             "layergroup": [
               "smap"
             ],
-            "product":  "SPL3FTP_E",
-            "tracks": [
-            "OrbitTracks_SMAP_Descending"
-             ]
+            "product":  "SPL3FTP_E"
         }
     }
 }

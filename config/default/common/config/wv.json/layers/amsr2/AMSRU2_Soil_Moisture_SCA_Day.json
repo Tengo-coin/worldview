@@ -10,10 +10,7 @@
             "layergroup": [
               "amsr2"
             ],
-            "product":  "AU_Land",
-            "tracks": [
-            "OrbitTracks_GCOM-W1_Ascending"
-             ]
+            "product":  "AU_Land"
         }
     }
 }

@@ -31,10 +31,7 @@
       "palette": {
         "id": "MODIS_Aqua_Thermal_Anomalies_All",
         "immutable": "true"
-      },
-      "tracks": [
-      "OrbitTracks_Aqua_Ascending"
-       ]
+      }
     }
   }
 }

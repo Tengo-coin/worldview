@@ -11,10 +11,7 @@
               "modis",
               "modis_aqua"
             ],
-            "wrapadjacentdays": true,
-            "tracks": [
-            "OrbitTracks_Aqua_Ascending"
-             ]
+            "wrapadjacentdays": true
         }
     }
 }

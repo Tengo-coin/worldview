@@ -9,10 +9,7 @@
             "layergroup": [
               "calipso"
             ],
-            "product":  "",
-             "tracks": [
-            "OrbitTracks_Calipso_Ascending"
-            ]
+            "product":  ""
         }
     }
 }

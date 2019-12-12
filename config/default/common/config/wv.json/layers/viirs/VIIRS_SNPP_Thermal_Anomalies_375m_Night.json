@@ -30,10 +30,7 @@
       "palette": {
         "id": "VIIRS_SNPP_Thermal_Anomalies_375m_Night",
         "immutable": "true"
-      },
-      "tracks": [
-          "OrbitTracks_Suomi_NPP_Descending"
-      ]
+      }
     }
   }
 }

@@ -14,10 +14,7 @@
 
             "palette": {
                 "recommended":  ["purple_2", "rainbow_1"]
-            },
-            "tracks": [
-            "OrbitTracks_Terra_Ascending"
-             ]
+            }
         }
     }
 }

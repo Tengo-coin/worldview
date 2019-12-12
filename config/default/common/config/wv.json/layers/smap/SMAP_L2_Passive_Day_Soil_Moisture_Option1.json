@@ -9,10 +9,7 @@
             "layergroup": [
               "smap"
             ],
-            "product":  "SPL2SMP",
-            "tracks": [
-            "OrbitTracks_SMAP_Descending"
-             ]
+            "product":  "SPL2SMP"
         }
     }
 }

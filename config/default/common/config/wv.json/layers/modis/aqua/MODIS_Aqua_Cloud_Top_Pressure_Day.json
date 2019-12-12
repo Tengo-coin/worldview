@@ -12,12 +12,10 @@
             ],
             "product":  "MYD06_L2_DAY",
             "wrapadjacentdays": true,
+
             "palette": {
                 "recommended":  ["blue_4"]
-            },
-            "tracks": [
-            "OrbitTracks_Aqua_Ascending"
-             ]
+            }
         }
     }
 }

@@ -10,10 +10,7 @@
             "layergroup": [
               "amsre"
             ],
-            "inactive": true,
-            "tracks": [
-            "OrbitTracks_Terra_Ascending"
-            ]
+            "inactive": true
         }
     }
 }

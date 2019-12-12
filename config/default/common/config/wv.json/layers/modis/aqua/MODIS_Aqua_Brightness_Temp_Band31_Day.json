@@ -11,10 +11,7 @@
               "modis_aqua"
             ],
             "product":  "MYD021KM_DAY",
-            "wrapadjacentdays": true,
-            "tracks": [
-            "OrbitTracks_Aqua_Ascending"
-             ]
+            "wrapadjacentdays": true
         }
     }
 }

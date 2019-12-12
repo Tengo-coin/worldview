@@ -10,10 +10,7 @@
               "omi"
             ],
             "product":  "OMAEROe",
-            "tags":     "aod",
-            "tracks": [
-            "OrbitTracks_Aura_Ascending"
-            ]
+            "tags":     "aod"
 
         }
     }
