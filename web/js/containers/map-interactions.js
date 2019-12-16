@@ -81,11 +81,13 @@ export class MapInteractions extends React.Component {
           if (vectorDataId && vectorDataId === 'OrbitTracks') {
             const label = feature.getProperties().label;
             if (label) {
+              const coords = feature.getFlatCoordinates();
+              const pixel = map.getPixelFromCoordinate(coords);
               newTooltip = {
                 label,
                 active: true,
-                offsetLeft: pixels[0],
-                offsetTop: pixels[1] - 10,
+                offsetLeft: pixel[0],
+                offsetTop: pixel[1] - 6,
                 id: feature.ol_uid
               }
             }
