@@ -30,7 +30,7 @@ class VectorTooltip extends React.Component {
           fade={false}
           key={id}
         >
-          {label}
+          {label + ' UTC'}
         </Tooltip>
       </>
     );
