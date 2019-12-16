@@ -46,7 +46,28 @@ export function getMaxValue(v) {
 export function isConditional(item) {
   return Array.isArray(item) && item[0] === 'case';
 }
-
+export function adjustCircleRadius(style) {
+  const styleImage = style.getImage();
+  const fill = styleImage.getFill();
+  const radius = styleImage.getRadius() * .6;
+  return new Style({
+    image: new Circle({
+      radius: radius,
+      fill: fill
+    })
+  });
+}
+export function getOrbitStyles(feature, styleArray) {
+  return styleArray.map((style) => {
+    const type = feature.getType();
+    switch (type) {
+      case 'Point':
+        return adjustCircleRadius(style);
+      default:
+        return style;
+    }
+  });
+};
 export function selectedCircleStyle(style) {
   const styleImage = style.getImage();
   const fill = styleImage.getFill();

@@ -7,7 +7,7 @@ import {
 import {
   getLayers
 } from '../layers/selectors';
-import { getMinValue, getMaxValue, selectedStyleFunction, offsetLineStringStyle } from './util';
+import { getMinValue, getMaxValue, selectedStyleFunction, getOrbitStyles } from './util';
 import update from 'immutability-helper';
 import { containsCoordinate } from 'ol/extent';
 import stylefunction from 'ol-mapbox-style/stylefunction';
@@ -136,11 +136,9 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
           minute = minutes.split(':');
         }
         if ((minute && minute[1] % 5 === 0) || feature.getType() === 'LineString') {
-          if (olMap.getCoordinateFromPixel([olMap.getPixelFromCoordinate(feature.getExtent())[0] - 40, 0])[0] < -180) {
-            return offsetLineStringStyle(feature, styleFunction(feature, resolution));
-          } else {
-            return styleFunction(feature, resolution);
-          }
+          return styleFunction(feature, resolution);
+        } else if ((minute && minute[1] % 1 === 0) || feature.getType() === 'LineString') {
+          return getOrbitStyles(feature, styleFunction(feature, resolution));
         }
       });
     } else if (glStyle.name === 'SEDAC' &&
