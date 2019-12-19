@@ -15,7 +15,7 @@ class Event extends React.Component {
    */
   getDateLists() {
     const { event, isSelected, selectedDate } = this.props;
-    if (event.geometries.length > 1) {
+    if (event.geometry.coordinates.length > 1) {
       return (
         <ul
           className="dates"
@@ -24,7 +24,7 @@ class Event extends React.Component {
           {event.geometries.map((geometry, index) => {
             var date = geometry.date.split('T')[0];
             return (
-              <li key={event.id + '-' + date} className="dates">
+              <li key={event.properties.id + '-' + date} className="dates">
                 <a
                   onClick={e => {
                     e.stopPropagation();
@@ -63,11 +63,11 @@ class Event extends React.Component {
     if (isSelected && (!date || date === selectedDate)) {
       deselectEvent();
     } else {
-      selectEvent(event.id, date);
+      selectEvent(event.properties.id, date);
       googleTagManager.pushEvent({
         event: 'natural_event_selected',
         natural_events: {
-          category: event.categories[0].title
+          category: event.properties.categories[0].title
         }
       });
     }
@@ -95,7 +95,7 @@ class Event extends React.Component {
               rel="noopener noreferrer"
               className="natural-event-link"
               href={reference.url}
-              key={event.id + '-' + reference.id}
+              key={event.properties.id + '-' + reference.id}
               onClick={e => {
                 e.stopPropagation();
               }}
@@ -113,7 +113,7 @@ class Event extends React.Component {
 
   render() {
     const { event, isVisible, isSelected } = this.props;
-    const eventDate = util.parseDateUTC(event.geometries[0].date);
+    const eventDate = event.properties.date ? util.parseDateUTC(event.properties.date) : new Date();
     var dateString =
       util.giveWeekDay(eventDate) +
       ', ' +
@@ -136,11 +136,11 @@ class Event extends React.Component {
           e.stopPropagation();
           this.onClick();
         }}
-        id={'sidebar-event-' + util.encodeId(event.id)}
+        id={'sidebar-event-' + util.encodeId(event.properties.id)}
       >
         <i
-          className={'event-icon event-icon-' + event.categories[0].slug}
-          title={event.categories[0].title}
+          className={'event-icon event-icon-' + event.properties.categories[0].slug}
+          title={event.properties.categories[0].title}
         />
         <h4
           className="title"

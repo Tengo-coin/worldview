@@ -12,16 +12,16 @@ export function getEventsWithinExtent(
   var maxExtent = selectedProj.maxExtent;
   var visibleListEvents = {};
 
-  loadedEvents.forEach(function(naturalEvent) {
+  loadedEvents.forEach(function (naturalEvent) {
     var isSelectedEvent = selected.id === naturalEvent.id;
     var date = getDefaultEventDate(naturalEvent);
     if (selected && selected.date) {
       date = selected.date;
     }
-    var geometry =
-      lodashFind(naturalEvent.geometries, function(geometry) {
-        return geometry.date.split('T')[0] === date;
-      }) || naturalEvent.geometries[0];
+    var geometry = naturalEvent.geometry;
+    // lodashFind(naturalEvent.geometries, function (geometry) {
+    //   return geometry.date.split('T')[0] === date;
+    // }) || naturalEvent.geometries[0];
 
     var coordinates = geometry.coordinates;
 
@@ -66,13 +66,14 @@ export function getEventsWithinExtent(
   return visibleListEvents;
 }
 export function getDefaultEventDate(event) {
-  var date = new Date(event.geometries[0].date).toISOString().split('T')[0];
-  if (event.geometries.length < 2) return date;
-  var category = event.categories.title || event.categories[0].title;
+  var dateObj = event.properties.date ? new Date(event.properties.date) : new Date();
+  var date = dateObj.toISOString().split('T')[0];
+  if (event.geometry.coordinates.length < 2) return date;
+  var category = event.properties.categories.title || event.properties.categories[0].title;
   var today = new Date().toISOString().split('T')[0];
   // For storms that happened today, get previous date
   if (date === today && category === 'Severe Storms') {
-    date = new Date(event.geometries[1].date).toISOString().split('T')[0];
+    // date = new Date(event.geometries[1].date).toISOString().split('T')[0];
   }
   return date;
 }

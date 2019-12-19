@@ -38,7 +38,7 @@ class Events extends React.Component {
       config
     } = this.props;
 
-    let eventsRequestURL = apiURL + '/events';
+    let eventsRequestURL = apiURL + '/events/geojson';
     let categoryRequestURL = apiURL + '/categories';
     let sourceRequestURL = apiURL + '/sources';
 
@@ -117,11 +117,11 @@ class Events extends React.Component {
             message="Events may not be visible at all times."
           />
         ) : (
-          ''
-        )}
+            ''
+          )}
         <Scrollbars
           style={{ maxHeight: height + 'px' }}
-          scrollBarVerticalTop={ scrollBarVerticalTop }
+          scrollBarVerticalTop={scrollBarVerticalTop}
         >
           <div id="wv-events">
             <span
@@ -250,10 +250,10 @@ function mapStateToProps(state) {
 
   const showAlert = Boolean(
     util.browser.localStorage &&
-      selected.id &&
-      sidebar.activeTab === 'events' &&
-      browser.greaterThan.small &&
-      !localStorage.getItem('dismissedEventVisibilityAlert')
+    selected.id &&
+    sidebar.activeTab === 'events' &&
+    browser.greaterThan.small &&
+    !localStorage.getItem('dismissedEventVisibilityAlert')
   );
   return {
     events,

@@ -13,12 +13,12 @@ import { CHANGE_TAB as CHANGE_SIDEBAR_TAB } from '../sidebar/constants';
 import {
   assign as lodashAssign,
   orderBy as lodashOrderBy,
-  uniqBy as lodashUniqBy
+  uniqBy as lodashUniqBy,
+  get as lodashGet
 } from 'lodash';
 
 const sortEvents = function (events) {
   return events.map(function (e) {
-    console.log(e);
     e.geometries = lodashOrderBy(e.geometries, 'date', 'desc');
     // Discard duplicate geometry dates
     e.geometries = lodashUniqBy(e.geometries, function (g) {
@@ -28,7 +28,8 @@ const sortEvents = function (events) {
   });
 };
 const formatResponse = function (item, ignored) {
-  if (item.properties.categories) {
+  const categories = lodashGet(item, 'properties.categories');
+  if (categories) {
     const categories = item.properties.categories;
     var category = Array.isArray(categories)
       ? categories[0]
