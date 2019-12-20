@@ -65,7 +65,7 @@ export class MapInteractions extends React.Component {
     const [lon, lat] = coord;
     const hasFeatures = map.hasFeatureAtPixel(pixels);
     let newTooltip = tooltipDefaultProps;
-    if (hasFeatures && !isShowingClick && !measureIsActive) {
+    if (hasFeatures) {
       let isActiveLayer = false;
       map.forEachFeatureAtPixel(pixels, function (feature, layer) {
         const def = lodashGet(layer, 'wv.def');
