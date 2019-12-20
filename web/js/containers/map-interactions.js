@@ -63,9 +63,6 @@ export class MapInteractions extends React.Component {
     const { isShowingClick, changeCursor, measureIsActive, compareState, swipeOffset, proj } = this.props;
     const { tooltip } = this.state;
     const [lon, lat] = coord;
-    if (lon < -250 || lon > 250 || lat < -90 || lat > 90) {
-      return;
-    }
     const hasFeatures = map.hasFeatureAtPixel(pixels);
     let newTooltip = tooltipDefaultProps;
     if (hasFeatures && !isShowingClick && !measureIsActive) {
