@@ -15,6 +15,11 @@
           "vectorStyle": {
             "id": "OrbitTracks_Aura_Descending"
           },
+          "palette": {
+            "id": "OrbitTracks_Aura_Descending",
+            "immutable": true
+          },
+          "wrapX":true,
           "period": "daily"
       }
   }

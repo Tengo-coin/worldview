@@ -19,6 +19,7 @@
             "id": "OrbitTracks_Aqua_Descending",
             "immutable": true
           },
+          "wrapX": true,
           "period": "daily"
       }
   }
