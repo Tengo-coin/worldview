@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import OlCoordinates from '../components/map/ol-coordinates';
 import vectorDialog from './vector-dialog';
-import { onMapClickGetVectorFeatures } from '../modules/vector-styles/util';
+import { onMapClickGetVectorFeatures, isFeatureInRenderableArea } from '../modules/vector-styles/util';
 import { openCustomContent, onClose } from '../modules/modal/actions';
 import { selectVectorFeatures } from '../modules/vector-styles/actions';
 import { groupBy as lodashGroupBy, debounce as lodashDebounce, get as lodashGet } from 'lodash';
@@ -71,7 +71,7 @@ export class MapInteractions extends React.Component {
         const def = lodashGet(layer, 'wv.def');
         if (!def) return;
         const isWrapped = proj.id === 'geographic' && (def.wrapadjacentdays || def.wrapX);
-        const isRenderedFeature = isWrapped ? (lon > -250 || lon < 250 || lat > -90 || lat < 90) : true;
+        const isRenderedFeature = layer.wrap ? isFeatureInRenderableArea(lon, layer.wrap) : true;
         if (isRenderedFeature && isFromActiveCompareRegion(map, pixels, layer.wv, compareState, swipeOffset)) {
           isActiveLayer = true;
           const vectorDataId = lodashGet(layer, 'wv.def.vectorData.id');

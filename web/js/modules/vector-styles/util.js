@@ -6,6 +6,8 @@ import {
 import { Stroke, Style, Fill, Circle, Text } from 'ol/style';
 import { setStyleFunction } from './selectors';
 import { isFromActiveCompareRegion } from '../compare/util';
+import Feature from 'ol/Feature';
+import LineString from 'ol/geom/LineString';
 export function getVectorStyleAttributeArray(layer) {
   var isCustomActive = false;
   var isMinActive = false;
@@ -84,6 +86,14 @@ export function selectedCircleStyle(style) {
       })
     })
   });
+}
+export function lineStringStyleWithinExtent(coords, styleFunction, resolution) {
+  var feature = new Feature({
+    geometry: new LineString(coords)
+  });
+  console.log(styleFunction(feature, resolution));
+  return styleFunction(feature, resolution);
+
 }
 export function selectedPolygonStyle(style) {
   const fill = style.getFill();
@@ -167,6 +177,12 @@ export function getPaletteForStyle(layer, layerstyleLayerObject) {
     title: layer.title,
     id: layer.id + '0_legend'
   }];
+}
+export function isFeatureInRenderableArea(lon, wrap, acceptableExtent) {
+  if (acceptableExtent) {
+    return (lon > acceptableExtent[0] && lon < acceptableExtent[2]);
+  }
+  return wrap === -1 ? (lon < 250 && lon > 180) : wrap === 1 ? (lon > -250 && lon < -180) : false;
 }
 export function onMapClickGetVectorFeatures(pixels, map, state, swipeOffset) {
   const metaArray = [];

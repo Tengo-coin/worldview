@@ -2,15 +2,17 @@ import {
   get as lodashGet,
   isUndefined as lodashIsUndefined,
   each as lodashEach,
-  find as lodashFind
+  find as lodashFind,
+  chunk as lodashChunk
 } from 'lodash';
 import {
   getLayers
 } from '../layers/selectors';
-import { getMinValue, getMaxValue, selectedStyleFunction, getOrbitStyles } from './util';
+import { getMinValue, getMaxValue, selectedStyleFunction, getOrbitStyles, lineStringStyleWithinExtent, isFeatureInRenderableArea } from './util';
 import update from 'immutability-helper';
 import { containsCoordinate } from 'ol/extent';
 import stylefunction from 'ol-mapbox-style/stylefunction';
+import { PALETTE_CHANGE } from '../palettes/constants';
 /**
  * Gets a single colormap (entries / legend combo)
  *
@@ -135,10 +137,25 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
         if (minutes) {
           minute = minutes.split(':');
         }
-        if ((minute && minute[1] % 5 === 0) || feature.getType() === 'LineString') {
-          return styleFunction(feature, resolution);
-        } else if ((minute && minute[1] % 1 === 0) || feature.getType() === 'LineString') {
-          return getOrbitStyles(feature, styleFunction(feature, resolution));
+        if (shouldRenderFeature(feature, acceptableExtent)) {
+          if ((minute && minute[1] % 5 === 0) || feature.getType() === 'LineString') {
+            return styleFunction(feature, resolution);
+          } else if ((minute && minute[1] % 1 === 0) || feature.getType() === 'LineString') {
+            return getOrbitStyles(feature, styleFunction(feature, resolution));
+          }
+        } else if (feature.getType() === 'LineString') {
+          let newCoords = [];
+          const coords = feature.getFlatCoordinates();
+          for (let i = 0, len = coords.length; i < len; i += 2) {
+            if (isFeatureInRenderableArea(coords[i], layer.wrap, acceptableExtent)) {
+              newCoords.push([coords[i], coords[i + 1]]);
+            }
+          }
+          // lodashEach(chunkedCoords, (coords) => {
+          //   const lon = coords[1];
+          //   console.log(coords)
+          // })
+          return lineStringStyleWithinExtent(newCoords, styleFunction, resolution);
         }
       });
     } else if (glStyle.name === 'SEDAC' &&
