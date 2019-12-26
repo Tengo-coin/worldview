@@ -2,9 +2,10 @@ import {
   get as lodashGet,
   isUndefined as lodashIsUndefined,
   each as lodashEach,
-  find as lodashFind,
-  chunk as lodashChunk
+  find as lodashFind
 } from 'lodash';
+import LineString from 'ol/geom/LineString';
+
 import {
   getLayers
 } from '../layers/selectors';
@@ -132,30 +133,30 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
     if (glStyle.name === 'Orbit Tracks') {
       // Filter time by 5 mins
       layerInLayerGroup.setStyle(function (feature, resolution) {
+        const geometry = feature.getType ? feature : feature.getGeometry();
         var minute;
         var minutes = feature.get('label');
         if (minutes) {
           minute = minutes.split(':');
         }
-        if (shouldRenderFeature(feature, acceptableExtent)) {
-          if ((minute && minute[1] % 5 === 0) || feature.getType() === 'LineString') {
+        if (shouldRenderFeature(geometry, acceptableExtent)) {
+          if ((minute && minute[1] % 5 === 0) || geometry.getType() === 'LineString') {
             return styleFunction(feature, resolution);
           } else if ((minute && minute[1] % 1 === 0) || feature.getType() === 'LineString') {
-            return getOrbitStyles(feature, styleFunction(feature, resolution));
+            return getOrbitStyles(geometry, styleFunction(feature, resolution));
           }
-        } else if (feature.getType() === 'LineString') {
+        } else if (layer.wrap && geometry.getType() === 'LineString') {
           let newCoords = [];
-          const coords = feature.getFlatCoordinates();
+          const coords = geometry.getFlatCoordinates();
+
           for (let i = 0, len = coords.length; i < len; i += 2) {
             if (isFeatureInRenderableArea(coords[i], layer.wrap, acceptableExtent)) {
               newCoords.push([coords[i], coords[i + 1]]);
             }
           }
-          // lodashEach(chunkedCoords, (coords) => {
-          //   const lon = coords[1];
-          //   console.log(coords)
-          // })
-          return lineStringStyleWithinExtent(newCoords, styleFunction, resolution);
+          feature.setGeometry(new LineString(newCoords));
+          return styleFunction(feature, resolution);
+          // const feature = lineStringStyleWithinExtent(newCoords, feature);
         }
       });
     } else if (glStyle.name === 'SEDAC' &&
@@ -188,7 +189,7 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
 }
 const shouldRenderFeature = (feature, acceptableExtent) => {
   if (!acceptableExtent) return true;
-  const midpoint = feature.getFlatCoordinates();
+  const midpoint = feature.getFlatCoordinates ? feature.getFlatCoordinates() : feature.getGeometry().getFlatCoordinates();
   if (containsCoordinate(acceptableExtent, midpoint)) return true;
   return false;
 };

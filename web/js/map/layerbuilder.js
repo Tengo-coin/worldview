@@ -7,6 +7,7 @@ import OlLayerGroup from 'ol/layer/Group';
 import OlLayerTile from 'ol/layer/Tile';
 import OlTileGridTileGrid from 'ol/tilegrid/TileGrid';
 import MVT from 'ol/format/MVT';
+import Feature from 'ol/Feature';
 import LayerVectorTile from 'ol/layer/VectorTile';
 import SourceVectorTile from 'ol/source/VectorTile';
 import lodashCloneDeep from 'lodash/cloneDeep';
@@ -415,14 +416,16 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
       '&Version=1.0.0' +
       '&FORMAT=application%2Fvnd.mapbox-vector-tile' +
       '&TileMatrix={z}&TileCol={x}&TileRow={y}';
-
+    const mvtConfig = day ? {
+      featureClass: Feature
+    } : {};
     var sourceOptions = new SourceVectorTile({
       url: source.url + urlParameters,
       layer: layerName,
       day: day,
-      format: new MVT(),
+      format: new MVT(mvtConfig),
       matrixSet: tms,
-      wrapX: true,
+      wrapX: day === 1 || day === -1 ? true : false,
       tileGrid: new OlTileGridTileGrid({
         extent: gridExtent,
         resolutions: matrixSet.resolutions,
