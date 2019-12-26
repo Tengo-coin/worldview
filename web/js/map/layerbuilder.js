@@ -416,7 +416,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
       '&Version=1.0.0' +
       '&FORMAT=application%2Fvnd.mapbox-vector-tile' +
       '&TileMatrix={z}&TileCol={x}&TileRow={y}';
-    const mvtConfig = day ? {
+    const mvtConfig = day && def.wrapadjacentdays ? {
       featureClass: Feature
     } : {};
     var sourceOptions = new SourceVectorTile({
