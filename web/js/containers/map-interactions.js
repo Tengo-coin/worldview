@@ -62,15 +62,16 @@ export class MapInteractions extends React.Component {
     const coord = map.getCoordinateFromPixel(pixels);
     const { isShowingClick, changeCursor, measureIsActive, compareState, swipeOffset, proj } = this.props;
     const { tooltip } = this.state;
-    const [lon, lat] = coord;
+    const [lon] = coord;
     const hasFeatures = map.hasFeatureAtPixel(pixels);
     let newTooltip = tooltipDefaultProps;
     if (hasFeatures) {
       let isActiveLayer = false;
       map.forEachFeatureAtPixel(pixels, function (feature, layer) {
         const def = lodashGet(layer, 'wv.def');
+        const geometry = feature.getType ? feature : feature.getGeometry();
+
         if (!def) return;
-        const isWrapped = proj.id === 'geographic' && (def.wrapadjacentdays || def.wrapX);
         const isRenderedFeature = layer.wrap ? isFeatureInRenderableArea(lon, layer.wrap) : true;
         if (isRenderedFeature && isFromActiveCompareRegion(map, pixels, layer.wv, compareState, swipeOffset)) {
           isActiveLayer = true;
@@ -78,8 +79,7 @@ export class MapInteractions extends React.Component {
           if (vectorDataId && vectorDataId === 'OrbitTracks') {
             const label = feature.getProperties().label;
             if (label) {
-              const coords = feature.getFlatCoordinates();
-              const pixel = map.getPixelFromCoordinate(coords);
+              const pixel = map.getPixelFromCoordinate(coord);
               newTooltip = {
                 label,
                 active: true,

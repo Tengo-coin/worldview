@@ -59,7 +59,7 @@ export function adjustCircleRadius(style) {
     })
   });
 }
-export function getOrbitStyles(feature, styleArray) {
+export function getOrbitPointStyles(feature, styleArray) {
   return styleArray.map((style) => {
     const type = feature.getType();
     switch (type) {
@@ -87,13 +87,17 @@ export function selectedCircleStyle(style) {
     })
   });
 }
-export function lineStringStyleWithinExtent(coords, styleFunction, resolution) {
-  var feature = new Feature({
-    geometry: new LineString(coords)
-  });
-  console.log(styleFunction(feature, resolution));
+export function containedLineStringStyle(props) {
+  const { feature, geometry, wrap, acceptableExtent, resolution, styleFunction } = props;
+  let newCoords = [];
+  const coords = geometry.getFlatCoordinates();
+  for (let i = 0, len = coords.length; i < len; i += 2) {
+    if (isFeatureInRenderableArea(coords[i], wrap, acceptableExtent)) {
+      newCoords.push([coords[i], coords[i + 1]]);
+    }
+  }
+  feature.setGeometry(new LineString(newCoords));
   return styleFunction(feature, resolution);
-
 }
 export function selectedPolygonStyle(style) {
   const fill = style.getFill();

@@ -4,16 +4,15 @@ import {
   each as lodashEach,
   find as lodashFind
 } from 'lodash';
-import LineString from 'ol/geom/LineString';
 
 import {
   getLayers
 } from '../layers/selectors';
-import { getMinValue, getMaxValue, selectedStyleFunction, getOrbitStyles, lineStringStyleWithinExtent, isFeatureInRenderableArea } from './util';
+import { getMinValue, getMaxValue, selectedStyleFunction, getOrbitPointStyles, containedLineStringStyle } from './util';
 import update from 'immutability-helper';
 import { containsCoordinate } from 'ol/extent';
 import stylefunction from 'ol-mapbox-style/stylefunction';
-import { PALETTE_CHANGE } from '../palettes/constants';
+
 /**
  * Gets a single colormap (entries / legend combo)
  *
@@ -142,21 +141,18 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
         if (shouldRenderFeature(geometry, acceptableExtent)) {
           if ((minute && minute[1] % 5 === 0) || geometry.getType() === 'LineString') {
             return styleFunction(feature, resolution);
-          } else if ((minute && minute[1] % 1 === 0) || feature.getType() === 'LineString') {
-            return getOrbitStyles(geometry, styleFunction(feature, resolution));
+          } else if ((minute && minute[1] % 1 === 0)) {
+            return getOrbitPointStyles(geometry, styleFunction(feature, resolution));
           }
         } else if (layer.wrap && geometry.getType() === 'LineString') {
-          let newCoords = [];
-          const coords = geometry.getFlatCoordinates();
-
-          for (let i = 0, len = coords.length; i < len; i += 2) {
-            if (isFeatureInRenderableArea(coords[i], layer.wrap, acceptableExtent)) {
-              newCoords.push([coords[i], coords[i + 1]]);
-            }
-          }
-          feature.setGeometry(new LineString(newCoords));
-          return styleFunction(feature, resolution);
-          // const feature = lineStringStyleWithinExtent(newCoords, feature);
+          return containedLineStringStyle({
+            feature,
+            geometry,
+            wrap: layer.wrap,
+            extent: acceptableExtent,
+            resolution,
+            styleFunction
+          });
         }
       });
     } else if (glStyle.name === 'SEDAC' &&
