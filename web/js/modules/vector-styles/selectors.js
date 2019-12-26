@@ -56,7 +56,7 @@ export function findIndex(layerId, type, value, index, groupStr, state) {
   index = index || 0;
   var values = getVectorStyle(layerId, index, groupStr, state).entries.values;
   var result;
-  lodashEach(values, function (check, index) {
+  lodashEach(values, function(check, index) {
     var min = getMinValue(check);
     var max = getMaxValue(check);
     if (type === 'min' && value === min) {
@@ -103,7 +103,7 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
               : null;
       }
     }
-    lodashEach(activeLayers, function (def) {
+    lodashEach(activeLayers, function(def) {
       if (state.compare && state.compare.active) {
         if (layerGroup && layerGroup.getLayers().getArray().length) {
           lodashEach(layerGroup.getLayers().getArray(), subLayer => {
@@ -131,7 +131,7 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
     // Filter Orbit Tracks
     if (glStyle.name === 'Orbit Tracks') {
       // Filter time by 5 mins
-      layerInLayerGroup.setStyle(function (feature, resolution) {
+      layerInLayerGroup.setStyle(function(feature, resolution) {
         const geometry = feature.getType ? feature : feature.getGeometry();
         var minute;
         var minutes = feature.get('label');
@@ -159,7 +159,7 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
       ((selected[layerId] && selected[layerId].length))) {
       const selectedFeatures = selected[layerId];
 
-      layerInLayerGroup.setStyle(function (feature, resolution) {
+      layerInLayerGroup.setStyle(function(feature, resolution) {
         const data = state.config.vectorData[def.vectorData.id];
         const properties = data.mvt_properties;
         const features = feature.getProperties();
@@ -174,7 +174,7 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
         }
       });
     } else if (acceptableExtent) {
-      layerInLayerGroup.setStyle(function (feature, resolution) {
+      layerInLayerGroup.setStyle(function(feature, resolution) {
         if (shouldRenderFeature(feature, acceptableExtent)) {
           return styleFunction(feature, resolution);
         }
@@ -229,7 +229,7 @@ export function clearStyleFunction(def, vectorStyleId, vectorStyles, layer, stat
   styleFunction = stylefunction(layer, glStyle, vectorStyleId);
   if (glStyle.name === 'Orbit Tracks') {
     // Filter time by 5 mins
-    layer.setStyle(function (feature, resolution) {
+    layer.setStyle(function(feature, resolution) {
       var minute;
       var minutes = feature.get('label');
       if (minutes) {

@@ -33,9 +33,7 @@ beforeEach(() => {
     />,
     {
       createNodeMock: (element) => {
-        if (element.id === 'ol-coords-case') {
-          return null;
-        }
+        if (element.id === 'ol-coords-case' || element.id === 'vector-hover-label-tooltip') return null;
       }
     }
   );

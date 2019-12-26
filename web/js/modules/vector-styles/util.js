@@ -3,10 +3,9 @@ import {
   find as lodashFind,
   get as lodashGet
 } from 'lodash';
-import { Stroke, Style, Fill, Circle, Text } from 'ol/style';
+import { Stroke, Style, Fill, Circle } from 'ol/style';
 import { setStyleFunction } from './selectors';
 import { isFromActiveCompareRegion } from '../compare/util';
-import Feature from 'ol/Feature';
 import LineString from 'ol/geom/LineString';
 export function getVectorStyleAttributeArray(layer) {
   var isCustomActive = false;
@@ -51,7 +50,7 @@ export function isConditional(item) {
 export function adjustCircleRadius(style) {
   const styleImage = style.getImage();
   const fill = styleImage.getFill();
-  const radius = styleImage.getRadius() * .6;
+  const radius = styleImage.getRadius() * 0.6;
   return new Style({
     image: new Circle({
       radius: radius,
@@ -89,7 +88,7 @@ export function selectedCircleStyle(style) {
 }
 export function containedLineStringStyle(props) {
   const { feature, geometry, wrap, acceptableExtent, resolution, styleFunction } = props;
-  let newCoords = [];
+  const newCoords = [];
   const coords = geometry.getFlatCoordinates();
   for (let i = 0, len = coords.length; i < len; i += 2) {
     if (isFeatureInRenderableArea(coords[i], wrap, acceptableExtent)) {
@@ -112,7 +111,7 @@ export function offsetLineStringStyle(feature, styleArray) {
   return styleArray.map(style => {
     const text = style.getText();
     if (text) {
-      text.setOffsetX(25)
+      text.setOffsetX(25);
     }
     return style;
   });
@@ -214,7 +213,7 @@ export function onMapClickGetVectorFeatures(pixels, map, state, swipeOffset) {
     offsetTop = y - modalHeight;
   }
 
-  map.forEachFeatureAtPixel(pixels, function (feature, layer) {
+  map.forEachFeatureAtPixel(pixels, function(feature, layer) {
     const def = lodashGet(layer, 'wv.def');
     if (!def) return;
     if (!isFromActiveCompareRegion(map, pixels, layer.wv, state.compare, swipeOffset)) return;

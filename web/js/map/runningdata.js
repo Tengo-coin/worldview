@@ -12,6 +12,7 @@ import {
 import {
   isFromActiveCompareRegion
 } from '../modules/compare/util';
+import { isFeatureInRenderableArea } from '../modules/vector-styles/util';
 export function MapRunningData(models, compareUi, store) {
   var self;
 
@@ -41,9 +42,8 @@ export function MapRunningData(models, compareUi, store) {
    */
   self.newPoint = function(pixels, map) {
     const state = store.getState();
-    const proj = state.proj;
     const activeLayerObj = {};
-    const [lon, lat] = map.getCoordinateFromPixel(pixels);
+    const [lon] = map.getCoordinateFromPixel(pixels);
     let swipeOffset;
     if (compareUi && state.compare.active) {
       swipeOffset = Math.floor(compareUi.getOffset());
@@ -52,8 +52,7 @@ export function MapRunningData(models, compareUi, store) {
     map.forEachFeatureAtPixel(pixels, (feature, layer) => {
       const def = lodashGet(layer, 'wv.def');
       if (!def) return;
-      const isWrapped = proj.id === 'geographic' && (def.wrapadjacentdays || def.wrapX);
-      const isRenderedFeature = isWrapped ? (lon > -250 || lon < 250 || lat > -90 || lat < 90) : true;
+      const isRenderedFeature = layer.wrap ? isFeatureInRenderableArea(lon, layer.wrap) : true;
       if (!isRenderedFeature || !isFromActiveCompareRegion(map, pixels, layer.wv, state.compare, swipeOffset)) return;
       let color;
       const identifier = def.palette.styleProperty;

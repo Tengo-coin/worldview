@@ -26,7 +26,7 @@ export class MapInteractions extends React.Component {
     this.registerMouseListeners();
     this.state = {
       tooltip: tooltipDefaultProps
-    }
+    };
   }
 
   registerMouseListeners() {
@@ -60,16 +60,15 @@ export class MapInteractions extends React.Component {
   mouseMove(event, map, crs) {
     const pixels = map.getEventPixel(event);
     const coord = map.getCoordinateFromPixel(pixels);
-    const { isShowingClick, changeCursor, measureIsActive, compareState, swipeOffset, proj } = this.props;
+    const { isShowingClick, changeCursor, compareState, swipeOffset } = this.props;
     const { tooltip } = this.state;
     const [lon] = coord;
     const hasFeatures = map.hasFeatureAtPixel(pixels);
     let newTooltip = tooltipDefaultProps;
     if (hasFeatures) {
       let isActiveLayer = false;
-      map.forEachFeatureAtPixel(pixels, function (feature, layer) {
+      map.forEachFeatureAtPixel(pixels, function(feature, layer) {
         const def = lodashGet(layer, 'wv.def');
-        const geometry = feature.getType ? feature : feature.getGeometry();
 
         if (!def) return;
         const isRenderedFeature = layer.wrap ? isFeatureInRenderableArea(lon, layer.wrap) : true;
@@ -86,7 +85,7 @@ export class MapInteractions extends React.Component {
                 offsetLeft: pixel[0],
                 offsetTop: pixel[1] - 6,
                 id: feature.ol_uid
-              }
+              };
             }
           }
         }
