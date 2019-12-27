@@ -2,14 +2,16 @@
   "layers": {
       "OrbitTracks_Aqua_Descending": {
           "id":       "OrbitTracks_Aqua_Descending",
-          "title":    "Orbit Tracks (Descending, Points, Aqua)",
-          "subtitle": "",
+          "title": "Aqua - Orbit Track & Time",
+          "subtitle": "Aqua / Space-Track.org",
           "description": "vector/OrbitTracks_Aqua_Descending",
           "type":     "vector",
-          "tags":     "vector vectors",
+          "tags":     "vector vectors tracks",
           "group":    "overlays",
           "layergroup": [
-            "vector"
+            "vector",
+            "reference",
+            "reference_orbits"
           ],
           "inactive": true,
           "vectorStyle": {
@@ -19,8 +21,11 @@
             "id": "OrbitTracks_Aqua_Descending",
             "immutable": true
           },
-          "wrapX": true,
-          "period": "daily"
+          "period": "daily",
+          "daynight": "night",
+      "track": "descending",
+      "startDate": "2002-05-04"
+
       }
   }
 }
