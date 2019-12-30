@@ -77,6 +77,7 @@ export function setRange(layerId, props, index, palettes, state) {
 }
 
 export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state) {
+  const { compare, proj } = state;
   var styleFunction;
   var layerId = def.id;
   var glStyle = vectorStyles[layerId];
@@ -84,6 +85,7 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
   var layerState = state.layers;
   const activeLayerStr = state.compare.activeString;
   const selected = state.vectorStyles.selected;
+  const projId = proj.id;
   var activeLayers = getLayers(
     layerState[activeLayerStr],
     {},
@@ -91,9 +93,10 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
   ).reverse();
   var layerGroups;
   var layerGroup;
+
   if (olMap) {
     layerGroups = olMap.getLayers().getArray();
-    if (state.compare && state.compare.active) {
+    if (compare && compare.active) {
       if (layerGroups.length === 2) {
         layerGroup =
           layerGroups[0].get('group') === activeLayerStr
@@ -104,7 +107,7 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
       }
     }
     lodashEach(activeLayers, function(def) {
-      if (state.compare && state.compare.active) {
+      if (compare && compare.active) {
         if (layerGroup && layerGroup.getLayers().getArray().length) {
           lodashEach(layerGroup.getLayers().getArray(), subLayer => {
             if (subLayer.wv && (subLayer.wv.id === layerId)) {
@@ -138,10 +141,10 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
         if (minutes) {
           minute = minutes.split(':');
         }
-        if ((acceptableExtent && shouldRenderFeature(geometry, acceptableExtent)) || !acceptableExtent) {
+        if (!layer.wrap || (acceptableExtent && shouldRenderFeature(geometry, acceptableExtent))) {
           if ((minute && minute[1] % 5 === 0) || geometry.getType() === 'LineString') {
             return styleFunction(feature, resolution);
-          } else if ((minute && minute[1] % 1 === 0)) {
+          } else if (minute && minute[1] % 1 === 0 && !(projId === 'geographic' && resolution > 0.35)) {
             return getOrbitPointStyles(geometry, styleFunction(feature, resolution));
           }
         } else if (geometry.getType() === 'LineString') {
