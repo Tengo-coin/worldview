@@ -3,10 +3,10 @@ import {
   find as lodashFind,
   get as lodashGet
 } from 'lodash';
+
 import { Stroke, Style, Fill, Circle } from 'ol/style';
 import { setStyleFunction } from './selectors';
 import { isFromActiveCompareRegion } from '../compare/util';
-import LineString from 'ol/geom/LineString';
 export function getVectorStyleAttributeArray(layer) {
   var isCustomActive = false;
   var isMinActive = false;
@@ -86,18 +86,7 @@ export function selectedCircleStyle(style) {
     })
   });
 }
-export function containedLineStringStyle(props) {
-  const { feature, geometry, wrap, acceptableExtent, resolution, styleFunction } = props;
-  const newCoords = [];
-  const coords = geometry.getFlatCoordinates();
-  for (let i = 0, len = coords.length; i < len; i += 2) {
-    if (isFeatureInRenderableArea(coords[i], wrap, acceptableExtent)) {
-      newCoords.push([coords[i], coords[i + 1]]);
-    }
-  }
-  feature.setGeometry(new LineString(newCoords));
-  return styleFunction(feature, resolution);
-}
+
 export function selectedPolygonStyle(style) {
   const fill = style.getFill();
   const color = fill.getColor().replace(/[^,]+(?=\))/, '0.5');

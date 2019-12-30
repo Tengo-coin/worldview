@@ -51,11 +51,11 @@ export function MapRunningData(models, compareUi, store) {
 
     map.forEachFeatureAtPixel(pixels, (feature, layer) => {
       const def = lodashGet(layer, 'wv.def');
-      if (!def) return;
+      const identifier = lodashGet(layer, 'def.palette.styleProperty');
+      if (!def || !identifier) return;
       const isRenderedFeature = layer.wrap ? isFeatureInRenderableArea(lon, layer.wrap) : true;
       if (!isRenderedFeature || !isFromActiveCompareRegion(map, pixels, layer.wv, state.compare, swipeOffset)) return;
       let color;
-      const identifier = def.palette.styleProperty;
       const layerId = def.id;
       const paletteLegends = getPalette(layerId, undefined, undefined, state);
       const legend = paletteLegends.legend;
