@@ -138,7 +138,7 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
         if (minutes) {
           minute = minutes.split(':');
         }
-        if (shouldRenderFeature(geometry, acceptableExtent)) {
+        if ((acceptableExtent && shouldRenderFeature(geometry, acceptableExtent)) || !acceptableExtent) {
           if ((minute && minute[1] % 5 === 0) || geometry.getType() === 'LineString') {
             return styleFunction(feature, resolution);
           } else if ((minute && minute[1] % 1 === 0)) {
