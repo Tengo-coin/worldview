@@ -28,7 +28,10 @@
       "source-description": "Default",
       "type": "circle",
       "paint": {
-        "circle-radius": "5",
+        "circle-radius": ["case",
+          ["==",  ["%", ["get", "minute"], 5], 0], 5,
+          3
+        ],
         "circle-color": "rgb(192, 88, 240)"
       }
     }
