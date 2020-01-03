@@ -30,7 +30,7 @@
       "paint": {
         "circle-radius": ["case",
           ["==",  ["%", ["get", "minute"], 5], 0], 5,
-          3
+          2.5
         ],
         "circle-color": "rgb(21, 192, 230)"
       }
