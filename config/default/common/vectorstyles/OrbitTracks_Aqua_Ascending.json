@@ -16,6 +16,7 @@
       "source-layer": "OrbitTracks_Aqua_Ascending",
       "source-description": "Default",
       "type": "line",
+
       "paint": {
         "line-color": "rgb(21, 192, 230)",
         "line-width": 2
@@ -27,8 +28,12 @@
       "source-layer": "OrbitTracks_Aqua_Ascending",
       "source-description": "Default",
       "type": "circle",
+
       "paint": {
-        "circle-radius": "5",
+        "circle-radius": ["case",
+          ["==",  ["%", ["get", "minute"], 5], 0], 5,
+          2
+        ],
         "circle-color": "rgb(21, 192, 230)"
       }
     }
