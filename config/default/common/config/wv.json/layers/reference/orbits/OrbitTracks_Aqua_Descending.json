@@ -13,7 +13,7 @@
             "reference",
             "reference_orbits"
           ],
-          "inactive": true,
+          "inactive": false,
           "vectorStyle": {
             "id": "OrbitTracks_Aqua_Descending"
           },
@@ -24,7 +24,7 @@
           "period": "daily",
           "daynight": "night",
       "track": "descending",
-      "startDate": "2002-05-04"
+      "startDate": "2019-12-28"
 
       }
   }
