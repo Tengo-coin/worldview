@@ -56,7 +56,7 @@ export function findIndex(layerId, type, value, index, groupStr, state) {
   index = index || 0;
   var values = getVectorStyle(layerId, index, groupStr, state).entries.values;
   var result;
-  lodashEach(values, function(check, index) {
+  lodashEach(values, function (check, index) {
     var min = getMinValue(check);
     var max = getMaxValue(check);
     if (type === 'min' && value === min) {
@@ -106,7 +106,7 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
               : null;
       }
     }
-    lodashEach(activeLayers, function(def) {
+    lodashEach(activeLayers, function (def) {
       if (compare && compare.active) {
         if (layerGroup && layerGroup.getLayers().getArray().length) {
           lodashEach(layerGroup.getLayers().getArray(), subLayer => {
@@ -134,28 +134,24 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
     // Filter Orbit Tracks
     if (glStyle.name === 'Orbit Tracks') {
       // Filter time by 5 mins
-      layerInLayerGroup.setStyle(function(feature, resolution) {
-        const geometry = feature.getType ? feature : feature.getGeometry();
-        var minute;
-        var minutes = feature.get('label');
-        if (minutes) {
-          minute = minutes.split(':');
-        }
-        if (!layer.wrap || (acceptableExtent && shouldRenderFeature(geometry, acceptableExtent))) {
-          if ((minute && minute[1] % 5 === 0) || geometry.getType() === 'LineString') {
-            return styleFunction(feature, resolution);
-          } else if (minute && minute[1] % 1 === 0 && !(projId === 'geographic' && resolution > 0.35)) {
-            return getOrbitPointStyles(geometry, styleFunction(feature, resolution));
-          }
-        } else if (geometry.getType() === 'LineString') {
-          return styleFunction(feature, resolution);
-        }
-      });
+      // layerInLayerGroup.setStyle(function (feature, resolution) {
+      //   const geometry = feature.getType ? feature : feature.getGeometry();
+      //   var minute;
+      //   var minutes = feature.get('label');
+      //   if (minutes) {
+      //     minute = minutes.split(':');
+      //   }
+      //   if (!layer.wrap || (acceptableExtent && shouldRenderFeature(geometry, acceptableExtent))) {
+      //     return styleFunction(feature, resolution);
+      //   } else if (geometry.getType() === 'LineString') {
+      //     return styleFunction(feature, resolution);
+      //   }
+      // });
     } else if (glStyle.name === 'SEDAC' &&
       ((selected[layerId] && selected[layerId].length))) {
       const selectedFeatures = selected[layerId];
 
-      layerInLayerGroup.setStyle(function(feature, resolution) {
+      layerInLayerGroup.setStyle(function (feature, resolution) {
         const data = state.config.vectorData[def.vectorData.id];
         const properties = data.mvt_properties;
         const features = feature.getProperties();
@@ -170,7 +166,7 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
         }
       });
     } else if (acceptableExtent) {
-      layerInLayerGroup.setStyle(function(feature, resolution) {
+      layerInLayerGroup.setStyle(function (feature, resolution) {
         if (shouldRenderFeature(feature, acceptableExtent)) {
           return styleFunction(feature, resolution);
         }
@@ -225,7 +221,7 @@ export function clearStyleFunction(def, vectorStyleId, vectorStyles, layer, stat
   styleFunction = stylefunction(layer, glStyle, vectorStyleId);
   if (glStyle.name === 'Orbit Tracks') {
     // Filter time by 5 mins
-    layer.setStyle(function(feature, resolution) {
+    layer.setStyle(function (feature, resolution) {
       var minute;
       var minutes = feature.get('label');
       if (minutes) {
