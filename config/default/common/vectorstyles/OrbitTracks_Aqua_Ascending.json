@@ -30,17 +30,14 @@
       "type": "circle",
       "paint": {
         "circle-radius": {
-          "base": ["case",
-            ["==",  ["%", ["get", "minute"], 5], 0], 5,
-            3
-          ],
+          "base": 3,
           "stops": [[12, ["case",
-            ["==",  ["%", ["get", "minute"], 5], 0], 5,
-              3]],
-            [22, ["case",
               ["==",  ["%", ["get", "minute"], 5], 0], 2,
               1
-            ]]]
+            ]],
+            [22, ["case",
+            ["==",  ["%", ["get", "minute"], 5], 0], 5,
+              3]]]
         },
         "circle-color": "rgb(21, 192, 230)"
       }
