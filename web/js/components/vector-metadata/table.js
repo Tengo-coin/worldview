@@ -30,8 +30,6 @@ export default class VectorMetaTable extends React.Component {
           const metaFeatures = obj.features;
           const metaLegend = obj.legend;
           const title = obj.featureTitle;
-          console.log(metaFeatures)
-          console.log(metaLegend)
           return (
             <div key={util.encodeId(title + '_' + metaIndex)}>
               <Table size="sm">
@@ -45,7 +43,7 @@ export default class VectorMetaTable extends React.Component {
                     const featureId = properties.Identifier;
                     const isIntegerToStyle = properties.Function !== 'Identify' && (properties.DataType === 'int');
                     if (!metaFeatures[featureId] && metaFeatures[featureId] !== 0) {
-                      return null
+                      return null;
                     }
 
                     const value = properties.ValueMap

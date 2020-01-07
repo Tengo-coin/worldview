@@ -69,10 +69,11 @@ export function getOrbitPointStyles(feature, styleArray) {
     }
   });
 };
-export function selectedCircleStyle(style) {
+export function selectedCircleStyle(style, size) {
+  size = size || 2;
   const styleImage = style.getImage();
   const fill = styleImage.getFill();
-  const radius = styleImage.getRadius() * 2;
+  const radius = styleImage.getRadius() * size;
   return new Style({
     image: new Circle({
       radius: radius,
@@ -105,13 +106,13 @@ export function offsetLineStringStyle(feature, styleArray) {
     return style;
   });
 }
-export function selectedStyleFunction(feature, styleArray) {
+export function selectedStyleFunction(feature, styleArray, size) {
   if (styleArray.length !== 1) return styleArray;
   return styleArray.map((style) => {
     const type = feature.getType();
     switch (type) {
       case 'Point':
-        return selectedCircleStyle(style);
+        return selectedCircleStyle(style, size);
       case 'Polygon':
         return selectedPolygonStyle(style);
       default:

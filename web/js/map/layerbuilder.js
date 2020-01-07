@@ -7,7 +7,6 @@ import OlLayerGroup from 'ol/layer/Group';
 import OlLayerTile from 'ol/layer/Tile';
 import OlTileGridTileGrid from 'ol/tilegrid/TileGrid';
 import MVT from 'ol/format/MVT';
-import Feature from 'ol/Feature';
 import LayerVectorTile from 'ol/layer/VectorTile';
 import SourceVectorTile from 'ol/source/VectorTile';
 import lodashCloneDeep from 'lodash/cloneDeep';
@@ -32,7 +31,7 @@ import {
 export function mapLayerBuilder(models, config, cache, ui, store) {
   const self = {};
 
-  self.init = function () {
+  self.init = function() {
     self.extentLayers = [];
   };
 
@@ -84,7 +83,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
    * @param {object} options - Layer options
    * @returns {object} OpenLayers layer
    */
-  self.createLayer = function (def, options) {
+  self.createLayer = function(def, options) {
     const state = store.getState();
     const activeDateStr = state.compare.isCompareA ? 'selected' : 'selectedB';
     options = options || {};
@@ -144,7 +143,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
    * @param  {object} options Layer options
    * @return {object}         Closest date
    */
-  self.getRequestDates = function (def, options) {
+  self.getRequestDates = function(def, options) {
     const state = store.getState();
     const activeDateStr = state.compare.isCompareA ? 'selected' : 'selectedB';
     const stateCurrentDate = new Date(state.date[activeDateStr]);
@@ -204,7 +203,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
    * @param {boolean} precache
    * @returns {object} layer key Object
    */
-  self.layerKey = function (def, options, state) {
+  self.layerKey = function(def, options, state) {
     const { compare } = state;
     var date;
     var layerId = def.id;
@@ -292,7 +291,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
    * @param {object} options - Layer options
    * @returns {object} OpenLayers WMTS layer
    */
-  const createLayerWMTS = function (def, options, day, state) {
+  const createLayerWMTS = function(def, options, day, state) {
     const activeDateStr = state.compare.isCompareA ? 'selected' : 'selectedB';
     const proj = state.proj.selected;
     const source = config.sources[def.source];
@@ -355,7 +354,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
    * @param {object} options - Layer options
    * @returns {object} OpenLayers Vector layer
    */
-  const createLayerVector = function (def, options, day, state) {
+  const createLayerVector = function(def, options, day, state) {
     const { proj, compare } = state;
     var date, urlParameters, gridExtent, source, matrixSet, matrixIds, start, layerExtent;
     const selectedProj = proj.selected;
@@ -376,7 +375,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
     }
     if (typeof def.matrixIds === 'undefined') {
       matrixIds = [];
-      lodashEach(matrixSet.resolutions, function (resolution, index) {
+      lodashEach(matrixSet.resolutions, function(resolution, index) {
         matrixIds.push(index);
       });
     } else {
@@ -416,9 +415,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
       '&Version=1.0.0' +
       '&FORMAT=application%2Fvnd.mapbox-vector-tile' +
       '&TileMatrix={z}&TileCol={x}&TileRow={y}';
-    const mvtConfig = day && def.wrapadjacentdays ? {
-      featureClass: Feature
-    } : {};
+
     var sourceOptions = new SourceVectorTile({
       url: source.url + urlParameters,
       layer: layerName,
@@ -468,7 +465,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
    * @param {object} options - Layer options
    * @returns {object} OpenLayers WMS layer
    */
-  const createLayerWMS = function (def, options, day, state) {
+  const createLayerWMS = function(def, options, day, state) {
     const { proj, compare } = state;
     const activeDateStr = compare.isCompareA ? 'selected' : 'selectedB';
     const selectedProj = proj.selected;
