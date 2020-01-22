@@ -1,0 +1,89 @@
+{
+    "stories": {
+      "vectors_intro": {
+        "id": "vectors_intro",
+        "type": "default",
+        "title": "Introducing Vectors!",
+        "description": "Interact with point and polygon vector features.",
+        "backgroundImage": "vector_intro_background.png",
+        "backgroundImageHover": "",
+        "readMoreLinks": [],
+        "steps": [
+          {
+            "id": "001",
+            "description": "step001.html",
+            "transition": {
+              "element": "",
+              "action": ""
+            },
+            "stepLink": "?v=-236.9392123428301,-106.04263287645742,196.10925452480706,98.03069793353708&l=Reference_Labels,Reference_Features,Coastlines,BlueMarble_ShadedRelief_Bathymetry,Land_Water_Map(hidden),VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)"
+          },
+          {
+            "id": "002",
+            "description": "step002.html",
+            "transition": {
+              "element": "",
+              "action": ""
+            },
+            "stepLink": "?v=-236.9392123428301,-106.04263287645742,196.10925452480706,98.03069793353708&l=GRanD_Dams(hidden),GRanD_Reservoirs,Reference_Labels,Reference_Features,Coastlines,BlueMarble_ShadedRelief_Bathymetry,Land_Water_Map(hidden),VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)"
+          },
+          {
+            "id": "003",
+            "description": "step003.html",
+            "transition": {
+              "element": "",
+              "action": ""
+            },
+            "stepLink": "?v=-236.9392123428301,-106.04263287645742,196.10925452480706,98.03069793353708&l=GRanD_Dams,GRanD_Reservoirs,Reference_Labels,Reference_Features,Coastlines,BlueMarble_ShadedRelief_Bathymetry,Land_Water_Map(hidden),VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)"
+          },
+          {
+            "id": "004",
+            "description": "step004.html",
+            "transition": {
+              "element": "",
+              "action": ""
+            },
+            "stepLink": "?v=-118.60644288546897,34.108550399021325,-110.97996676513284,37.70251390032979&l=Reference_Labels,GRanD_Dams,GRanD_Reservoirs,Reference_Features,Coastlines,BlueMarble_ShadedRelief_Bathymetry,Land_Water_Map(hidden),VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)"
+          },
+          {
+            "id": "005",
+            "description": "step005.html",
+            "transition": {
+              "element": "",
+              "action": ""
+            },
+            "stepLink": "?v=21.077072212656766,46.549263616892816,38.43693052685171,54.730066412922966&l=Nuclear_Power_Plant_Locations,Reference_Labels,GRanD_Dams(hidden),GRanD_Reservoirs,Reference_Features,Coastlines,BlueMarble_ShadedRelief_Bathymetry,Land_Water_Map(hidden),VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)"
+          },
+          {
+            "id": "006",
+            "description": "step006.html",
+            "transition": {
+              "element": "",
+              "action": ""
+            },
+            "stepLink": "?v=21.077072212656766,46.549263616892816,38.43693052685171,54.730066412922966&l=Nuclear_Power_Plant_Locations,GRanD_Dams(hidden),GRanD_Reservoirs(hidden),GPW_Population_Density_2015(palette=blue_3),Reference_Labels,Reference_Features,Coastlines,BlueMarble_ShadedRelief_Bathymetry,Land_Water_Map(hidden),VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)"
+          },
+          {
+            "id": "007",
+            "description": "step007.html",
+            "transition": {
+              "element": "",
+              "action": ""
+            },
+            "stepLink": "?v=21.077072212656766,46.549263616892816,38.43693052685171,54.730066412922966&t=2020-01-03-T16%3A15%3A14Z&l=Nuclear_Power_Plant_Locations,GRanD_Dams(hidden),GRanD_Reservoirs(hidden),GPW_Population_Density_2015(palette=blue_3),Reference_Labels,Reference_Features,Coastlines,BlueMarble_ShadedRelief_Bathymetry,Land_Water_Map(hidden),VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)"
+          },
+          {
+            "id": "008",
+            "description": "step008.html",
+            "transition": {
+              "element": "",
+              "action": ""
+            },
+            "stepLink": "?v=21.077072212656766,46.549263616892816,38.43693052685171,54.730066412922966&t=2020-01-03-T16%3A15%3A14Z&l=Nuclear_Power_Plant_Locations,GRanD_Dams(hidden),GRanD_Reservoirs(hidden),GPW_Population_Density_2015(palette=blue_3),Reference_Labels,Reference_Features,Coastlines,BlueMarble_ShadedRelief_Bathymetry,Land_Water_Map(hidden),VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)"
+          }
+        ]
+      }
+    }
+  }
+  
+  

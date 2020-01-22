@@ -1,0 +1,1 @@
+Let's also add the Nuclear Power Plants layer. Here we've zoomed to the Chernobyl Power Plant in Ukraine. Click on the red dot in the center of the map, north of Kyiv. The locations of nuclear reactors around the world are represented as point features and show population exposure estimates in proximity to the nuclear power plant.
