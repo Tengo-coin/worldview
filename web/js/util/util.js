@@ -1,10 +1,3 @@
-/* global ntptEventTag */
-
-/* The ntptEventTag global variable is defined by
- * https://earthdata.nasa.gov/lib/ntpagetag.js
- * which is included via config.scripts in web/config/wv.json
-*/
-
 import {
   isObject as lodashIsObject,
   each as lodashEach,
@@ -974,14 +967,6 @@ export default (function(self) {
     });
   };
 
-  self.metrics = function() {
-    if (window.ntptEventTag) {
-      ntptEventTag.apply(null, arguments);
-    } else {
-      console.log('no metrics');
-    }
-  };
-
   self.key = {
     LEFT: 37,
     RIGHT: 39,
@@ -1109,6 +1094,27 @@ export default (function(self) {
     var timeDiff = Math.abs(date2.getTime() - date1.getTime());
     var minuteDiff = Math.ceil(timeDiff / (60000));
     return minuteDiff;
+  };
+
+  /**
+   * Find closest index for currentDateValue from array of dates
+   * @param {Array} dateArray | Array of date objects
+   * @param {Number} currentDateValue | Number of milliseconds from date object
+   * @return {Number}
+   */
+  self.closestToIndex = (dateArray, currentDateValue) => {
+    let closestDateIndex;
+    let minDistance;
+    dateArray.forEach((date, index) => {
+      const dateValue = date.getTime();
+      var distance = Math.abs(currentDateValue - dateValue);
+      if (closestDateIndex === undefined || distance < minDistance) {
+        closestDateIndex = index;
+        minDistance = distance;
+      }
+    });
+
+    return closestDateIndex;
   };
 
   /**

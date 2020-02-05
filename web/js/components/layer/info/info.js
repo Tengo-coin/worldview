@@ -98,7 +98,7 @@ class LayerInfo extends React.Component {
             </span>
 
             {hasLayerDateRange && dateRanges.overlap === false ? (
-              <DateRanges layer={layer} dateRanges={dateRanges} />
+              <DateRanges layer={layer} dateRanges={dateRanges} screenHeight={screenHeight} />
             ) : (
               ''
             )}
@@ -127,5 +127,6 @@ class LayerInfo extends React.Component {
 export default LayerInfo;
 
 LayerInfo.propTypes = {
-  layer: PropTypes.object
+  layer: PropTypes.object,
+  screenHeight: PropTypes.number
 };
