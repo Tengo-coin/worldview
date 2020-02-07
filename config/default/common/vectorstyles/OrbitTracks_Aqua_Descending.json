@@ -30,7 +30,11 @@
       "layout": {
         "text-field": ["get", "label"],
         "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
-        "text-size": 10,
+        "text-size":[
+          "step",
+          ["zoom"], 7,
+          18, 10
+        ],
         "text-transform": "uppercase",
         "text-letter-spacing": 0.05,
         "text-radial-offset":["case",["!=",["get", "day_offset"], 0], 6, 4],
@@ -42,7 +46,7 @@
         "text-halo-width": 1,
         "text-opacity": [
           "step",
-          ["zoom"], ["case",["!=", ["%", ["get", "minute"], 5], 0], 0, 1],
+          ["zoom"], ["case", ["!=", ["%", ["get", "minute"], 5], 0], 0, 1],
           20, 1
         ]
       }
