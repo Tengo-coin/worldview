@@ -39,12 +39,26 @@ nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
       var json = JSON.parse(content);
 
       var layers = json.layers;
+      let hasSymbol = false;
       for (var i = 0, length = layers.length; i < length; i++) {
         const layer = layers[i];
         if (layer.type === 'symbol') {
           layer.layout = layout;
           layer.paint = paint;
+          hasSymbol = true;
         }
+      }
+      if (!hasSymbol) {
+        var obj = {
+          id: layers[0].id,
+          source: layers[0].id,
+          'source-layer': layers[0].id,
+          'source-description': 'Default',
+          type: 'symbol'
+        };
+        obj.layout = layout;
+        obj.paint = paint;
+        layers.push(obj);
       }
       var jsonDone = JSON.stringify(json, null, 2);
 
