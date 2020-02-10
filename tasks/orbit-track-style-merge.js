@@ -1,7 +1,5 @@
 var fs = require('fs');
-
-var json = require('../config/default/release/gc/vectorstyles/OrbitTracks.json');
-var layers = json.layers;
+var nodeDir = require('node-dir');
 var layout = {
   'text-field': ['get', 'label'],
   'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
@@ -25,16 +23,39 @@ var paint = {
     20, 1
   ]
 };
-for (var i = 0, length = layers.length; i < length; i++) {
-  const layer = layers[i];
-  if (layer.type === 'symbol') {
-    layer.layout = layout;
-    layer.paint = paint;
-  }
-}
-var jsonDone = JSON.stringify(json);
+console.log((/OrbitTracks/).test('OrbitTracks1232321.json'));
+nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
+  {
+    match: /.json$/, // only match orbit tracks
+    include: /OrbitTracks/,
+    recursive: false // only the root dir
+  },
 
-console.log(json.layers[2].paint);
-fs.writeFile('orbit-styles.json', jsonDone, 'utf8', () => {
-  console.log('written');
-});
+  function (err, content, filename, next) {
+    console.log(filename);
+    if (err) {
+      console.warn(err);
+    } else {
+      var json = JSON.parse(content);
+
+      var layers = json.layers;
+      for (var i = 0, length = layers.length; i < length; i++) {
+        const layer = layers[i];
+        if (layer.type === 'symbol') {
+          layer.layout = layout;
+          layer.paint = paint;
+        }
+      }
+      var jsonDone = JSON.stringify(json, null, 2);
+
+      fs.writeFile(filename, jsonDone, 'utf8', () => {
+        console.log('written');
+      });
+    }
+    next();
+  },
+  function() {
+    console.log('end');
+  }
+
+);

@@ -1,0 +1,29 @@
+// var dir = require('node-dir');
+
+// dir.readFiles(
+
+//     './', // the root path
+
+//     // an options object
+//     {
+
+//         match: /.json$/, // only match json files
+//         recursive: false // only the root dir
+
+//     },
+
+//     function (err, content, filename, next) {
+
+//         if (err) {
+
+//             console.log(err);
+
+//         } else {
+
+//             console.log(filename);
+
+//         }
+
+//     }
+
+// );
