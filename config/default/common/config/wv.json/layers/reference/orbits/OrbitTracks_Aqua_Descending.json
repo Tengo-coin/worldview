@@ -1,31 +1,30 @@
 {
   "layers": {
-      "OrbitTracks_Aqua_Descending": {
-          "id":       "OrbitTracks_Aqua_Descending",
-          "title": "Aqua - Orbit Track & Time",
-          "subtitle": "Aqua / Space-Track.org",
-          "description": "vector/OrbitTracks_Aqua_Descending",
-          "type":     "vector",
-          "tags":     "vector vectors tracks",
-          "group":    "overlays",
-          "layergroup": [
-            "vector",
-            "reference",
-            "reference_orbits"
-          ],
-          "inactive": false,
-          "vectorStyle": {
-            "id": "OrbitTracks_Aqua_Descending"
-          },
-          "palette": {
-            "id": "OrbitTracks_Aqua_Descending",
-            "immutable": true
-          },
-          "period": "daily",
-          "daynight": "night",
-          "track": "descending",
-          "startDate": "2019-12-28"
-
-      }
+    "OrbitTracks_Aqua_Descending": {
+      "id": "OrbitTracks_Aqua_Descending",
+      "title": "Aqua - Orbit Track & Time",
+      "subtitle": "Aqua / Space-Track.org",
+      "description": "vector/OrbitTracks_Aqua_Descending",
+      "type": "vector",
+      "tags": "vector vectors tracks",
+      "group": "overlays",
+      "layergroup": [
+        "vector",
+        "reference",
+        "reference_orbits"
+      ],
+      "inactive": false,
+      "vectorStyle": {
+        "id": "OrbitTracks_Aqua_Descending"
+      },
+      "palette": {
+        "immutable": true,
+        "id": "OrbitTracks_Aqua_Descending"
+      },
+      "period": "daily",
+      "daynight": "night",
+      "track": "descending",
+      "startDate": "2019-12-28"
+    }
   }
 }

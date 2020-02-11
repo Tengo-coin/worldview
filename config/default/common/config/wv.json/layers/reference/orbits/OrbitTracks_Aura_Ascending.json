@@ -1,31 +1,30 @@
 {
   "layers": {
-      "OrbitTracks_Aura_Ascending": {
-          "id":       "OrbitTracks_Aura_Ascending",
-          "title": "Aura - Orbit Track & Time",
-          "subtitle": "Aura / Space-Track.org",
-          "description": "vector/OrbitTracks_Aura_Ascending",
-          "type":     "vector",
-          "tags":     "vector vectors tracks",
-          "group":    "overlays",
-          "layergroup": [
-            "vector",
-            "reference",
-            "reference_orbits"
-          ],
-          "palette": {
-            "id": "OrbitTracks_Aura_Ascending",
-            "immutable": true
-          },
-          "startDate": "2019-12-28",
-
-          "inactive": false,
-          "vectorStyle": {
-            "id": "OrbitTracks_Aura_Ascending"
-          },
-          "daynight": "night",
-          "track": "descending",
-              "period": "daily"
-          }
+    "OrbitTracks_Aura_Ascending": {
+      "id": "OrbitTracks_Aura_Ascending",
+      "title": "Aura - Orbit Track & Time",
+      "subtitle": "Aura / Space-Track.org",
+      "description": "vector/OrbitTracks_Aura_Ascending",
+      "type": "vector",
+      "tags": "vector vectors tracks",
+      "group": "overlays",
+      "layergroup": [
+        "vector",
+        "reference",
+        "reference_orbits"
+      ],
+      "palette": {
+        "immutable": true,
+        "id": "OrbitTracks_Aura_Ascending"
+      },
+      "startDate": "2019-12-28",
+      "inactive": false,
+      "vectorStyle": {
+        "id": "OrbitTracks_Aura_Ascending"
+      },
+      "daynight": "night",
+      "track": "descending",
+      "period": "daily"
+    }
   }
 }

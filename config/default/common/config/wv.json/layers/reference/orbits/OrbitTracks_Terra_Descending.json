@@ -1,21 +1,25 @@
 {
   "layers": {
-      "OrbitTracks_Terra_Descending": {
-          "id":       "OrbitTracks_Terra_Descending",
-          "title":    "Orbit Tracks (Descending, Points, Terra)",
-          "subtitle": "",
-          "description": "vector/OrbitTracks_Terra_Descending",
-          "type":     "vector",
-          "tags":     "vector vectors",
-          "group":    "overlays",
-          "layergroup": [
-            "vector"
-          ],
-          "inactive": true,
-          "vectorStyle": {
-            "id": "OrbitTracks_Terra_Descending"
-          },
-          "period": "daily"
+    "OrbitTracks_Terra_Descending": {
+      "id": "OrbitTracks_Terra_Descending",
+      "title": "Orbit Tracks (Descending, Points, Terra)",
+      "subtitle": "",
+      "description": "vector/OrbitTracks_Terra_Descending",
+      "type": "vector",
+      "tags": "vector vectors",
+      "group": "overlays",
+      "layergroup": [
+        "vector"
+      ],
+      "inactive": true,
+      "vectorStyle": {
+        "id": "OrbitTracks_Terra_Descending"
+      },
+      "period": "daily",
+      "palette": {
+        "immutable": true,
+        "id": "OrbitTracks_Terra_Descending"
       }
+    }
   }
 }

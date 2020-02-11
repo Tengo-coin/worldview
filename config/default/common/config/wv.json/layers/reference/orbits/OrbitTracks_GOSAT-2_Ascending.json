@@ -1,21 +1,25 @@
 {
   "layers": {
-      "OrbitTracks_GOSAT-2_Ascending": {
-          "id":       "OrbitTracks_GOSAT-2_Ascending",
-          "title":    "Orbit Tracks (Ascending, Points, GOSAT-2)",
-          "subtitle": "",
-          "description": "vector/OrbitTracks_GOSAT-2_Ascending",
-          "type":     "vector",
-          "tags":     "vector vectors",
-          "group":    "overlays",
-          "layergroup": [
-            "vector"
-          ],
-          "inactive": true,
-          "vectorStyle": {
-            "id": "OrbitTracks_GOSAT-2_Ascending"
-          },
-          "period": "daily"
+    "OrbitTracks_GOSAT-2_Ascending": {
+      "id": "OrbitTracks_GOSAT-2_Ascending",
+      "title": "Orbit Tracks (Ascending, Points, GOSAT-2)",
+      "subtitle": "",
+      "description": "vector/OrbitTracks_GOSAT-2_Ascending",
+      "type": "vector",
+      "tags": "vector vectors",
+      "group": "overlays",
+      "layergroup": [
+        "vector"
+      ],
+      "inactive": true,
+      "vectorStyle": {
+        "id": "OrbitTracks_GOSAT-2_Ascending"
+      },
+      "period": "daily",
+      "palette": {
+        "immutable": true,
+        "id": "OrbitTracks_GOSAT-2_Ascending"
       }
+    }
   }
 }
