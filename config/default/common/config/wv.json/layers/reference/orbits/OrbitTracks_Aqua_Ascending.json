@@ -15,7 +15,13 @@
       ],
       "inactive": false,
       "vectorStyle": {
-        "id": "OrbitTracks_Aqua_Ascending"
+        "id": "OrbitTracks_Aqua_Ascending",
+        "arctic": {
+          "id": "OrbitTracks_Aqua_Ascending_polar"
+        },
+        "antarctic": {
+          "id": "OrbitTracks_Aqua_Ascending_polar"
+        }
       },
       "daynight": "day",
       "track": "ascending",
