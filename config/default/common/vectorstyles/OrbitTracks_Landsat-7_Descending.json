@@ -17,7 +17,7 @@
       "source-description": "Default",
       "type": "line",
       "paint": {
-        "line-color": "rgb(219, 112, 147)",
+        "line-color": "rgb(102, 204, 204)",
         "line-width": 2
       }
     },
@@ -29,7 +29,7 @@
       "type": "circle",
       "paint": {
         "circle-radius": "5",
-        "circle-color": "rgb(219, 112, 147)"
+        "circle-color": "rgb(102, 204, 204)"
       }
     },
     {

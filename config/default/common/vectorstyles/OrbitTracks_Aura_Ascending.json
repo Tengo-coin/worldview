@@ -11,9 +11,9 @@
   },
   "layers": [
     {
-      "id": "OrbitTracks_Aura_Descending",
-      "source": "OrbitTracks_Aura_Descending",
-      "source-layer": "OrbitTracks_Aura_Descending",
+      "id": "OrbitTracks_Aura_Ascending",
+      "source": "OrbitTracks_Aura_Ascending",
+      "source-layer": "OrbitTracks_Aura_Ascending",
       "source-description": "Default",
       "type": "line",
       "paint": {
@@ -22,9 +22,9 @@
       }
     },
     {
-      "id": "OrbitTracks_Aura_Descending",
-      "source": "OrbitTracks_Aura_Descending",
-      "source-layer": "OrbitTracks_Aura_Descending",
+      "id": "OrbitTracks_Aura_Ascending",
+      "source": "OrbitTracks_Aura_Ascending",
+      "source-layer": "OrbitTracks_Aura_Ascending",
       "source-description": "Default",
       "type": "circle",
       "paint": {
@@ -49,9 +49,9 @@
       }
     },
     {
-      "id": "OrbitTracks_Aura_Descending",
-      "source": "OrbitTracks_Aura_Descending",
-      "source-layer": "OrbitTracks_Aura_Descending",
+      "id": "OrbitTracks_Aura_Ascending",
+      "source": "OrbitTracks_Aura_Ascending",
+      "source-layer": "OrbitTracks_Aura_Ascending",
       "source-description": "Default",
       "type": "symbol",
       "layout": {
