@@ -77,9 +77,9 @@ export function setRange(layerId, props, index, palettes, state) {
 }
 
 export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state) {
-  const { compare } = state;
+  const { compare, proj } = state;
   var styleFunction;
-  var layerId = def.id;
+  var layerId = lodashGet(def, `vectorStyle.${proj.id}.id`) || lodashGet(def, 'vectorStyle.id') || def.id;
   var glStyle = vectorStyles[layerId];
   var olMap = lodashGet(state, 'map.ui.selected');
   var layerState = state.layers;
