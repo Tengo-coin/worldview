@@ -10,7 +10,7 @@ var layout = {
   ],
   'text-transform': 'uppercase',
   'text-letter-spacing': 0.05,
-  'text-radial-offset': 2,
+  'text-radial-offset': 0.5,
   'text-variable-anchor': ['top', 'bottom', 'left', 'right']
 };
 var paint = {
@@ -23,7 +23,6 @@ var paint = {
     5, 1
   ]
 };
-console.log((/OrbitTracks/).test('OrbitTracks1232321.json'));
 nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
   {
     match: /.json$/, // only match orbit tracks
