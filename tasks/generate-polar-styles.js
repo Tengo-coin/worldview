@@ -26,7 +26,7 @@ var paint = {
 nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
   {
     match: /.json$/, // only match orbit tracks
-    include: /OrbitTracks/,
+    include: /polar/,
     recursive: false // only the root dir
   },
 

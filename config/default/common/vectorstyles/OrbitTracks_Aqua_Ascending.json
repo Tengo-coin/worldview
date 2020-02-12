@@ -74,19 +74,7 @@
         ],
         "text-transform": "uppercase",
         "text-letter-spacing": 0.05,
-        "text-radial-offset": [
-          "case",
-          [
-            "!=",
-            [
-              "get",
-              "day_offset"
-            ],
-            0
-          ],
-          6,
-          4
-        ],
+        "text-radial-offset": 1.5,
         "text-variable-anchor": [
           "left",
           "right"
