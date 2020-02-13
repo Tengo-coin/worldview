@@ -664,7 +664,6 @@ export function mapui(models, config, store, ui) {
             }
           });
         }
-        setStyleFunction(def, vectorStyleId, vectorStyles, null, state);
       }
     });
     updateLayerVisibilities();
