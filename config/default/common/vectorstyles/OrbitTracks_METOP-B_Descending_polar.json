@@ -15,28 +15,6 @@
       "source": "OrbitTracks_METOP-B_Descending",
       "source-layer": "OrbitTracks_METOP-B_Descending",
       "source-description": "Default",
-      "type": "line",
-      "paint": {
-        "line-color": "rgb(255, 196, 198)",
-        "line-width": 2
-      }
-    },
-    {
-      "id": "OrbitTracks_METOP-B_Descending",
-      "source": "OrbitTracks_METOP-B_Descending",
-      "source-layer": "OrbitTracks_METOP-B_Descending",
-      "source-description": "Default",
-      "type": "circle",
-      "paint": {
-        "circle-radius": "5",
-        "circle-color": "rgb(255, 196, 198)"
-      }
-    },
-    {
-      "id": "OrbitTracks_METOP-B_Descending",
-      "source": "OrbitTracks_METOP-B_Descending",
-      "source-layer": "OrbitTracks_METOP-B_Descending",
-      "source-description": "Default",
       "type": "symbol",
       "layout": {
         "text-field": [
@@ -95,6 +73,28 @@
           5,
           1
         ]
+      }
+    },
+    {
+      "id": "OrbitTracks_METOP-B_Descending",
+      "source": "OrbitTracks_METOP-B_Descending",
+      "source-layer": "OrbitTracks_METOP-B_Descending",
+      "source-description": "Default",
+      "type": "line",
+      "paint": {
+        "line-color": "rgb(255, 196, 198)",
+        "line-width": 2
+      }
+    },
+    {
+      "id": "OrbitTracks_METOP-B_Descending",
+      "source": "OrbitTracks_METOP-B_Descending",
+      "source-layer": "OrbitTracks_METOP-B_Descending",
+      "source-description": "Default",
+      "type": "circle",
+      "paint": {
+        "circle-radius": "5",
+        "circle-color": "rgb(255, 196, 198)"
       }
     }
   ]

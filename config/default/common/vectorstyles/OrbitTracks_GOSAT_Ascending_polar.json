@@ -15,28 +15,6 @@
       "source": "OrbitTracks_GOSAT_Ascending",
       "source-layer": "OrbitTracks_GOSAT_Ascending",
       "source-description": "Default",
-      "type": "line",
-      "paint": {
-        "line-color": "rgb(255, 160, 122)",
-        "line-width": 2
-      }
-    },
-    {
-      "id": "OrbitTracks_GOSAT_Ascending",
-      "source": "OrbitTracks_GOSAT_Ascending",
-      "source-layer": "OrbitTracks_GOSAT_Ascending",
-      "source-description": "Default",
-      "type": "circle",
-      "paint": {
-        "circle-radius": "5",
-        "circle-color": "rgb(255, 160, 122)"
-      }
-    },
-    {
-      "id": "OrbitTracks_GOSAT_Ascending",
-      "source": "OrbitTracks_GOSAT_Ascending",
-      "source-layer": "OrbitTracks_GOSAT_Ascending",
-      "source-description": "Default",
       "type": "symbol",
       "layout": {
         "text-field": [
@@ -95,6 +73,28 @@
           5,
           1
         ]
+      }
+    },
+    {
+      "id": "OrbitTracks_GOSAT_Ascending",
+      "source": "OrbitTracks_GOSAT_Ascending",
+      "source-layer": "OrbitTracks_GOSAT_Ascending",
+      "source-description": "Default",
+      "type": "line",
+      "paint": {
+        "line-color": "rgb(255, 160, 122)",
+        "line-width": 2
+      }
+    },
+    {
+      "id": "OrbitTracks_GOSAT_Ascending",
+      "source": "OrbitTracks_GOSAT_Ascending",
+      "source-layer": "OrbitTracks_GOSAT_Ascending",
+      "source-description": "Default",
+      "type": "circle",
+      "paint": {
+        "circle-radius": "5",
+        "circle-color": "rgb(255, 160, 122)"
       }
     }
   ]

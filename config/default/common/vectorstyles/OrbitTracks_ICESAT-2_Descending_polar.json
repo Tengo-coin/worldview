@@ -15,28 +15,6 @@
       "source": "OrbitTracks_ICESAT-2_Descending",
       "source-layer": "OrbitTracks_ICESAT-2_Descending",
       "source-description": "Default",
-      "type": "line",
-      "paint": {
-        "line-color": "rgb(22, 160, 133)",
-        "line-width": 2
-      }
-    },
-    {
-      "id": "OrbitTracks_ICESAT-2_Descending",
-      "source": "OrbitTracks_ICESAT-2_Descending",
-      "source-layer": "OrbitTracks_ICESAT-2_Descending",
-      "source-description": "Default",
-      "type": "circle",
-      "paint": {
-        "circle-radius": "5",
-        "circle-color": "rgb(22, 160, 133)"
-      }
-    },
-    {
-      "id": "OrbitTracks_ICESAT-2_Descending",
-      "source": "OrbitTracks_ICESAT-2_Descending",
-      "source-layer": "OrbitTracks_ICESAT-2_Descending",
-      "source-description": "Default",
       "type": "symbol",
       "layout": {
         "text-field": [
@@ -95,6 +73,28 @@
           5,
           1
         ]
+      }
+    },
+    {
+      "id": "OrbitTracks_ICESAT-2_Descending",
+      "source": "OrbitTracks_ICESAT-2_Descending",
+      "source-layer": "OrbitTracks_ICESAT-2_Descending",
+      "source-description": "Default",
+      "type": "line",
+      "paint": {
+        "line-color": "rgb(22, 160, 133)",
+        "line-width": 2
+      }
+    },
+    {
+      "id": "OrbitTracks_ICESAT-2_Descending",
+      "source": "OrbitTracks_ICESAT-2_Descending",
+      "source-layer": "OrbitTracks_ICESAT-2_Descending",
+      "source-description": "Default",
+      "type": "circle",
+      "paint": {
+        "circle-radius": "5",
+        "circle-color": "rgb(22, 160, 133)"
       }
     }
   ]

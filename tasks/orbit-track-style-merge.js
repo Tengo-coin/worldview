@@ -1,5 +1,6 @@
 var fs = require('fs');
 var nodeDir = require('node-dir');
+var findIndex = require('lodash').findIndex;
 var layout = {
   'text-field': ['get', 'label'],
   'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
@@ -11,7 +12,7 @@ var layout = {
   'text-transform': 'uppercase',
   'text-letter-spacing': 0.05,
   'text-radial-offset': 1.5,
-  'text-variable-anchor': ['left', 'right']
+  'text-variable-anchor': ['right', 'left']
 };
 var paint = {
   'text-color': '#fff',
@@ -28,7 +29,6 @@ nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
   {
     match: /.json$/, // only match orbit tracks
     include: /OrbitTracks/,
-    exclude: /polar/,
     recursive: false // only the root dir
   },
 
@@ -40,27 +40,33 @@ nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
       var json = JSON.parse(content);
 
       var layers = json.layers;
-      let hasSymbol = false;
-      for (var i = 0, length = layers.length; i < length; i++) {
-        const layer = layers[i];
-        if (layer.type === 'symbol') {
-          layer.layout = layout;
-          layer.paint = paint;
-          hasSymbol = true;
-        }
+      // let hasSymbol = false;
+      // for (var i = 0, length = layers.length; i < length; i++) {
+      //   const layer = layers[i];
+      //   if (layer.type === 'symbol') {
+      //     layer.layout = layout;
+      //     layer.paint = paint;
+      //     hasSymbol = true;
+      //   }
+      // }
+      var symbolIndex = findIndex(layers, { type: 'symbol' });
+      if (symbolIndex > 0) {
+        const newLayer = layers[symbolIndex];
+        layers.splice(symbolIndex, 1);
+        layers.unshift(newLayer);
       }
-      if (!hasSymbol) {
-        var obj = {
-          id: layers[0].id,
-          source: layers[0].id,
-          'source-layer': layers[0].id,
-          'source-description': 'Default',
-          type: 'symbol'
-        };
-        obj.layout = layout;
-        obj.paint = paint;
-        layers.push(obj);
-      }
+      // if (!hasSymbol) {
+      //   var obj = {
+      //     id: layers[0].id,
+      //     source: layers[0].id,
+      //     'source-layer': layers[0].id,
+      //     'source-description': 'Default',
+      //     type: 'symbol'
+      //   };
+      //   obj.layout = layout;
+      //   obj.paint = paint;
+      //   layers.push(obj);
+      // }
       var jsonDone = JSON.stringify(json, null, 2);
 
       fs.writeFile(filename, jsonDone, 'utf8', () => {

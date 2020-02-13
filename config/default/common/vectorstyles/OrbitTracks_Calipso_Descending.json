@@ -15,28 +15,6 @@
       "source": "OrbitTracks_Calipso_Descending",
       "source-layer": "OrbitTracks_Calipso_Descending",
       "source-description": "Default",
-      "type": "line",
-      "paint": {
-        "line-color": "rgb(216, 186, 25)",
-        "line-width": 2
-      }
-    },
-    {
-      "id": "OrbitTracks_Calipso_Descending",
-      "source": "OrbitTracks_Calipso_Descending",
-      "source-layer": "OrbitTracks_Calipso_Descending",
-      "source-description": "Default",
-      "type": "circle",
-      "paint": {
-        "circle-radius": "5",
-        "circle-color": "rgb(216, 186, 25)"
-      }
-    },
-    {
-      "id": "OrbitTracks_Calipso_Descending",
-      "source": "OrbitTracks_Calipso_Descending",
-      "source-layer": "OrbitTracks_Calipso_Descending",
-      "source-description": "Default",
       "type": "symbol",
       "layout": {
         "text-field": [
@@ -53,17 +31,15 @@
             "zoom"
           ],
           7,
-          3,
+          18,
           10
         ],
         "text-transform": "uppercase",
         "text-letter-spacing": 0.05,
-        "text-radial-offset": 0.5,
+        "text-radial-offset": 1.5,
         "text-variable-anchor": [
-          "top",
-          "bottom",
-          "left",
-          "right"
+          "right",
+          "left"
         ]
       },
       "paint": {
@@ -92,9 +68,31 @@
             0,
             1
           ],
-          5,
+          20,
           1
         ]
+      }
+    },
+    {
+      "id": "OrbitTracks_Calipso_Descending",
+      "source": "OrbitTracks_Calipso_Descending",
+      "source-layer": "OrbitTracks_Calipso_Descending",
+      "source-description": "Default",
+      "type": "line",
+      "paint": {
+        "line-color": "rgb(216, 186, 25)",
+        "line-width": 2
+      }
+    },
+    {
+      "id": "OrbitTracks_Calipso_Descending",
+      "source": "OrbitTracks_Calipso_Descending",
+      "source-layer": "OrbitTracks_Calipso_Descending",
+      "source-description": "Default",
+      "type": "circle",
+      "paint": {
+        "circle-radius": "5",
+        "circle-color": "rgb(216, 186, 25)"
       }
     }
   ]

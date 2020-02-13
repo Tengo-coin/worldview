@@ -15,44 +15,6 @@
       "source": "OrbitTracks_Aura_Ascending",
       "source-layer": "OrbitTracks_Aura_Ascending",
       "source-description": "Default",
-      "type": "line",
-      "paint": {
-        "line-color": "rgb(192, 88, 240)",
-        "line-width": 2
-      }
-    },
-    {
-      "id": "OrbitTracks_Aura_Ascending",
-      "source": "OrbitTracks_Aura_Ascending",
-      "source-layer": "OrbitTracks_Aura_Ascending",
-      "source-description": "Default",
-      "type": "circle",
-      "paint": {
-        "circle-radius": [
-          "case",
-          [
-            "==",
-            [
-              "%",
-              [
-                "get",
-                "minute"
-              ],
-              5
-            ],
-            0
-          ],
-          5,
-          3
-        ],
-        "circle-color": "rgb(192, 88, 240)"
-      }
-    },
-    {
-      "id": "OrbitTracks_Aura_Ascending",
-      "source": "OrbitTracks_Aura_Ascending",
-      "source-layer": "OrbitTracks_Aura_Ascending",
-      "source-description": "Default",
       "type": "symbol",
       "layout": {
         "text-field": [
@@ -111,6 +73,44 @@
           5,
           1
         ]
+      }
+    },
+    {
+      "id": "OrbitTracks_Aura_Ascending",
+      "source": "OrbitTracks_Aura_Ascending",
+      "source-layer": "OrbitTracks_Aura_Ascending",
+      "source-description": "Default",
+      "type": "line",
+      "paint": {
+        "line-color": "rgb(192, 88, 240)",
+        "line-width": 2
+      }
+    },
+    {
+      "id": "OrbitTracks_Aura_Ascending",
+      "source": "OrbitTracks_Aura_Ascending",
+      "source-layer": "OrbitTracks_Aura_Ascending",
+      "source-description": "Default",
+      "type": "circle",
+      "paint": {
+        "circle-radius": [
+          "case",
+          [
+            "==",
+            [
+              "%",
+              [
+                "get",
+                "minute"
+              ],
+              5
+            ],
+            0
+          ],
+          5,
+          3
+        ],
+        "circle-color": "rgb(192, 88, 240)"
       }
     }
   ]

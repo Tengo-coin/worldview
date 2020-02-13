@@ -15,28 +15,6 @@
       "source": "OrbitTracks_ISS_Descending",
       "source-layer": "OrbitTracks_ISS_Descending",
       "source-description": "Default",
-      "type": "line",
-      "paint": {
-        "line-color": "rgb(219, 112, 147)",
-        "line-width": 2
-      }
-    },
-    {
-      "id": "OrbitTracks_ISS_Descending",
-      "source": "OrbitTracks_ISS_Descending",
-      "source-layer": "OrbitTracks_ISS_Descending",
-      "source-description": "Default",
-      "type": "circle",
-      "paint": {
-        "circle-radius": "5",
-        "circle-color": "rgb(219, 112, 147)"
-      }
-    },
-    {
-      "id": "OrbitTracks_ISS_Descending",
-      "source": "OrbitTracks_ISS_Descending",
-      "source-layer": "OrbitTracks_ISS_Descending",
-      "source-description": "Default",
       "type": "symbol",
       "layout": {
         "text-field": [
@@ -95,6 +73,28 @@
           5,
           1
         ]
+      }
+    },
+    {
+      "id": "OrbitTracks_ISS_Descending",
+      "source": "OrbitTracks_ISS_Descending",
+      "source-layer": "OrbitTracks_ISS_Descending",
+      "source-description": "Default",
+      "type": "line",
+      "paint": {
+        "line-color": "rgb(219, 112, 147)",
+        "line-width": 2
+      }
+    },
+    {
+      "id": "OrbitTracks_ISS_Descending",
+      "source": "OrbitTracks_ISS_Descending",
+      "source-layer": "OrbitTracks_ISS_Descending",
+      "source-description": "Default",
+      "type": "circle",
+      "paint": {
+        "circle-radius": "5",
+        "circle-color": "rgb(219, 112, 147)"
       }
     }
   ]
