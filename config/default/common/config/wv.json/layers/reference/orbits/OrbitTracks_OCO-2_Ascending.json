@@ -13,7 +13,13 @@
       ],
       "inactive": true,
       "vectorStyle": {
-        "id": "OrbitTracks_OCO-2_Ascending"
+        "id": "OrbitTracks_OCO-2_Ascending",
+        "arctic": {
+          "id": "OrbitTracks_OCO-2_Ascending_polar"
+        },
+        "antarctic": {
+          "id": "OrbitTracks_OCO-2_Ascending_polar"
+        }
       },
       "period": "daily",
       "palette": {

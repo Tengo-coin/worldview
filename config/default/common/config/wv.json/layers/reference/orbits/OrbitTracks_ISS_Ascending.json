@@ -13,7 +13,13 @@
       ],
       "inactive": true,
       "vectorStyle": {
-        "id": "OrbitTracks_ISS_Ascending"
+        "id": "OrbitTracks_ISS_Ascending",
+        "arctic": {
+          "id": "OrbitTracks_ISS_Ascending_polar"
+        },
+        "antarctic": {
+          "id": "OrbitTracks_ISS_Ascending_polar"
+        }
       },
       "period": "daily",
       "palette": {

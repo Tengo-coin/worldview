@@ -39,12 +39,14 @@ nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
 
       var layers = json.layers;
       let hasSymbol = false;
+
       for (var i = 0, length = layers.length; i < length; i++) {
         const layer = layers[i];
         if (layer.type === 'symbol') {
           layer.layout = layout;
           layer.paint = paint;
           hasSymbol = true;
+          layers.push(layers.splice(layers.indexOf(layer), 1)[0]);
         }
       }
       if (!hasSymbol) {
@@ -61,8 +63,8 @@ nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
       }
       var jsonDone = JSON.stringify(json, null, 2);
       var shortName = filename.split('.').slice(0, -1).join('.');
-      fs.writeFile(shortName + '_polar.json', jsonDone, 'utf8', () => {
-        console.log('wrote: ' + shortName + '_polar.json');
+      fs.writeFile(shortName + '.json', jsonDone, 'utf8', () => {
+        console.log('wrote: ' + shortName + '.json');
       });
     }
     next();

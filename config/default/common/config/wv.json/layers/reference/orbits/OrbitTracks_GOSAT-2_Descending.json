@@ -13,7 +13,13 @@
       ],
       "inactive": true,
       "vectorStyle": {
-        "id": "OrbitTracks_GOSAT-2_Descending"
+        "id": "OrbitTracks_GOSAT-2_Descending",
+        "arctic": {
+          "id": "OrbitTracks_GOSAT-2_Descending_polar"
+        },
+        "antarctic": {
+          "id": "OrbitTracks_GOSAT-2_Descending_polar"
+        }
       },
       "period": "daily",
       "palette": {

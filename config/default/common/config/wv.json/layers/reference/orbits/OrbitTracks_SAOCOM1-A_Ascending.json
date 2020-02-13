@@ -13,7 +13,13 @@
       ],
       "inactive": true,
       "vectorStyle": {
-        "id": "OrbitTracks_SAOCOM1-A_Ascending"
+        "id": "OrbitTracks_SAOCOM1-A_Ascending",
+        "arctic": {
+          "id": "OrbitTracks_SAOCOM1-A_Ascending_polar"
+        },
+        "antarctic": {
+          "id": "OrbitTracks_SAOCOM1-A_Ascending_polar"
+        }
       },
       "palette": {
         "immutable": true,

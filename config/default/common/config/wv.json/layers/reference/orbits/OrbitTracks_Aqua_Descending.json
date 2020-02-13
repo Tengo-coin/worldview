@@ -15,7 +15,13 @@
       ],
       "inactive": false,
       "vectorStyle": {
-        "id": "OrbitTracks_Aqua_Descending"
+        "id": "OrbitTracks_Aqua_Descending",
+        "arctic": {
+          "id": "OrbitTracks_Aqua_Descending_polar"
+        },
+        "antarctic": {
+          "id": "OrbitTracks_Aqua_Descending_polar"
+        }
       },
       "palette": {
         "immutable": true,

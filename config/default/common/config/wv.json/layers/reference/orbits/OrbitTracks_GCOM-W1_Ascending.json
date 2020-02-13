@@ -13,7 +13,13 @@
       ],
       "inactive": true,
       "vectorStyle": {
-        "id": "OrbitTracks_GCOM-W1_Ascending"
+        "id": "OrbitTracks_GCOM-W1_Ascending",
+        "arctic": {
+          "id": "OrbitTracks_GCOM-W1_Ascending_polar"
+        },
+        "antarctic": {
+          "id": "OrbitTracks_GCOM-W1_Ascending_polar"
+        }
       },
       "period": "daily",
       "palette": {

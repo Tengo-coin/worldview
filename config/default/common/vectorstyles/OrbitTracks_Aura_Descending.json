@@ -69,13 +69,15 @@
             "zoom"
           ],
           7,
-          18,
+          3,
           10
         ],
         "text-transform": "uppercase",
         "text-letter-spacing": 0.05,
-        "text-radial-offset": 1.5,
+        "text-radial-offset": 0.5,
         "text-variable-anchor": [
+          "top",
+          "bottom",
           "left",
           "right"
         ]
@@ -106,7 +108,7 @@
             0,
             1
           ],
-          20,
+          5,
           1
         ]
       }

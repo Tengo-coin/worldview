@@ -20,7 +20,13 @@
       "startDate": "2019-12-28",
       "inactive": false,
       "vectorStyle": {
-        "id": "OrbitTracks_Aura_Ascending"
+        "id": "OrbitTracks_Aura_Ascending",
+        "arctic": {
+          "id": "OrbitTracks_Aura_Ascending_polar"
+        },
+        "antarctic": {
+          "id": "OrbitTracks_Aura_Ascending_polar"
+        }
       },
       "daynight": "night",
       "track": "descending",

@@ -13,7 +13,13 @@
       ],
       "inactive": true,
       "vectorStyle": {
-        "id": "OrbitTracks_Terra_Descending"
+        "id": "OrbitTracks_Terra_Descending",
+        "arctic": {
+          "id": "OrbitTracks_Terra_Descending_polar"
+        },
+        "antarctic": {
+          "id": "OrbitTracks_Terra_Descending_polar"
+        }
       },
       "period": "daily",
       "palette": {
