@@ -11,7 +11,7 @@ var layout = {
   'text-transform': 'uppercase',
   'text-letter-spacing': 0.05,
   'text-radial-offset': 0.5,
-  'text-variable-anchor': ['top', 'bottom', 'left', 'right']
+  'text-variable-anchor': ['bottom', 'top']
 };
 var paint = {
   'text-color': '#fff',
@@ -25,8 +25,7 @@ var paint = {
 };
 nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
   {
-    match: /.json$/, // only match orbit tracks
-    include: /polar/,
+    match: /_polar/, // only match polar tracks
     recursive: false // only the root dir
   },
 

@@ -38,10 +38,8 @@
         "text-letter-spacing": 0.05,
         "text-radial-offset": 0.5,
         "text-variable-anchor": [
-          "top",
           "bottom",
-          "left",
-          "right"
+          "top"
         ]
       },
       "paint": {
