@@ -1,10 +1,12 @@
 var fs = require('fs');
 var nodeDir = require('node-dir');
-var opacity = [
-  'step',
-  ['zoom'], ['case', ['!=', ['%', ['get', 'minute'], 5], 0], 0, 1],
-  17, 1
-];
+// var opacity = [
+//   'step',
+//   ['zoom'], ['case', ['!=', ['%', ['get', 'minute'], 5], 0], 0, 1],
+//   17, 1
+// ];
+const circleRadius = ['step', ['zoom'], 2.5, 18, 3.75, 20, 5];
+const circleOpacity = ['step', ['zoom'], ['case', ['!=', ['%', ['get', 'minute'], 5], 0], 0, 1], 20, 1];
 nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
   {
     match: /.json$/, // only match orbit tracks
@@ -23,7 +25,11 @@ nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
       for (var i = 0, length = layers.length; i < length; i++) {
         const layer = layers[i];
         if (layer.type === 'circle') {
-          layer.paint['circle-opacity'] = opacity;
+          layer.paint['circle-radius'] = circleRadius;
+          layer.paint['circle-opacity'] = circleOpacity;
+        }
+        if (layer.type === 'symbol') {
+          layer.layout['text-radial-offset'] = 1;
         }
       }
       // var symbolIndex = findIndex(layers, { type: 'symbol' });
