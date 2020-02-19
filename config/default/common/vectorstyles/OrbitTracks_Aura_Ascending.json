@@ -108,7 +108,32 @@
           5,
           3
         ],
-        "circle-color": "rgb(192, 88, 240)"
+        "circle-color": "rgb(192, 88, 240)",
+        "circle-opacity": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "case",
+            [
+              "!=",
+              [
+                "%",
+                [
+                  "get",
+                  "minute"
+                ],
+                5
+              ],
+              0
+            ],
+            0,
+            1
+          ],
+          17,
+          1
+        ]
       }
     }
   ]

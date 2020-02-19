@@ -92,7 +92,32 @@
       "type": "circle",
       "paint": {
         "circle-radius": "5",
-        "circle-color": "rgb(178, 144, 193)"
+        "circle-color": "rgb(178, 144, 193)",
+        "circle-opacity": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "case",
+            [
+              "!=",
+              [
+                "%",
+                [
+                  "get",
+                  "minute"
+                ],
+                5
+              ],
+              0
+            ],
+            0,
+            1
+          ],
+          17,
+          1
+        ]
       }
     }
   ]
