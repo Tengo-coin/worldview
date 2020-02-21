@@ -5,8 +5,9 @@ var nodeDir = require('node-dir');
 //   ['zoom'], ['case', ['!=', ['%', ['get', 'minute'], 5], 0], 0, 1],
 //   17, 1
 // ];
-const circleRadius = ['step', ['zoom'], 2.5, 18, 3.75, 20, 5];
-const circleOpacity = ['step', ['zoom'], ['case', ['!=', ['%', ['get', 'minute'], 5], 0], 0, 1], 20, 1];
+const circleRadius = ['step', ['zoom'], 2.5, 18, 3.5, 20, 5];
+const textOpacity = ['step', ['zoom'], ['case', ['!=', ['%', ['get', 'minute'], 10], 0], 0, 1], 19, ['case', ['!=', ['%', ['get', 'minute'], 5], 0], 0, 1], 20, 1];
+const circleOpacity = ['step', ['zoom'], ['case', ['!=', ['%', ['get', 'minute'], 10], 0], 0, 1], 19, ['case', ['!=', ['%', ['get', 'minute'], 5], 0], 0, 1], 20, 1];
 nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
   {
     match: /.json$/, // only match orbit tracks
@@ -29,7 +30,7 @@ nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
           layer.paint['circle-opacity'] = circleOpacity;
         }
         if (layer.type === 'symbol') {
-          layer.layout['text-radial-offset'] = 1;
+          layer.paint['text-opacity'] = textOpacity;
         }
       }
       // var symbolIndex = findIndex(layers, { type: 'symbol' });
