@@ -91,7 +91,15 @@
       "source-description": "Default",
       "type": "circle",
       "paint": {
-        "circle-radius": "5",
+        "circle-radius": [
+          "step",
+          [
+            "zoom"
+          ],
+          2.5,
+          5,
+          5
+        ],
         "circle-color": "rgb(136, 177, 191)",
         "circle-opacity": [
           "step",

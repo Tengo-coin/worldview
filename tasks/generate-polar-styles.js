@@ -25,6 +25,15 @@ var circleOpacity = [
   5,
   1
 ];
+var circleRadius = [
+  'step',
+  [
+    'zoom'
+  ],
+  2.5,
+  5,
+  5
+];
 var textRadialOffset = 0.2;
 var textOpacity = [
   'step',
@@ -74,6 +83,7 @@ nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
         }
         if (layer.type === 'circle') {
           layer.paint['circle-opacity'] = circleOpacity;
+          layer.paint['circle-radius'] = circleRadius;
         }
       }
 

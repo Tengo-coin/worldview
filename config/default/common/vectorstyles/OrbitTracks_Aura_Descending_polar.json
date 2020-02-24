@@ -92,21 +92,13 @@
       "type": "circle",
       "paint": {
         "circle-radius": [
-          "case",
+          "step",
           [
-            "==",
-            [
-              "%",
-              [
-                "get",
-                "minute"
-              ],
-              5
-            ],
-            0
+            "zoom"
           ],
+          2.5,
           5,
-          3
+          5
         ],
         "circle-color": "rgb(192, 88, 240)",
         "circle-opacity": [
