@@ -36,7 +36,7 @@
         ],
         "text-transform": "uppercase",
         "text-letter-spacing": 0.05,
-        "text-radial-offset": 0.5,
+        "text-radial-offset": 0.2,
         "text-variable-anchor": [
           "bottom",
           "top"
@@ -92,7 +92,32 @@
       "type": "circle",
       "paint": {
         "circle-radius": "5",
-        "circle-color": "rgb(210, 136, 127)"
+        "circle-color": "rgb(210, 136, 127)",
+        "circle-opacity": [
+          "step",
+          [
+            "zoom"
+          ],
+          [
+            "case",
+            [
+              "!=",
+              [
+                "%",
+                [
+                  "get",
+                  "minute"
+                ],
+                5
+              ],
+              0
+            ],
+            0,
+            1
+          ],
+          5,
+          1
+        ]
       }
     }
   ]
