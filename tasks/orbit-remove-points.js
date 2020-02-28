@@ -30,7 +30,8 @@ nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
           layer.paint['circle-opacity'] = circleOpacity;
         }
         if (layer.type === 'symbol') {
-          layer.paint['text-size'] = textSize;
+          delete layer.paint['text-size'];
+          layer.layout['text-size'] = textSize;
         }
       }
       // var symbolIndex = findIndex(layers, { type: 'symbol' });
