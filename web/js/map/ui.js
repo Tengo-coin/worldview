@@ -924,7 +924,7 @@ export function mapui(models, config, store, ui) {
           ? 0.0
           : models.map.rotation,
         zoom: proj.startZoom,
-        maxZoom: proj.numZoomLevels,
+        maxResolution: proj.resolutions[0],
         enableRotation: true,
         extent: isGeographic ? [-250, -90, 250, 90] : proj.maxExtent,
         constrainOnlyCenter: true
