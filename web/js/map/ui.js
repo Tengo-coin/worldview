@@ -881,6 +881,7 @@ export function mapui(models, config, store, ui) {
     const { date, compare } = state;
     const activeDate = compare.isCompareA ? 'selected' : 'selectedB';
     dateSelected = dateSelected || date[activeDate];
+    const isGeographic = proj.id === 'geographic';
     var id,
       $map,
       scaleMetric,
@@ -915,17 +916,17 @@ export function mapui(models, config, store, ui) {
     });
     map = new OlMap({
       view: new OlView({
-        maxResolution: proj.resolutions[0],
+        minZoom: isGeographic ? 1 : 3,
         projection: olProj.get(proj.crs),
         center: proj.startCenter,
         rotation:
-          proj.id === 'geographic' || proj.id === 'webmerc'
-            ? 0.0
-            : models.map.rotation,
+        isGeographic || proj.id === 'webmerc'
+          ? 0.0
+          : models.map.rotation,
         zoom: proj.startZoom,
         maxZoom: proj.numZoomLevels,
         enableRotation: true,
-        extent: proj.id === 'geographic' ? [-250, -90, 250, 90] : proj.maxExtent,
+        extent: isGeographic ? [-250, -90, 250, 90] : proj.maxExtent,
         constrainOnlyCenter: true
       }),
       target: id,
