@@ -30,7 +30,8 @@
       },
       "daynight": "night",
       "track": "descending",
-      "period": "daily"
+      "period": "daily",
+      "wrapadjacentdays": true
     }
   }
 }

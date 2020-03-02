@@ -25,7 +25,8 @@
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_OCO-2_Ascending"
-      }
+      },
+      "wrapadjacentdays": true
     }
   }
 }

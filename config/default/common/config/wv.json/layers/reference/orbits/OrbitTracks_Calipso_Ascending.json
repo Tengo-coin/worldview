@@ -25,7 +25,8 @@
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_Calipso_Ascending"
-      }
+      },
+      "wrapadjacentdays": true
     }
   }
 }

@@ -25,7 +25,8 @@
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_Terra_Descending"
-      }
+      },
+      "wrapadjacentdays": true
     }
   }
 }

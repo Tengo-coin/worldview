@@ -25,7 +25,8 @@
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_Suomi_NPP_Ascending"
-      }
+      },
+      "wrapadjacentdays": true
     }
   }
 }

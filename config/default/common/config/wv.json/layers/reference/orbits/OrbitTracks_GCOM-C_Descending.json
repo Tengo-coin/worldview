@@ -25,7 +25,8 @@
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_GCOM-C_Descending"
-      }
+      },
+      "wrapadjacentdays": true
     }
   }
 }

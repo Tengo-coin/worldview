@@ -25,7 +25,8 @@
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_NOAA-20_Ascending"
-      }
+      },
+      "wrapadjacentdays": true
     }
   }
 }

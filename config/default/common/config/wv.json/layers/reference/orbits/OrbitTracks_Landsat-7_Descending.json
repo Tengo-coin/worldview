@@ -25,7 +25,8 @@
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_Landsat-7_Descending"
-      }
+      },
+      "wrapadjacentdays": true
     }
   }
 }

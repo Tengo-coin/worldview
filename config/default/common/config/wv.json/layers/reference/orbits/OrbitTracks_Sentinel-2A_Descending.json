@@ -25,7 +25,8 @@
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_Sentinel-2A_Descending"
-      }
+      },
+      "wrapadjacentdays": true
     }
   }
 }

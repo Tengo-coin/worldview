@@ -25,7 +25,8 @@
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_Sentinel-5P_Ascending"
-      }
+      },
+      "wrapadjacentdays": true
     }
   }
 }

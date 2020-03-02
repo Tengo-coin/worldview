@@ -25,7 +25,8 @@
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_CloudSat_Descending"
-      }
+      },
+      "wrapadjacentdays": true
     }
   }
 }
