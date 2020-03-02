@@ -9,6 +9,7 @@ import { selectVectorFeatures } from '../modules/vector-styles/actions';
 import { groupBy as lodashGroupBy, debounce as lodashDebounce, get as lodashGet } from 'lodash';
 import { changeCursor } from '../modules/map/actions';
 import { isFromActiveCompareRegion } from '../modules/compare/util';
+import * as olExtent from 'ol/extent';
 
 export class MapInteractions extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export class MapInteractions extends React.Component {
   }
 
   registerMouseListeners() {
-    // this.props.mouseEvents.on('mousemove', this.mouseMove);
+    this.props.mouseEvents.on('mousemove', this.mouseMove);
     this.props.mouseEvents.on('singleclick', this.singleClick);
   }
 
@@ -51,18 +52,18 @@ export class MapInteractions extends React.Component {
     const coord = map.getCoordinateFromPixel(pixels);
     const { isShowingClick, changeCursor, measureIsActive, compareState, swipeOffset, proj } = this.props;
     const [lon, lat] = coord;
-    if (lon < -250 || lon > 250 || lat < -90 || lat > 90) {
-      return;
-    }
+    if (lon < -250 || lon > 250 || lat < -90 || lat > 90) return;
+
     const hasFeatures = map.hasFeatureAtPixel(pixels);
     if (hasFeatures && !isShowingClick && !measureIsActive) {
       let isActiveLayer = false;
       map.forEachFeatureAtPixel(pixels, function(feature, layer) {
         const def = lodashGet(layer, 'wv.def');
         if (!def) return;
-        const isWrapped = proj.id === 'geographic' && (def.wrapadjacentdays || def.wrapX);
-        const isRenderedFeature = isWrapped ? (lon > -250 || lon < 250 || lat > -90 || lat < 90) : true;
-        if (isRenderedFeature && isFromActiveCompareRegion(map, pixels, layer.wv, compareState, swipeOffset)) {
+
+        const layerExtent = layer.getSource().tileGrid.getExtent();
+        const isRenderedFeature = olExtent.containsCoordinate(layerExtent, coord);
+        if (isRenderedFeature && isFromActiveCompareRegion(map, coord, layer.wv, compareState, swipeOffset)) {
           isActiveLayer = true;
         }
       });
