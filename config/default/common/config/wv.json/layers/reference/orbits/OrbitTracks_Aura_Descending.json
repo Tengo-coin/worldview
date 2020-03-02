@@ -30,8 +30,7 @@
         "immutable": true,
         "id": "OrbitTracks_Aura_Descending"
       },
-      "period": "daily",
-      "wrapadjacentdays": true
+      "period": "daily"
     }
   }
 }
