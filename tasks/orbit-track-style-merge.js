@@ -7,7 +7,7 @@ var layout = {
   'text-size': [
     'step',
     ['zoom'], 7,
-    18, 10
+    18, 12
   ],
   'text-transform': 'uppercase',
   'text-letter-spacing': 0.05,
@@ -24,11 +24,16 @@ var paint = {
     20, 1
   ]
 };
+var textSize = [
+  'step',
+  ['zoom'], 5, 17, 7,
+  18, 12
+];
 console.log((/OrbitTracks/).test('OrbitTracks1232321.json'));
 nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
   {
     match: /.json$/, // only match orbit tracks
-    include: /OrbitTracks/,
+    exclude: /_polar/,
     recursive: false // only the root dir
   },
 
@@ -41,20 +46,18 @@ nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
 
       var layers = json.layers;
       // let hasSymbol = false;
-      // for (var i = 0, length = layers.length; i < length; i++) {
-      //   const layer = layers[i];
-      //   if (layer.type === 'symbol') {
-      //     layer.layout = layout;
-      //     layer.paint = paint;
-      //     hasSymbol = true;
-      //   }
-      // }
-      var symbolIndex = findIndex(layers, { type: 'symbol' });
-      if (symbolIndex > 0) {
-        const newLayer = layers[symbolIndex];
-        layers.splice(symbolIndex, 1);
-        layers.unshift(newLayer);
+      for (var i = 0, length = layers.length; i < length; i++) {
+        const layer = layers[i];
+        if (layer.type === 'symbol') {
+          layer.layout['text-size'] = textSize;
+        }
       }
+      // var symbolIndex = findIndex(layers, { type: 'symbol' });
+      // if (symbolIndex > 0) {
+      //   const newLayer = layers[symbolIndex];
+      //   layers.splice(symbolIndex, 1);
+      //   layers.unshift(newLayer);
+      // }
       // if (!hasSymbol) {
       //   var obj = {
       //     id: layers[0].id,
