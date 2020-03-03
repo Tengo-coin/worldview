@@ -32,7 +32,9 @@
           ],
           7,
           3,
-          10
+          10,
+          5,
+          12
         ],
         "text-transform": "uppercase",
         "text-letter-spacing": 0.05,

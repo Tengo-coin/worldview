@@ -24,16 +24,11 @@ var paint = {
     20, 1
   ]
 };
-var textSize = [
-  'step',
-  ['zoom'], 5, 17, 7,
-  18, 12
-];
+var textSize = ['step', ['zoom'], 7, 3, 10, 5, 12];
 console.log((/OrbitTracks/).test('OrbitTracks1232321.json'));
 nodeDir.readFiles('./config/default/common/vectorstyles/', // the root path
   {
-    match: /.json$/, // only match orbit tracks
-    exclude: /_polar/,
+    match: /_polar/, // only match orbit tracks
     recursive: false // only the root dir
   },
 
