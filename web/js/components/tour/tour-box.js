@@ -5,7 +5,7 @@ class TourBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      styles: { }
+      styles: { },
     };
 
     this.onMouseOver = this.onMouseOver.bind(this);
@@ -14,9 +14,8 @@ class TourBox extends React.Component {
 
   UNSAFE_componentWillMount() {
     if (this.props.backgroundImage) {
-      const { origin, pathname } = window.location;
       this.setState({
-        styles: { backgroundImage: `url(${origin}${pathname}config/metadata/stories/${this.props.storyId}/${this.props.backgroundImage})` }
+        styles: { backgroundImage: `url(config/metadata/stories/${this.props.storyId}/${this.props.backgroundImage})` },
       });
     }
   }
@@ -24,9 +23,8 @@ class TourBox extends React.Component {
   onMouseOver(e) {
     e.preventDefault();
     if (this.props.backgroundImageHover) {
-      const { origin, pathname } = window.location;
       this.setState({
-        styles: { backgroundImage: `url(${origin}${pathname}config/metadata/stories/${this.props.storyId}/${this.props.backgroundImageHover})` }
+        styles: { backgroundImage: `url(config/metadata/stories/${this.props.storyId}/${this.props.backgroundImageHover})` },
       });
     }
   }
@@ -34,17 +32,16 @@ class TourBox extends React.Component {
   onMouseOut(e) {
     e.preventDefault();
     if (this.props.backgroundImage) {
-      const { origin, pathname } = window.location;
       this.setState({
-        styles: { backgroundImage: `url(${origin}${pathname}config/metadata/stories/${this.props.storyId}/${this.props.backgroundImage})` }
+        styles: { backgroundImage: `url(config/metadata/stories/${this.props.storyId}/${this.props.backgroundImage})` },
       });
     }
   }
 
   render() {
     let floatBox = '';
-    if (this.props.storyOrder.length - (this.props.index + 1) === 0 ||
-      this.props.storyOrder.length - (this.props.index + 2) === 0) {
+    if (this.props.storyOrder.length - (this.props.index + 1) === 0
+      || this.props.storyOrder.length - (this.props.index + 2) === 0) {
       floatBox = ' tour-box-float';
     }
     return (
@@ -72,7 +69,7 @@ TourBox.propTypes = {
   className: PropTypes.string,
   description: PropTypes.string,
   storyOrder: PropTypes.array,
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 export default TourBox;
