@@ -27,6 +27,7 @@ import {
 import {
   nearestInterval,
 } from '../modules/layers/util';
+import { createWMSLayer } from './util';
 
 export function mapLayerBuilder(models, config, cache, ui, store) {
   const self = {};
@@ -431,15 +432,14 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
         resolutions: matrixSet.resolutions,
         tileSize: matrixSet.tileSize,
         origin: start,
-        minZoom: 1,
+
       }),
     });
-
     const layer = new LayerVectorTile({
       extent: layerExtent,
       source: sourceOptions,
-      updateWhileInteracting: true,
       renderMode: 'image',
+      maxResolution: matrixSet.resolutions[5],
     });
 
     if (config.vectorStyles && def.vectorStyle && def.vectorStyle.id) {
@@ -458,7 +458,10 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
       setStyleFunction(def, vectorStyleId, vectorStyles, layer, state);
     }
     layer.wrap = day;
-    return layer;
+    const wmsLayer = createWMSLayer(date, layerExtent, def.id, matrixSet.resolutions);
+    return new OlLayerGroup({
+      layers: [layer, wmsLayer],
+    });
   };
 
   /**
@@ -470,7 +473,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
    * @param {object} options - Layer options
    * @returns {object} OpenLayers WMS layer
    */
-  const createLayerWMS = function(def, options, day, state) {
+  const createLayerWMS = function(def, options, day, state, minZoom) {
     const { proj, compare } = state;
     const activeDateStr = compare.isCompareA ? 'selected' : 'selectedB';
     const selectedProj = proj.selected;

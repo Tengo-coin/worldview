@@ -974,8 +974,8 @@ export function mapui(models, config, store, ui) {
     }
 
     // Set event listeners for changes on the map view (when rotated, zoomed, panned)
-    map.getView().on('change:center', lodashDebounce(updateExtent, 300));
-    map.getView().on('change:resolution', lodashDebounce(updateExtent, 300));
+    // map.getView().on('change:center', lodashDebounce(updateExtent, 300));
+     // map.getView().on('change:resolution', lodashDebounce(updateExtent, 300));
     map.getView().on('change:rotation', lodashThrottle(onRotate, 300));
     map.on('pointerdrag', () => {
       self.mapIsbeingDragged = true;
