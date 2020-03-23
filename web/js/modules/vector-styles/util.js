@@ -206,6 +206,7 @@ export function onMapClickGetVectorFeatures(pixels, map, state, swipeOffset) {
   }
 
   map.forEachFeatureAtPixel(pixels, (feature, layer) => {
+    console.log(pixels);
     const def = lodashGet(layer, 'wv.def');
     if (!def) return;
     if (!isFromActiveCompareRegion(map, pixels, layer.wv, state.compare, swipeOffset)) return;
@@ -218,7 +219,7 @@ export function onMapClickGetVectorFeatures(pixels, map, state, swipeOffset) {
       const properties = data.mvt_properties;
       const uniqueIdentifierKey = lodashFind(properties, { Function: 'Identify' }).Identifier;
       const titleObj = lodashFind(properties, { IsLabel: 'True' });
-      const titleKey = titleObj.Identifier;
+      const titleKey = titleObj ? titleObj.Identifier : 'Fire!';
 
       const uniqueIdentifier = features[uniqueIdentifierKey];
       const title = titleKey ? features[titleKey] : 'Unknown title';

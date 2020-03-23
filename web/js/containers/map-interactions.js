@@ -37,7 +37,7 @@ export class MapInteractions extends React.Component {
     const offsetLeft = clickObj.offsetLeft || 10;
     const offsetTop = clickObj.offsetTop || 100;
     const dialogId = isVectorModalOpen ? modalState.id : `vector_dialog${pixels[0]}${pixels[1]}`;
-
+    console.log(metaArray);
     if (metaArray.length) {
       openVectorDiaglog(dialogId, metaArray, offsetLeft, offsetTop, isMobile);
     }

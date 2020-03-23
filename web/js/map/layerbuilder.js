@@ -46,7 +46,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
    */
   const getLayer = (createLayerFunc, def, options, attributes, wrapLayer) => {
     const state = store.getState();
-    const layer = createLayerFunc(def, options, null, state);
+    const layer = createLayerFunc(def, options, null, state, attributes);
     if (!wrapLayer) {
       return layer;
     }
@@ -356,7 +356,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
    * @param {object} options - Layer options
    * @returns {object} OpenLayers Vector layer
    */
-  const createLayerVector = function(def, options, day, state) {
+  const createLayerVector = function(def, options, day, state, attributes) {
     const { proj, compare } = state;
     let date; let urlParameters; let gridExtent; let source; let matrixSet; let matrixIds; let start; let
       layerExtent;
@@ -458,6 +458,7 @@ export function mapLayerBuilder(models, config, cache, ui, store) {
       setStyleFunction(def, vectorStyleId, vectorStyles, layer, state);
     }
     layer.wrap = day;
+    layer.wv = attributes;
     const wmsLayer = createWMSLayer(date, layerExtent, def.id, matrixSet.resolutions);
     return new OlLayerGroup({
       layers: [layer, wmsLayer],
