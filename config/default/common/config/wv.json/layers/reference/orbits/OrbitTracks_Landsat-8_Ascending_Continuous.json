@@ -1,0 +1,25 @@
+{
+  "layers": {
+    "OrbitTracks_Landsat-8_Ascending_Continuous": {
+      "id": "OrbitTracks_Landsat-8_Ascending_Continuous",
+      "title": "Orbit Tracks (Ascending, Points, Landsat-8)",
+      "subtitle": "",
+      "description": "vector/OrbitTracks_Landsat-8_Ascending_Continuous",
+      "type": "vector",
+      "tags": "vector vectors",
+      "group": "overlays",
+      "layergroup": [
+        "vector"
+      ],
+      "inactive": true,
+      "vectorStyle": {
+        "id": "OrbitTracks_Landsat-8_Ascending_Continuous"
+      },
+      "period": "daily",
+      "palette": {
+        "immutable": true,
+        "id": "OrbitTracks_Landsat-8_Ascending"
+      }
+    }
+  }
+}
