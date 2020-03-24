@@ -2,17 +2,14 @@
     "defaults": {
         "projection": "geographic",
         "startingLayers": [
+
             {
-                "id": "OrbitTracks_Aqua_Ascending",
-                "hidden": "true"
+                "id": "OrbitTracks_Landsat-8_Ascending_Continuous"
             },
             {
-                "id": "OrbitTracks_Aqua_Descending",
-                "hidden": "true"
-            },
-            {
-                "id": "OrbitTracks_Aura_Descending"
+                "id": "OrbitTracks_Aqua_Descending_Continuous"
             }
         ]
     }
 }
+
