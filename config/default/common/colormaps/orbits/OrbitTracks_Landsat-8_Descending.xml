@@ -6,7 +6,7 @@
       <ColorMapEntry rgb="255,69,0" sourceValue="200" transparent="false" ref="1" />
     </Entries>
     <Legend type="classification">
-      <LegendEntry rgb="255,69,0" id="1" tooltip="Acquisition Time (UTC)" label="Acquisition Time (UTC)" showLabel="true" />
+      <LegendEntry rgb="255,69,0" id="1" tooltip="Acquisition Time (UTC) - Descending/Day" label="Acquisition Time (UTC) - Descending/Day" showLabel="true" />
     </Legend>
   </ColorMap>
 </ColorMaps>
