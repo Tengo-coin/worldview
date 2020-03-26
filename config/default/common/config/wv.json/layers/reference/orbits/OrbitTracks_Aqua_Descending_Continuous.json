@@ -2,9 +2,9 @@
   "layers": {
     "OrbitTracks_Aqua_Descending_Continuous": {
       "id": "OrbitTracks_Aqua_Descending_Continuous",
-      "title": "Orbit Tracks (Descending, Continuous, Points, Aqua)",
+      "title": "Aqua - Orbit Track & Time (Continuous)",
       "subtitle": "Aqua / Space-Track.org",
-      "description": "vector/OrbitTracks_Aqua_Descending_Continuous",
+      "description": "vector/OrbitTracks_Aqua_Descending",
       "type": "vector",
       "tags": "vector vectors tracks",
       "group": "overlays",

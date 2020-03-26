@@ -23,6 +23,7 @@
           "id": "OrbitTracks_Aqua_Descending_polar"
         }
       },
+      "wrapadjacentdays": true,
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_Aqua_Descending"

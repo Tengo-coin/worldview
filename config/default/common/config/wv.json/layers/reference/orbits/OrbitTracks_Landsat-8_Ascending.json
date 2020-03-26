@@ -2,7 +2,7 @@
   "layers": {
     "OrbitTracks_Landsat-8_Ascending": {
       "id": "OrbitTracks_Landsat-8_Ascending",
-      "title": "Orbit Tracks (Ascending, Points, Landsat-8)",
+      "title": "Landsat 8 - Orbit Track & Time",
       "subtitle": "",
       "description": "vector/OrbitTracks_Landsat-8_Ascending",
       "type": "vector",
@@ -22,6 +22,7 @@
         }
       },
       "period": "daily",
+      "wrapadjacentdays": true,
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_Landsat-8_Ascending"

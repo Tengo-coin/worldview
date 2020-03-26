@@ -2,7 +2,7 @@
   "layers": {
     "OrbitTracks_Landsat-8_Descending": {
       "id": "OrbitTracks_Landsat-8_Descending",
-      "title": "Orbit Tracks (Descending, Points, Landsat-8)",
+      "title": "Landsat 8 - Orbit Track & Time",
       "subtitle": "",
       "description": "vector/OrbitTracks_Landsat-8_Descending",
       "type": "vector",
