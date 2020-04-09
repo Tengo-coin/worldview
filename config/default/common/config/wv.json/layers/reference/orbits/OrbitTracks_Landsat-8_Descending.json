@@ -22,6 +22,8 @@
         }
       },
       "period": "daily",
+      "daynight": "day",
+      "track": "descending",
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_Landsat-8_Descending"

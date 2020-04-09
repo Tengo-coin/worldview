@@ -14,8 +14,16 @@
       "wrapadjacentdays": true,
       "inactive": true,
       "vectorStyle": {
-        "id": "OrbitTracks_Landsat-8_Ascending_Continuous"
+        "id": "OrbitTracks_Landsat-8_Ascending_Continuous",
+        "arctic": {
+          "id": "OrbitTracks_Landsat-8_Ascending_Continuous_polar"
+        },
+        "antarctic": {
+          "id": "OrbitTracks_Landsat-8_Ascending_Continuous_polar"
+        }
       },
+      "daynight": "night",
+      "track": "ascending",
       "period": "daily",
       "palette": {
         "immutable": true,

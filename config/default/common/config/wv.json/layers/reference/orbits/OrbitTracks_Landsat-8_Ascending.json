@@ -23,6 +23,8 @@
       },
       "period": "daily",
       "wrapadjacentdays": true,
+      "daynight": "night",
+      "track": "ascending",
       "palette": {
         "immutable": true,
         "id": "OrbitTracks_Landsat-8_Ascending"
