@@ -47,12 +47,12 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
    */
   const getLayer = (createLayerFunc, def, options, attributes, wrapLayer) => {
     const state = store.getState();
-    const layer = createLayerFunc(def, options, null, state);
+    const layer = createLayerFunc(def, options, null, state, attributes);
     if (!wrapLayer) {
       return layer;
     }
-    const layerNext = createLayerFunc(def, options, 1, state);
-    const layerPrior = createLayerFunc(def, options, -1, state);
+    const layerNext = createLayerFunc(def, options, 1, state, attributes);
+    const layerPrior = createLayerFunc(def, options, -1, state, attributes);
     layer.wv = attributes;
     layerPrior.wv = attributes;
     layerNext.wv = attributes;
@@ -366,7 +366,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
    * @param {object} options - Layer options
    * @returns {object} OpenLayers Vector layer
    */
-  const createLayerVector = function(def, options, day, state) {
+  const createLayerVector = function(def, options, day, state, attributes) {
     const { proj, compare } = state;
     let date;
     let gridExtent;
@@ -445,11 +445,14 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
         origin: start,
       }),
     });
-
+    def.maxResolution = 0.0703125;
     const layer = new LayerVectorTile({
       extent: layerExtent,
       source: sourceOptions,
       renderMode: 'image',
+      updateWhileAnimating: true,
+      // renderBuffer: 500,
+      ...def.maxResolution && { maxResolution: def.maxResolution },
     });
 
     if (config.vectorStyles && def.vectorStyle && def.vectorStyle.id) {
@@ -468,6 +471,12 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
       setStyleFunction(def, vectorStyleId, vectorStyles, layer, state);
     }
     layer.wrap = day;
+    layer.wv = attributes;
+    console.log(matrixSet.resolutions[3]);
+    // const wmsLayer = createLayerWMS(def, options, day, state, def.maxResolution);
+    // return new OlLayerGroup({
+    //   layers: [layer, wmsLayer],
+    // });
     return layer;
   };
 
@@ -480,7 +489,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
    * @param {object} options - Layer options
    * @returns {object} OpenLayers WMS layer
    */
-  const createLayerWMS = function(def, options, day, state) {
+  const createLayerWMS = function(def, options, day, state, minResolution) {
     const { proj, compare } = state;
     const activeDateStr = compare.isCompareA ? 'selected' : 'selectedB';
     const selectedProj = proj.selected;
@@ -561,6 +570,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
     const layer = new OlLayerTile({
       preload: Infinity,
       extent,
+      ...!!minResolution && { minResolution },
       source: new OlSourceTileWMS(sourceOptions),
     });
     return layer;
