@@ -179,7 +179,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.19.3",
     "moment-locales-webpack-plugin": "^1.1.2",
-    "ol": "^6.1.1",
+    "ol": "openlayers/openlayers#master",
     "ol-mapbox-style": "^6.1.1",
     "proj4": "2.6.1",
     "promise-queue": "2.2.5",
@@ -208,6 +208,7 @@
     "reselect": "^4.0.0",
     "simplebar-react": "^2.0.8",
     "supercluster": "7.0.0",
+    "typescript": "^3.8.3",
     "web-streams-polyfill": "^2.0.6",
     "what-input": "^5.2.7",
     "whatwg-fetch": "^3.0.0"

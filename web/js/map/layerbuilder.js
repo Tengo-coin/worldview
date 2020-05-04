@@ -386,6 +386,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
       throw new Error(`${def.id}: Invalid source: ${def.source}`);
     }
     const matrixSet = source.matrixSets[def.matrixSet];
+
     if (!matrixSet) {
       throw new Error(`${def.id}: Undefined matrix set: ${def.matrixSet}`);
     }
@@ -430,6 +431,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
       + '&Version=1.0.0'
       + '&FORMAT=application%2Fvnd.mapbox-vector-tile'
       + '&TileMatrix={z}&TileCol={x}&TileRow={y}';
+    console.log(matrixSet);
     const wrapX = !!(day === 1 || day === -1);
     const sourceOptions = new SourceVectorTile({
       url: source.url + urlParameters,
@@ -443,6 +445,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
         resolutions: matrixSet.resolutions,
         tileSize: matrixSet.tileSize,
         origin: start,
+        sizes: matrixSet.tileMatrices,
       }),
     });
     def.maxResolution = 0.0703125;
@@ -450,9 +453,8 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
       extent: layerExtent,
       source: sourceOptions,
       renderMode: 'image',
-      updateWhileAnimating: true,
       // renderBuffer: 500,
-      ...def.maxResolution && { maxResolution: def.maxResolution },
+      // ...def.maxResolution && { maxResolution: def.maxResolution },
     });
 
     if (config.vectorStyles && def.vectorStyle && def.vectorStyle.id) {
@@ -468,11 +470,10 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
           }
         });
       }
-      setStyleFunction(def, vectorStyleId, vectorStyles, layer, state);
+      // setStyleFunction(def, vectorStyleId, vectorStyles, layer, state);
     }
     layer.wrap = day;
     layer.wv = attributes;
-    console.log(matrixSet.resolutions[3]);
     // const wmsLayer = createLayerWMS(def, options, day, state, def.maxResolution);
     // return new OlLayerGroup({
     //   layers: [layer, wmsLayer],
@@ -570,7 +571,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
     const layer = new OlLayerTile({
       preload: Infinity,
       extent,
-      ...!!minResolution && { minResolution },
+      // ...!!minResolution && { minResolution },
       source: new OlSourceTileWMS(sourceOptions),
     });
     return layer;
