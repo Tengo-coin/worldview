@@ -3,14 +3,9 @@
         "projection": "geographic",
         "startingLayers": [
             { "id": "MODIS_Aqua_Thermal_Anomalies_All_v6_NRT" },
-            { "id": "MODIS_Aqua_Thermal_Anomalies_Day_v6_NRT", "hidden": "true" },
-            { "id": "MODIS_Aqua_Thermal_Anomalies_Night_v6_NRT", "hidden": "true" },
             { "id": "MODIS_Combined_Thermal_Anomalies_All_v6_NRT", "hidden": "true"  },
-            { "id": "MODIS_Combined_Thermal_Anomalies_Day_v6_NRT", "hidden": "true" },
-            { "id": "MODIS_Combined_Thermal_Anomalies_Night_v6_NRT", "hidden": "true" },
             { "id": "VIIRS_SNPP_Thermal_Anomalies_375m_All_v1_NRT", "hidden": "true"  },
-            { "id": "VIIRS_SNPP_Thermal_Anomalies_375m_Day_v1_NRT", "hidden": "true" },
-            { "id": "VIIRS_SNPP_Thermal_Anomalies_375m_Night_v1_NRT", "hidden": "true" },
+            { "id": "MODIS_Terra_Thermal_Anomalies_All_v6_NRT", "hidden": "true" },
             { "id": "BlueMarble_NextGeneration"}
         ]
     }
