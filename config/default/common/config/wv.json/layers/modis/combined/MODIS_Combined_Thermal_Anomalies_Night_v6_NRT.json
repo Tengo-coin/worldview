@@ -15,7 +15,7 @@
           },
           "wrapX": true,
           "palette": {
-              "id": "MODIS_Combined_Thermal_Anomalies_Night"
+              "id": "MODIS_Combined_Thermal_Anomalies_All"
           }
       }
   }

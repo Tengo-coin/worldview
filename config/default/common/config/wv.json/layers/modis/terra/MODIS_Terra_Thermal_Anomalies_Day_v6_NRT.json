@@ -14,7 +14,7 @@
           },
           "wrapX": true,
           "palette": {
-              "id": "MODIS_Terra_Thermal_Anomalies_Day"
+              "id": "MODIS_Terra_Thermal_Anomalies_All"
           }
       }
   }

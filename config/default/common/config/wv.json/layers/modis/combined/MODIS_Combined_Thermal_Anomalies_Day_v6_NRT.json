@@ -14,7 +14,7 @@
           },
           "wrapX": true,
           "palette": {
-              "id": "MODIS_Combined_Thermal_Anomalies_Day"
+              "id": "MODIS_Combined_Thermal_Anomalies_All"
           }
       }
   }
