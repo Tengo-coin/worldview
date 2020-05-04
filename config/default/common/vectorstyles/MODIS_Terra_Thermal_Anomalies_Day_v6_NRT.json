@@ -16,11 +16,21 @@
       "source-layer": "MODIS_Terra_Thermal_Anomalies_Day_v6_NRT",
       "type": "circle",
       "paint": {
-        "circle-radius": {
-          "base": 2,
-          "stops": [[12, 1], [22, 10]]
-        },
-        "circle-color": "#FF0000"
+        "circle-radius": [
+          "step",
+          [
+            "zoom"
+          ],
+          1,
+          17,
+          2,
+          19,
+          3,
+          22,
+          7
+        ],
+        "circle-color": "#FF0000",
+        "circle-opacity": 0.3
       }
     }
   ]
