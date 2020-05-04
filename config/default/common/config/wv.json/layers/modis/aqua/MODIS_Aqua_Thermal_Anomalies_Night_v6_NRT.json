@@ -1,0 +1,21 @@
+{
+  "layers": {
+      "MODIS_Aqua_Thermal_Anomalies_Night_v6_NRT": {
+          "id": "MODIS_Aqua_Thermal_Anomalies_Day_v6_NRT",
+          "title": "Thermal Anomalies and Fires (Night, v6.0, Near Real-Time, MODIS, Aqua)",
+          "group": "overlays",
+          "tags": "vectors",
+          "type": "vector",
+          "layergroup": [
+            "vector"
+          ],
+          "vectorStyle": {
+              "id": "MODIS_Aqua_Thermal_Anomalies_Night_v6_NRT"
+          },
+          "wrapX": true,
+          "palette": {
+              "id": "MODIS_Aqua_Thermal_Anomalies_Night"
+          }
+      }
+  }
+}
