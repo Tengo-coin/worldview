@@ -453,8 +453,8 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
       extent: layerExtent,
       source: sourceOptions,
       renderMode: 'image',
-      // renderBuffer: 500,
-      // ...def.maxResolution && { maxResolution: def.maxResolution },
+      renderBuffer: 500,
+      ...def.maxResolution && { maxResolution: def.maxResolution },
     });
 
     if (config.vectorStyles && def.vectorStyle && def.vectorStyle.id) {
@@ -474,10 +474,10 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
     }
     layer.wrap = day;
     layer.wv = attributes;
-    // const wmsLayer = createLayerWMS(def, options, day, state, def.maxResolution);
-    // return new OlLayerGroup({
-    //   layers: [layer, wmsLayer],
-    // });
+    const wmsLayer = createLayerWMS(def, options, day, state, def.maxResolution);
+    return new OlLayerGroup({
+      layers: [layer, wmsLayer],
+    });
     return layer;
   };
 
