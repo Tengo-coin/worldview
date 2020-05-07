@@ -35,7 +35,7 @@ import Debug from './components/util/debug';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../../node_modules/jquery-ui-bundle/jquery-ui.structure.min.css';
 import '../../node_modules/jquery-ui-bundle/jquery-ui.theme.min.css';
-import '../../node_modules/ol/ol.css';
+import '../../../openlayers/src/ol/ol.css';
 import '../../node_modules/rc-slider/dist/rc-slider.min.css';
 import '../../node_modules/simplebar/dist/simplebar.min.css';
 import 'react-image-crop/dist/ReactCrop.css';

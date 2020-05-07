@@ -470,7 +470,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
           }
         });
       }
-      // setStyleFunction(def, vectorStyleId, vectorStyles, layer, state);
+      setStyleFunction(def, vectorStyleId, vectorStyles, layer, state);
     }
     layer.wrap = day;
     layer.wv = attributes;

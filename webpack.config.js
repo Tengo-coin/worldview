@@ -69,6 +69,10 @@ module.exports = {
         __dirname,
         './web/js/components/util/google-tag-manager.js',
       ),
+      ol: path.resolve(
+        __dirname,
+        '../openlayers/build/ol',
+      ),
     },
   },
   mode: devMode ? 'development' : 'production',
