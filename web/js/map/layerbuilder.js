@@ -474,8 +474,10 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
     }
     layer.wrap = day;
     layer.wv = attributes;
-    console.log(config.layers[wmslayerId]);
-    const wmsLayer = createLayerWMS(config.layers[wmslayerId], options, day, state, def.maxResolution);
+    console.log(wmslayerId);
+    const wmsDef = config.layers[wmslayerId];
+    wmsDef.source = 'GIBS:wms';
+    const wmsLayer = createLayerWMS(wmsDef, options, day, state, def.maxResolution);
     return new OlLayerGroup({
       layers: [layer, wmsLayer],
     });

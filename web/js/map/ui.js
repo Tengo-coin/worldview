@@ -42,7 +42,7 @@ import * as layerConstants from '../modules/layers/constants';
 import * as compareConstants from '../modules/compare/constants';
 import * as paletteConstants from '../modules/palettes/constants';
 import * as vectorStyleConstants from '../modules/vector-styles/constants';
-import { setStyleFunction } from '../modules/vector-styles/selectors';
+// import { setStyleFunction } from '../modules/vector-styles/selectors';
 import {
   getLayers,
   isRenderable as isRenderableLayer,
