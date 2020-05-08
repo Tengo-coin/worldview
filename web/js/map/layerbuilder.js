@@ -447,7 +447,8 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
         sizes: matrixSet.tileMatrices,
       }),
     });
-    def.maxResolution = 0.0703125;
+    def.maxResolution = 0.03515625;
+    console.log(matrixSet.resolutions);
     const layer = new LayerVectorTile({
       extent: layerExtent,
       source: sourceOptions,
