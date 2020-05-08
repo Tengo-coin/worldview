@@ -29,7 +29,7 @@
           22,
           7
         ],
-        "circle-color": "#FF0000",
+        "circle-color": "rgb(236, 98, 16)",
         "circle-opacity": 0.3
       }
     }
