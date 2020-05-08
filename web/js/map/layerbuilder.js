@@ -431,7 +431,6 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
       + '&Version=1.0.0'
       + '&FORMAT=application%2Fvnd.mapbox-vector-tile'
       + '&TileMatrix={z}&TileCol={x}&TileRow={y}';
-    console.log(matrixSet);
     const wrapX = !!(day === 1 || day === -1);
     const sourceOptions = new SourceVectorTile({
       url: source.url + urlParameters,
@@ -456,7 +455,8 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
       renderBuffer: 500,
       ...def.maxResolution && { maxResolution: def.maxResolution },
     });
-
+    let wmslayerId = def.id.replace('_v6_NRT', '');
+    wmslayerId = wmslayerId.replace('_v1_NRT', '');
     if (config.vectorStyles && def.vectorStyle && def.vectorStyle.id) {
       const { vectorStyles } = config;
       let vectorStyleId;
@@ -474,11 +474,12 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
     }
     layer.wrap = day;
     layer.wv = attributes;
-    const wmsLayer = createLayerWMS(def, options, day, state, def.maxResolution);
+    console.log(config.layers[wmslayerId]);
+    const wmsLayer = createLayerWMS(config.layers[wmslayerId], options, day, state, def.maxResolution);
     return new OlLayerGroup({
       layers: [layer, wmsLayer],
     });
-    return layer;
+    // return layer;
   };
 
   /**
@@ -533,6 +534,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
         start = [180, 90];
       }
     }
+
     const parameters = {
       LAYERS: def.layer || def.id,
       FORMAT: def.format,
@@ -571,7 +573,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
     const layer = new OlLayerTile({
       preload: Infinity,
       extent,
-      // ...!!minResolution && { minResolution },
+      ...!!minResolution && { minResolution },
       source: new OlSourceTileWMS(sourceOptions),
     });
     return layer;

@@ -50,31 +50,31 @@ export class MapInteractions extends React.Component {
   }
 
   mouseMove(event, map, crs) {
-    const pixels = map.getEventPixel(event);
-    const coord = map.getCoordinateFromPixel(pixels);
-    const {
-      isShowingClick, changeCursor, measureIsActive, compareState, swipeOffset, proj,
-    } = this.props;
-    const [lon, lat] = coord;
-    if (lon < -250 || lon > 250 || lat < -90 || lat > 90) {
-      return;
-    }
-    const hasFeatures = map.hasFeatureAtPixel(pixels);
-    if (hasFeatures && !isShowingClick && !measureIsActive) {
-      let isActiveLayer = false;
-      map.forEachFeatureAtPixel(pixels, (feature, layer) => {
-        const def = lodashGet(layer, 'wv.def');
-        if (!def) return;
-        const isWrapped = proj.id === 'geographic' && (def.wrapadjacentdays || def.wrapX);
-        const isRenderedFeature = isWrapped ? lon > -250 || lon < 250 || lat > -90 || lat < 90 : true;
-        if (isRenderedFeature && isFromActiveCompareRegion(map, pixels, layer.wv, compareState, swipeOffset)) {
-          isActiveLayer = true;
-        }
-      });
-      if (isActiveLayer) changeCursor(true);
-    } else if (!hasFeatures && isShowingClick) {
-      changeCursor(false);
-    }
+    // const pixels = map.getEventPixel(event);
+    // const coord = map.getCoordinateFromPixel(pixels);
+    // const {
+    //   isShowingClick, changeCursor, measureIsActive, compareState, swipeOffset, proj,
+    // } = this.props;
+    // const [lon, lat] = coord;
+    // if (lon < -250 || lon > 250 || lat < -90 || lat > 90) {
+    //   return;
+    // }
+    // const hasFeatures = map.hasFeatureAtPixel(pixels);
+    // if (hasFeatures && !isShowingClick && !measureIsActive) {
+    //   let isActiveLayer = false;
+    //   map.forEachFeatureAtPixel(pixels, (feature, layer) => {
+    //     const def = lodashGet(layer, 'wv.def');
+    //     if (!def) return;
+    //     const isWrapped = proj.id === 'geographic' && (def.wrapadjacentdays || def.wrapX);
+    //     const isRenderedFeature = isWrapped ? lon > -250 || lon < 250 || lat > -90 || lat < 90 : true;
+    //     if (isRenderedFeature && isFromActiveCompareRegion(map, pixels, layer.wv, compareState, swipeOffset)) {
+    //       isActiveLayer = true;
+    //     }
+    //   });
+    //   if (isActiveLayer) changeCursor(true);
+    // } else if (!hasFeatures && isShowingClick) {
+    //   changeCursor(false);
+    // }
   }
 
   render() {
