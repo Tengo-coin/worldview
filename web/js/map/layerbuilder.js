@@ -13,6 +13,7 @@ import SourceVectorTile from 'ol/source/VectorTile';
 import lodashCloneDeep from 'lodash/cloneDeep';
 import lodashMerge from 'lodash/merge';
 import lodashEach from 'lodash/each';
+import lodashGet from 'lodash/get';
 import util from '../util/util';
 import lookupFactory from '../ol/lookupimagetile';
 import { datesinDateRanges, prevDateInDateRange } from '../modules/layers/util';
@@ -29,6 +30,7 @@ import {
 import {
   nearestInterval,
 } from '../modules/layers/util';
+import { createVectorUrl, mergeBreakpointLayerAttributes } from './util';
 
 export default function mapLayerBuilder(models, config, cache, ui, store) {
   const self = {};
@@ -117,7 +119,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
       };
       def = lodashCloneDeep(def);
       lodashMerge(def, def.projections[proj.id]);
-
+      if (def.breakPointLayer) def = mergeBreakpointLayerAttributes(def, proj.id);
       const wrapLayer = proj.id === 'geographic' && (def.wrapadjacentdays === true || def.wrapX);
       switch (def.type) {
         case 'wmts':
@@ -412,32 +414,24 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
     }
 
     const layerName = def.layer || def.id;
-    const tms = def.matrixSet;
-
+    const tileMatrixSet = def.matrixSet;
     date = options.date || state.date[activeDateStr];
-    if (day && def.wrapadjacentdays) {
-      date = util.dateAdd(date, 'day', day);
-    }
 
-    const urlParameters = `${'?'
-      + 'TIME='}${
-      util.toISOStringSeconds(util.roundTimeOneMinute(date))
-    }&layer=${
-      layerName
-    }&tilematrixset=${
-      tms
-    }&Service=WMTS`
-      + '&Request=GetTile'
-      + '&Version=1.0.0'
-      + '&FORMAT=application%2Fvnd.mapbox-vector-tile'
-      + '&TileMatrix={z}&TileCol={x}&TileRow={y}';
+    if (day && def.wrapadjacentdays) date = util.dateAdd(date, 'day', day);
+    const urlParameters = createVectorUrl(date, layerName, tileMatrixSet);
     const wrapX = !!(day === 1 || day === -1);
+    const breakPointLayerDef = def.breakPointLayer;
+    const breakPointResolution = lodashGet(def, 'breakPointLayer.resolutionBreakPoint');
+    const breakPointType = lodashGet(def, 'breakPointLayer.breakPointType');
+    const isMaxBreakPoint = breakPointType === 'max';
+    const isMinBreakPoint = breakPointType === 'min';
+
     const sourceOptions = new SourceVectorTile({
       url: source.url + urlParameters,
       layer: layerName,
       day,
       format: new MVT(),
-      matrixSet: tms,
+      matrixSet: tileMatrixSet,
       wrapX,
       tileGrid: new OlTileGridTileGrid({
         extent: gridExtent,
@@ -445,23 +439,20 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
         tileSize: matrixSet.tileSize,
         origin: start,
         sizes: matrixSet.tileMatrices,
+
       }),
     });
-    def.maxResolution = 0.03515625;
-    console.log(matrixSet.resolutions);
     const layer = new LayerVectorTile({
       extent: layerExtent,
       source: sourceOptions,
       renderMode: 'image',
       renderBuffer: 500,
-      ...def.maxResolution && { maxResolution: def.maxResolution },
+      ...isMaxBreakPoint && { maxResolution: breakPointResolution },
+      ...isMinBreakPoint && { minResolution: breakPointResolution },
     });
-    let wmslayerId = def.id.replace('_v6_NRT', '');
-    wmslayerId = wmslayerId.replace('_v1_NRT', '');
     if (config.vectorStyles && def.vectorStyle && def.vectorStyle.id) {
       const { vectorStyles } = config;
       let vectorStyleId;
-
       vectorStyleId = def.vectorStyle.id;
       if (state.layers[activeGroupStr]) {
         const layers = state.layers[activeGroupStr];
@@ -475,14 +466,16 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
     }
     layer.wrap = day;
     layer.wv = attributes;
-    console.log(wmslayerId);
-    const wmsDef = config.layers[wmslayerId];
-    wmsDef.source = 'GIBS:wms';
-    const wmsLayer = createLayerWMS(wmsDef, options, day, state, def.maxResolution);
-    return new OlLayerGroup({
-      layers: [layer, wmsLayer],
-    });
-    // return layer;
+    layer.isVector = true;
+    const newDef = { ...def, ...breakPointLayerDef };
+    if (breakPointLayerDef) {
+      const layerGroup = new OlLayerGroup({
+        layers: [layer, createLayerWMS(newDef, options, day, state)],
+      });
+      layerGroup.breakPointLayerGroup = true;
+      return layerGroup;
+    }
+    return layer;
   };
 
   /**
@@ -494,7 +487,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
    * @param {object} options - Layer options
    * @returns {object} OpenLayers WMS layer
    */
-  const createLayerWMS = function(def, options, day, state, minResolution) {
+  const createLayerWMS = function(def, options, day, state) {
     const { proj, compare } = state;
     const activeDateStr = compare.isCompareA ? 'selected' : 'selectedB';
     const selectedProj = proj.selected;
@@ -537,7 +530,6 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
         start = [180, 90];
       }
     }
-
     const parameters = {
       LAYERS: def.layer || def.id,
       FORMAT: def.format,
@@ -576,7 +568,7 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
     const layer = new OlLayerTile({
       preload: Infinity,
       extent,
-      ...!!minResolution && { minResolution },
+      ...!!def.resolutionBreakPoint && { minResolution: def.resolutionBreakPoint },
       source: new OlSourceTileWMS(sourceOptions),
     });
     return layer;

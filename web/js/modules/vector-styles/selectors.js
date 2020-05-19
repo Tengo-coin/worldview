@@ -126,6 +126,7 @@ export function setStyleFunction(def, vectorStyleId, vectorStyles, layer, state)
   }
   const layerArray = layer.getLayers ? layer.getLayers().getArray() : [layer];
   lodashEach(layerArray, (layerInLayerGroup) => {
+    layerInLayerGroup = layerInLayerGroup.getLayers ? lodashFind(layerInLayerGroup.getLayers().getArray(), 'isVector') : layerInLayerGroup;
     // Apply mapbox-gl styles
     const extentStartX = layerInLayerGroup.getExtent()[0];
     const acceptableExtent = extentStartX === 180 ? [-180, -90, -110, 90] : extentStartX === -250 ? [110, -90, 180, 90] : null;
