@@ -25,7 +25,7 @@ import {
 import {
   isActive as isVectorStyleActive,
   getKey as getVectorStyleKeys,
-  setStyleFunction,
+  applyStyle,
 } from '../modules/vector-styles/selectors';
 import {
   nearestInterval,
@@ -38,7 +38,6 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
   self.init = function() {
     self.extentLayers = [];
   };
-
   /**
    * Return a layer, or layergroup, created with the supplied function
    * @param {*} createLayerFunc
@@ -377,8 +376,6 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
     let layerExtent;
     const selectedProj = proj.selected;
     const activeDateStr = compare.isCompareA ? 'selected' : 'selectedB';
-    const activeGroupStr = options.group ? options.group : compare.activeString;
-
     const source = config.sources[def.source];
     gridExtent = selectedProj.maxExtent;
     layerExtent = gridExtent;
@@ -446,24 +443,11 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
       extent: layerExtent,
       source: sourceOptions,
       renderMode: 'image',
-      renderBuffer: 500,
+      preload: 10,
       ...isMaxBreakPoint && { maxResolution: breakPointResolution },
       ...isMinBreakPoint && { minResolution: breakPointResolution },
     });
-    if (config.vectorStyles && def.vectorStyle && def.vectorStyle.id) {
-      const { vectorStyles } = config;
-      let vectorStyleId;
-      vectorStyleId = def.vectorStyle.id;
-      if (state.layers[activeGroupStr]) {
-        const layers = state.layers[activeGroupStr];
-        layers.forEach((layer) => {
-          if (layer.id === layerName && layer.custom) {
-            vectorStyleId = layer.custom;
-          }
-        });
-      }
-      setStyleFunction(def, vectorStyleId, vectorStyles, layer, state);
-    }
+    applyStyle(def, layer, state, options);
     layer.wrap = day;
     layer.wv = attributes;
     layer.isVector = true;
@@ -472,7 +456,6 @@ export default function mapLayerBuilder(models, config, cache, ui, store) {
       const layerGroup = new OlLayerGroup({
         layers: [layer, createLayerWMS(newDef, options, day, state)],
       });
-      layerGroup.breakPointLayerGroup = true;
       return layerGroup;
     }
     return layer;
