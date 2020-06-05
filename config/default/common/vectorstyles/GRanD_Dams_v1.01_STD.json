@@ -2,17 +2,17 @@
   "version": 8,
   "name": "SEDAC",
   "sources": {
-    "GRanD_Dams": {
+    "GRanD_Dams_v1.01_STD": {
       "type": "vector",
       "tiles": [
-        "https://uat.gibs.earthdata.nasa.gov/wmts/epsg4326/best/GRanD_Dams/default/{Time}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.mvt"
+        "https://uat.gibs.earthdata.nasa.gov/wmts/epsg4326/std/GRanD_Dams_v1.01_STD/default/{Time}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.mvt"
       ]
     }
   },
   "layers": [
     {
       "id": "GRanD_Dams_v1.01_STD",
-      "source": "GRanD_Dams",
+      "source": "GRanD_Dams_v1.01_STD",
       "source-layer": "GRanD_Dams_v1.01_STD",
       "source-description": "Default",
       "type": "circle",

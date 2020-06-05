@@ -1,5 +1,5 @@
 {
-    "layerOrder": [ 
+    "layerOrder": [
         "VIIRS_SNPP_CorrectedReflectance_TrueColor",
         "VIIRS_SNPP_CorrectedReflectance_BandsM3-I3-M11",
         "VIIRS_SNPP_CorrectedReflectance_BandsM11-I2-I1",
@@ -856,7 +856,7 @@
         "ASTER_GDEM_Color_Shaded_Relief",
         "ASTER_GDEM_Greyscale_Shaded_Relief",
         "SRTM_Color_Index",
-
+        "GRanD_Dams_v1.01_STD",
         "GRanD_Reservoirs",
         "GRanD_Dams",
         "Nuclear_Power_Plant_Locations",

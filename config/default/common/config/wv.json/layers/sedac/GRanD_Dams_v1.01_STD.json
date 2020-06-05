@@ -1,0 +1,22 @@
+{
+    "layers": {
+        "GRanD_Dams_v1.01_STD": {
+            "id":       "GRanD_Dams_v1.01_STD",
+            "title":    "Dams (Global Reservoir and Dam Database)",
+            "subtitle": "v1.01, Standard",
+            "group":    "overlays",
+            "tags": "vectors",
+            "type": "vector",
+            "vectorStyle": {
+                "id": "GRanD_Dams_v1.01_STD"
+            },
+            "wrapX": true,
+            "palette": {
+                "id": "GRanD_Dams",
+                "immutable": true,
+                "styleProperty": "MAIN_USE",
+                "unclassified": "Not Classified"
+            }
+        }
+    }
+}
