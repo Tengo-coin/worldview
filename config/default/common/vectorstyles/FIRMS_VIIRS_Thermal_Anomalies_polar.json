@@ -53,13 +53,7 @@
       "type": "circle",
       "paint": {
         "circle-radius": [
-          "step",
-          [
-            "zoom"
-          ],
-          2.5,
-          5,
-          5
+          "step", ["zoom"], 2.5, 5, 5
         ],
         "circle-color": "rgb(240, 40, 40)",
         "circle-opacity": 0.3,
@@ -75,13 +69,7 @@
       "type": "circle",
       "paint": {
         "circle-radius": [
-          "step",
-          [
-            "zoom"
-          ],
-          2.5,
-          5,
-          5
+          "step", ["zoom"], 2.5, 5, 5
         ],
         "circle-color": "rgb(240, 40, 40)",
         "circle-opacity": 0.3,
@@ -97,13 +85,7 @@
       "type": "circle",
       "paint": {
         "circle-radius": [
-          "step",
-          [
-            "zoom"
-          ],
-          2.5,
-          5,
-          5
+          "step", ["zoom"], 2.5, 5, 5
         ],
         "circle-color": "rgb(240, 40, 40)",
         "circle-opacity": 0.3,
@@ -119,13 +101,7 @@
       "type": "circle",
       "paint": {
         "circle-radius": [
-          "step",
-          [
-            "zoom"
-          ],
-          2.5,
-          5,
-          5
+          "step", ["zoom"], 2.5, 5, 5
         ],
         "circle-color": "rgb(240, 40, 40)",
         "circle-opacity": 0.3,
@@ -141,13 +117,7 @@
       "type": "circle",
       "paint": {
         "circle-radius": [
-          "step",
-          [
-            "zoom"
-          ],
-          2.5,
-          5,
-          5
+          "step", ["zoom"], 2.5, 5, 5
         ],
         "circle-color": "rgb(240, 40, 40)",
         "circle-opacity": 0.3,
@@ -163,13 +133,7 @@
       "type": "circle",
       "paint": {
         "circle-radius": [
-          "step",
-          [
-            "zoom"
-          ],
-          2.5,
-          5,
-          5
+          "step", ["zoom"], 2.5, 5, 5
         ],
         "circle-color": "rgb(240, 40, 40)",
         "circle-opacity": 0.3,
@@ -185,13 +149,7 @@
       "type": "circle",
       "paint": {
         "circle-radius": [
-          "step",
-          [
-            "zoom"
-          ],
-          2.5,
-          5,
-          5
+          "step", ["zoom"], 2.5, 5, 5
         ],
         "circle-color": "rgb(240, 40, 40)",
         "circle-opacity": 0.3,
@@ -207,13 +165,7 @@
       "type": "circle",
       "paint": {
         "circle-radius": [
-          "step",
-          [
-            "zoom"
-          ],
-          2.5,
-          5,
-          5
+          "step", ["zoom"], 2.5, 5, 5
         ],
         "circle-color": "rgb(240, 40, 40)",
         "circle-opacity": 0.3,
@@ -229,13 +181,7 @@
       "type": "circle",
       "paint": {
         "circle-radius": [
-          "step",
-          [
-            "zoom"
-          ],
-          2.5,
-          5,
-          5
+          "step", ["zoom"], 2.5, 5, 5
         ],
         "circle-color": "rgb(240, 40, 40)",
         "circle-opacity": 0.3,
