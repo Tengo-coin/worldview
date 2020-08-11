@@ -7,7 +7,6 @@
       "description": "aster/ASTER_GDEM_Color_Index",
       "tags": "gdem",
       "group": "overlays",
-      "type": "wmts",
       "layergroup": [
         "aster"
       ],
