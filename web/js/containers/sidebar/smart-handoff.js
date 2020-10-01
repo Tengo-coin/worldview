@@ -11,7 +11,6 @@ import util from '../../util/util';
 import { getLayers } from '../../modules/layers/selectors';
 import { imageUtilGetCoordsFromPixelValues } from '../../modules/image-download/util';
 import { openCustomContent } from '../../modules/modal/actions';
-import { changeCropBounds } from '../../modules/animation/actions';
 import getSelectedDate from '../../modules/date/selectors';
 
 
@@ -32,7 +31,6 @@ class SmartHandoff extends Component {
     const {
       screenWidth,
       screenHeight,
-      onBoundaryChange,
     } = props;
 
     this.state = {
@@ -44,11 +42,20 @@ class SmartHandoff extends Component {
       },
       selectedLayer: null,
       availableGranules: null,
-      currentExtent: null,
+      currentExtent: {},
+      coordinates: {},
     };
 
-    this.debounceBoundaryUpdate = lodashDebounce(onBoundaryChange, 200);
+
     this.onBoundaryChange = this.onBoundaryChange.bind(this);
+
+    this.updateExtent = this.updateExtent.bind(this);
+    this.debouncedUpdateExtent = lodashDebounce(this.updateExtent, 1000);
+  }
+
+  updateExtent() {
+    const { currentExtent } = this.state;
+    console.log(currentExtent);
   }
 
   /**
@@ -56,6 +63,8 @@ class SmartHandoff extends Component {
    * @param {*} boundaries - the focal point to which layer data should be contained within
    */
   onBoundaryChange(boundaries) {
+    const { proj, map } = this.props;
+    const { selectedLayer } = this.state;
     const {
       x, y, width, height,
     } = boundaries;
@@ -66,8 +75,34 @@ class SmartHandoff extends Component {
       y2: y + height,
     };
 
-    this.setState({ boundaries: newBoundaries });
-    this.debounceBoundaryUpdate(newBoundaries);
+    const lonlats = imageUtilGetCoordsFromPixelValues(
+      newBoundaries,
+      map.ui.selected,
+    );
+    const { crs } = proj;
+    // Retrieve the lat/lon coordinates based on the defining boundary and map projection
+    const geolonlat1 = olProj.transform(lonlats[0], crs, 'EPSG:4326');
+    const geolonlat2 = olProj.transform(lonlats[1], crs, 'EPSG:4326');
+
+    const currentExtent = {
+      southWest: `${geolonlat1[0]},${geolonlat1[1]}`,
+      northEast: `${geolonlat2[0]},${geolonlat2[1]}`,
+    };
+
+    const coordinates = {
+      bottomLeft: util.formatCoordinate([geolonlat1[0], geolonlat1[1]]),
+      topRight: util.formatCoordinate([geolonlat2[0], geolonlat2[1]]),
+    };
+
+    this.setState({
+      boundaries: newBoundaries,
+      coordinates,
+      currentExtent,
+    }, () => {
+      if (selectedLayer && currentExtent) {
+        this.debouncedUpdateExtent();
+      }
+    });
   }
 
   onLayerChange(layer, currentExtent) {
@@ -104,10 +139,8 @@ class SmartHandoff extends Component {
    */
   render() {
     const {
-      map,
       screenWidth,
       screenHeight,
-      proj,
       activeLayers,
       isActive,
       showWarningModal,
@@ -115,7 +148,7 @@ class SmartHandoff extends Component {
     } = this.props;
 
     let { selectedLayer } = this.state;
-    const { availableGranules } = this.state;
+    const { availableGranules, coordinates, currentExtent } = this.state;
 
     // Determine if data-download 'smart-handoff' tab is activated by user
     if (!isActive) return null;
@@ -126,24 +159,6 @@ class SmartHandoff extends Component {
       x, y, x2, y2,
     } = boundaries;
 
-    // Retrieve the lat/lon coordinates based on the defining boundary and map projection
-    const lonlats = imageUtilGetCoordsFromPixelValues(
-      boundaries,
-      map.ui.selected,
-    );
-    const { crs } = proj;
-    const geolonlat1 = olProj.transform(lonlats[0], crs, 'EPSG:4326');
-    const geolonlat2 = olProj.transform(lonlats[1], crs, 'EPSG:4326');
-
-    const currentExtent = {
-      southWest: `${geolonlat1[0]},${geolonlat1[1]}`,
-      northEast: `${geolonlat2[0]},${geolonlat2[1]}`,
-    };
-
-
-    if (selectedLayer && currentExtent) {
-      // lodashDebounce(() => this.onUpdateExtent(currentExtent), 300);
-    }
 
     // Default modal state
     const showModal = false;
@@ -255,10 +270,7 @@ class SmartHandoff extends Component {
             top: y - 20,
             width: x2 - x,
           }}
-          coordinates={{
-            bottomLeft: util.formatCoordinate([geolonlat1[0], geolonlat1[1]]),
-            topRight: util.formatCoordinate([geolonlat2[0], geolonlat2[1]]),
-          }}
+          coordinates={coordinates}
           showCoordinates
         />
       </div>
@@ -305,7 +317,6 @@ SmartHandoff.propTypes = {
   isActive: PropTypes.bool,
   activeLayers: PropTypes.array,
   map: PropTypes.object.isRequired,
-  onBoundaryChange: PropTypes.func,
   boundaries: PropTypes.object,
   proj: PropTypes.object,
   screenHeight: PropTypes.number,
@@ -361,9 +372,6 @@ const mapDispatchToProps = (dispatch) => ({
         size: 'lg',
       }),
     );
-  },
-  onBoundaryChange: (bounds) => {
-    dispatch(changeCropBounds(bounds));
   },
 });
 
