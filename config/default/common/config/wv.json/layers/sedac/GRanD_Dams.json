@@ -1,9 +1,6 @@
 {
   "layers": {
     "GRanD_Dams": {
-      "id": "GRanD_Dams",
-      "title": "Dams",
-      "subtitle": "Global Reservoir and Dam Database (GRanD), v1.01",
       "description": "sedac/GRanD_Dams",
       "group": "overlays",
       "tags": "vectors",
@@ -25,7 +22,7 @@
       "breakPointLayer": {
         "id": "GRanD_Dams",
         "type": "wms",
-        "format":   "image/png",
+        "format": "image/png",
         "breakPointType": "max",
         "projections": {
           "geographic": {

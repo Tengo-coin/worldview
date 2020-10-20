@@ -1,9 +1,6 @@
 {
   "layers": {
     "MODIS_Combined_Thermal_Anomalies_Day": {
-      "id": "MODIS_Combined_Thermal_Anomalies_Day",
-      "title": "Fires and Thermal Anomalies (Day)",
-      "subtitle": "Terra and Aqua / MODIS",
       "description": "modis/combined/MODIS_Combined_Thermal_Anomalies_All",
       "tags": "hotspots vectors",
       "group": "overlays",
@@ -15,9 +12,6 @@
           "id": "FIRMS_MODIS_Thermal_Anomalies_polar"
         }
       },
-      "daynight": [
-        "day"
-      ],
       "layergroup": [
         "modis",
         "modis_terra"
@@ -33,7 +27,7 @@
         "breakPointType": "max",
         "projections": {
           "geographic": {
-            "resolutionBreakPoint":  0.017578125,
+            "resolutionBreakPoint": 0.017578125,
             "source": "GIBS:wms"
           },
           "arctic": {

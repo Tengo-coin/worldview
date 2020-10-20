@@ -2,8 +2,6 @@
   "layers": {
     "OrbitTracks_Landsat-8_Descending": {
       "id": "OrbitTracks_Landsat-8_Descending",
-      "title": "Landsat 8 - Orbit Track & Time",
-      "subtitle": "Landsat 8 / Space-Track.org",
       "description": "reference/orbits/OrbitTracks_Landsat-8_Descending",
       "group": "overlays",
       "format": "image/png",
@@ -14,7 +12,6 @@
         "reference",
         "reference_orbits"
       ],
-      "daynight": [ "day" ],
       "track": "descending",
       "startDate": "2013-02-11",
       "projections": {

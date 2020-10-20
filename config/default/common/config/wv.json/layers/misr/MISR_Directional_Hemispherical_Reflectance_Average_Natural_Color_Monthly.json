@@ -1,9 +1,6 @@
 {
   "layers": {
     "MISR_Directional_Hemispherical_Reflectance_Average_Natural_Color_Monthly": {
-      "id": "MISR_Directional_Hemispherical_Reflectance_Average_Natural_Color_Monthly",
-      "title": "Directional Hemispheric Reflectance (DHR) Average (Monthly, Natural Color)",
-      "subtitle": "Terra / MISR",
       "description": "misr/MISR_Directional_Hemispherical_Reflectance_Average_Natural_Color_Monthly",
       "tags": "",
       "group": "overlays",
@@ -11,10 +8,7 @@
         "misr"
       ],
       "product": "MIL3MLS",
-      "wrapadjacentdays": true,
-      "daynight": [
-        "day"
-      ]
+      "wrapadjacentdays": true
     }
   }
 }

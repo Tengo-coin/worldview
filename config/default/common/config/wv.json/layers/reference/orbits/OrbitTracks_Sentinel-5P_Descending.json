@@ -2,8 +2,6 @@
   "layers": {
     "OrbitTracks_Sentinel-5P_Descending": {
       "id": "OrbitTracks_Sentinel-5P_Descending",
-      "title": "Sentinel-5P - Orbit Track & Time",
-      "subtitle": "Sentinel-5P / Space-Track.org",
       "description": "reference/orbits/OrbitTracks_Sentinel-5P_Descending",
       "tags": "tracks night",
       "group": "overlays",
@@ -14,7 +12,6 @@
         "reference",
         "reference_orbits"
       ],
-      "daynight": [ "night" ],
       "track": "descending",
       "startDate": "2017-10-14",
       "projections": {

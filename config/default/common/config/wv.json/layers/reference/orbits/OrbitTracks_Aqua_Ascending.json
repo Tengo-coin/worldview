@@ -2,8 +2,6 @@
   "layers": {
     "OrbitTracks_Aqua_Ascending": {
       "id": "OrbitTracks_Aqua_Ascending",
-      "title": "Aqua - Orbit Track & Time",
-      "subtitle": "Aqua / Space-Track.org",
       "description": "reference/orbits/OrbitTracks_Aqua_Ascending",
       "group": "overlays",
       "format": "image/png",
@@ -14,7 +12,6 @@
         "reference",
         "reference_orbits"
       ],
-      "daynight": [ "day" ],
       "track": "ascending",
       "startDate": "2002-05-04",
       "projections": {

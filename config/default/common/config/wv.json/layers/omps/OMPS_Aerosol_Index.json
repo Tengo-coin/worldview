@@ -1,9 +1,6 @@
 {
   "layers": {
     "OMPS_Aerosol_Index": {
-      "id": "OMPS_Aerosol_Index",
-      "title": "Aerosol Index",
-      "subtitle": "Suomi NPP / OMPS",
       "description": "omps/OMPS_Aerosol_Index",
       "tags": "ai",
       "group": "overlays",
@@ -11,13 +8,7 @@
       "layergroup": [
         "omps"
       ],
-      "product": "OMPS_NPP_NMMIEAI_L2",
-      "tracks": [
-        "OrbitTracks_Suomi_NPP_Ascending"
-      ],
-      "daynight": [
-        "day"
-      ]
+      "product": "OMPS_NPP_NMMIEAI_L2"
     }
   }
 }

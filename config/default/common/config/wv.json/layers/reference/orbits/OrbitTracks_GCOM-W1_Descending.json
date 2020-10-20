@@ -2,8 +2,6 @@
   "layers": {
     "OrbitTracks_GCOM-W1_Descending": {
       "id": "OrbitTracks_GCOM-W1_Descending",
-      "title": "GCOM-W1 - Orbit Track & Time",
-      "subtitle": "GCOM-W1 / Space-Track.org",
       "description": "reference/orbits/OrbitTracks_GCOM-W1_Descending",
       "group": "overlays",
       "format": "image/png",
@@ -13,7 +11,6 @@
         "reference",
         "reference_orbits"
       ],
-      "daynight": [ "night" ],
       "track": "descending",
       "startDate": "2012-05-17",
       "projections": {

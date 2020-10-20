@@ -1,9 +1,6 @@
 {
   "layers": {
     "OCO-2_Solar_Induced_Florescence_Blended": {
-      "id": "OCO-2_Solar_Induced_Florescence_Blended",
-      "title": "Solar-induced Chlorophyll Fluorescence (Blended)",
-      "subtitle": "OCO-2",
       "description": "oco2/OCO-2_Solar_Induced_Florescence_Blended",
       "tags": "oco2",
       "group": "overlays",
@@ -11,13 +8,7 @@
         "oco2"
       ],
       "product": "OCO2_L2_Lite_SIF",
-      "wrapadjacentdays": true,
-      "tracks": [
-        "OrbitTracks_OCO-2_Ascending"
-      ],
-      "daynight": [
-        "day"
-      ]
+      "wrapadjacentdays": true
     }
   }
 }

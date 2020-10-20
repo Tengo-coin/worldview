@@ -2,8 +2,6 @@
   "layers": {
     "OrbitTracks_ISS_Ascending": {
       "id": "OrbitTracks_ISS_Ascending",
-      "title": "ISS - Orbit Track & Time",
-      "subtitle": "Int'l Space Station / Space-Track.org",
       "description": "reference/orbits/OrbitTracks_ISS_Ascending",
       "tags": "international tracks",
       "group": "overlays",
@@ -14,7 +12,6 @@
         "reference",
         "reference_orbits"
       ],
-      "daynight": "",
       "track": "ascending",
       "startDate": "1998-11-20",
       "projections": {

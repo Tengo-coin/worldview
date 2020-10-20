@@ -2,8 +2,6 @@
   "layers": {
     "OrbitTracks_Terra_Descending": {
       "id": "OrbitTracks_Terra_Descending",
-      "title": "Terra - Orbit Track & Time",
-      "subtitle": "Terra / Space-Track.org",
       "description": "reference/orbits/OrbitTracks_Terra_Descending",
       "group": "overlays",
       "format": "image/png",
@@ -14,7 +12,6 @@
         "reference",
         "reference_orbits"
       ],
-      "daynight": [ "day" ],
       "track": "descending",
       "startDate": "2000-02-24",
       "projections": {

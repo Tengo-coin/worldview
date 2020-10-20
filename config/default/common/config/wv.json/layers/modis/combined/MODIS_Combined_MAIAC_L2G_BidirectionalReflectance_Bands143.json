@@ -1,9 +1,6 @@
 {
   "layers": {
     "MODIS_Combined_MAIAC_L2G_BidirectionalReflectance_Bands143": {
-      "id": "MODIS_Combined_MAIAC_L2G_BidirectionalReflectance_Bands143",
-      "title": "MAIAC Reflectance (BRDF-Adjusted)",
-      "subtitle": "Terra and Aqua / MODIS",
       "description": "modis/combined/MODIS_Combined_MAIAC_L2G_BidirectionalReflectance_Bands143",
       "tags": "",
       "group": "baselayers",
@@ -12,10 +9,7 @@
         "modis_combined"
       ],
       "product": "",
-      "wrapadjacentdays": true,
-      "daynight": [
-        "day"
-      ]
+      "wrapadjacentdays": true
     }
   }
 }
