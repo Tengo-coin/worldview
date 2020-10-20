@@ -304,7 +304,7 @@ function mapStateToProps(state, ownProps) {
     ? getPaletteLegends(layer.id, layerGroupName, state)
     : [];
   const isCustomPalette = hasPalette && palettes.custom[layer.id];
-  const tracksForLayer = layers[layerGroupName].filter((activeLayer) => (layer.tracks || []).some((track) => activeLayer.id === track));
+  const tracksForLayer = layers[layerGroupName].filter((activeLayer) => (layer.orbitTracks || []).some((track) => activeLayer.id === track));
   const selectedMap = lodashGet(map, 'ui.selected');
   const isVector = layer.type === 'vector';
   const mapRes = selectedMap ? selectedMap.getView().getResolution() : null;
