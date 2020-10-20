@@ -2,6 +2,7 @@
         "layerOrder": [
                 "Nuclear_Power_Plant_Locations",
                 "GRanD_Dams",
+                "HLS_MGRS_Granule_Grid",
                 "GRanD_Reservoirs",
                 "GRUMP_Settlements_v1.01_STD",
                 "GRUMP_Settlements_v2.01_STD",

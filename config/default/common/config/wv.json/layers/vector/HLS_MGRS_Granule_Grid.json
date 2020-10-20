@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "GRanD_Dams": {
+      "id": "HLS_MGRS_Granule_Grid",
+      "type": "vector",
+      "tags": "vector vectors",
+      "group": "overlays",
+      "downloadId": "GRanD_Dams",
+      "layergroup": [
+        "vector"
+      ],
+      "inactive": true,
+      "vectorStyle": {
+        "id": "HLS_MGRS_Granule_Grid"
+      },
+      "period": "daily"
+    }
+  }
+}

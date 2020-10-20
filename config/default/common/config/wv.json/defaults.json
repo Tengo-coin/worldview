@@ -4,10 +4,7 @@
         "startingLayers": [
 
             {
-                "id": "OrbitTracks_Landsat-8_Ascending_Continuous"
-            },
-            {
-                "id": "OrbitTracks_Aqua_Descending_Continuous"
+                "id": "HLS_MGRS_Granule_Grid"
             }
         ]
     }
