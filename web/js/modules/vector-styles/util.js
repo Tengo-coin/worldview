@@ -109,9 +109,10 @@ export function offsetLineStringStyle(feature, styleArray) {
   });
 }
 export function selectedStyleFunction(feature, styleArray, size) {
-  if (styleArray.length !== 1) return styleArray;
+  // if (styleArray.length !== 1) return styleArray;
   return styleArray.map((style) => {
     const type = feature.getType();
+    if(style.getText()) return style;
     switch (type) {
       case 'Point':
         return selectedCircleStyle(style, size);
@@ -229,6 +230,7 @@ function getModalContentsAtPixel(mapProps, config, compareState) {
       || !isFromActiveCompareRegion(map, pixels, layer.wv, compareState, swipeOffset)) {
       return;
     }
+
     if (def.vectorData && def.vectorData.id && def.title) {
       const layerId = def.id;
       if (!selected[layerId]) selected[layerId] = [];
