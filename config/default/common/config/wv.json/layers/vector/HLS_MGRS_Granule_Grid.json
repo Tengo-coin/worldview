@@ -1,0 +1,26 @@
+{
+  "layers": {
+    "HLS_MGRS_Granule_Grid": {
+      "id": "HLS_MGRS_Granule_Grid",
+      "type": "vector",
+      "tags": "vector vectors",
+      "group": "overlays",
+      "downloadId": "GRanD_Dams",
+      "matrixSet": "31.25m",
+      "layergroup": [
+        "vector"
+      ],
+      "palette": {
+        "id": "",
+        "immutable": true,
+        "styleProperty": "",
+        "unclassified": "Not Classified"
+      },
+      "inactive": true,
+      "vectorStyle": {
+        "id": "HLS_MGRS_Granule_Grid"
+      },
+      "period": "daily"
+    }
+  }
+}
