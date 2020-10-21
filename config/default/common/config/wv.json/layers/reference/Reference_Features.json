@@ -4,7 +4,7 @@
       "description": "reference/Reference_Features",
       "tags": "osm reference, country, countries, state, province",
       "group": "overlays",
-      "noTransition": "true",
+      "noTransition": true,
       "layergroup": [
         "reference"
       ],
