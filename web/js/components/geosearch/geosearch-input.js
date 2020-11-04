@@ -29,10 +29,12 @@ class SearchBox extends Component {
   // handle submit button click - required to select coordinates since no suggestions menu
   handleSubmitClick = (e) => {
     e.preventDefault();
-    const { onSelect, coordinatesPending, onCoordinateInputSelect } = this.props;
+    const {
+      onSelect, coordinatesPending, onCoordinateInputSelect, searchResults,
+    } = this.props;
     if (coordinatesPending.length > 0) {
       onCoordinateInputSelect();
-    } else if (this.highlightedItem) {
+    } else if (searchResults.length > 0 && this.highlightedItem) {
       onSelect(this.highlightedItem.text, this.highlightedItem);
     }
   }
@@ -86,10 +88,10 @@ class SearchBox extends Component {
     } = this.props;
     const hasCoordinates = coordinates.length > 0;
     // eslint-disable-next-line no-nested-ternary
-    const buttonContainerRight = hasCoordinates
+    const rightPositioning = hasCoordinates
       ? isMobile ? '67px' : '60px'
       : '30px';
-    const submitButtonStyle = inputValue
+    const buttonStyle = inputValue
       ? { color: '#0070c8', cursor: 'pointer' }
       : {};
 
@@ -98,11 +100,11 @@ class SearchBox extends Component {
         className="geosearch-submit-input-group-addon"
         addonType="append"
         style={{
-          right: buttonContainerRight,
+          right: rightPositioning,
         }}
       >
         <Button
-          style={submitButtonStyle}
+          style={buttonStyle}
           disabled={!inputValue}
           onClick={this.handleSubmitClick}
           className="geosearch-search-submit-button"
@@ -121,7 +123,7 @@ class SearchBox extends Component {
     } = this.props;
     const hasCoordinates = coordinates.length > 0;
     // eslint-disable-next-line no-nested-ternary
-    const buttonContainerRight = hasCoordinates
+    const rightPositioning = hasCoordinates
       ? isMobile ? '121px' : '121px'
       : '92px';
 
@@ -131,9 +133,9 @@ class SearchBox extends Component {
         className="geosearch-submit-input-group-addon"
         addonType="append"
         style={{
-          right: buttonContainerRight,
+          right: rightPositioning,
         }}
-        title="The entered coordinates are outside of the current map extent."
+        title="The entered location is outside of the current map extent."
       >
         <FontAwesomeIcon icon={faExclamationTriangle} size="1x" />
       </InputGroupAddon>
@@ -141,24 +143,33 @@ class SearchBox extends Component {
     );
   }
 
-  render() {
+  // condtional autocomplete wrapper styling
+  getWrapperStyle = () => {
     const {
       coordinates,
+      isMobile,
+      showExtentAlert,
+    } = this.props;
+    const hasCoordinates = coordinates.length > 0;
+    const wrapperStyleWidth = hasCoordinates ? '268px' : '299px';
+    return {
+      width: isMobile ? '90%' : wrapperStyleWidth,
+      // eslint-disable-next-line no-nested-ternary
+      paddingRight: isMobile
+        ? '0'
+        : showExtentAlert ? '53px' : '26px',
+    };
+  }
+
+  render() {
+    const {
       inputValue,
       isMobile,
       onChange,
       onSelect,
       searchResults,
-      showExtentAlert,
     } = this.props;
-    const hasCoordinates = coordinates.length > 0;
-    const wrapperStyleWidth = hasCoordinates ? '268px' : '299px';
-    const wrapperStyle = {
-      width: isMobile ? '90%' : wrapperStyleWidth,
-      paddingRight: isMobile
-        ? '0'
-        : showExtentAlert ? '48px' : '26px',
-    };
+
     const placeHolderText = isMobile
       ? 'Enter place name or coordinates'
       : 'Search for places or enter coordinates';
@@ -175,13 +186,12 @@ class SearchBox extends Component {
             id: 'geosearch-autocomplete',
             placeholder: placeHolderText,
           }}
-          wrapperStyle={wrapperStyle}
+          wrapperStyle={this.getWrapperStyle()}
           value={inputValue}
           items={searchResults}
           getItemValue={(item) => item.text}
           onSelect={onSelect}
           onChange={onChange}
-          onMenuVisibilityChange={this.resetHighlightedItem}
           renderMenu={this.renderMenu}
           renderItem={this.renderItem}
         />
