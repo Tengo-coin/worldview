@@ -5,14 +5,13 @@ import LayerList from './layer-list';
 import { getLayers } from '../../modules/layers/selectors';
 import Scrollbars from '../../components/util/scrollbar';
 
-const Layers = (props) => {
+function Layers (props) {
   const {
     overlays,
     baselayers,
     isActive,
     layerGroupName,
     height,
-    checkerBoardPattern,
     layerSplit,
   } = props;
   const outterClass = 'layer-container sidebar-panel';
@@ -28,7 +27,6 @@ const Layers = (props) => {
         layerGroupName={layerGroupName}
         layerSplit={layerSplit}
         layers={overlays}
-        checkerBoardPattern={checkerBoardPattern}
       />
       <LayerList
         title="Base Layers"
@@ -36,18 +34,15 @@ const Layers = (props) => {
         layerGroupName={layerGroupName}
         layers={baselayers}
         layerSplit={layerSplit}
-        checkerBoardPattern={checkerBoardPattern}
       />
     </div>
   </Scrollbars>
   );
-};
+}
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
   const { layers, proj } = state;
-  const {
-    isActive, layerGroupName, height, checkerBoardPattern,
-  } = ownProps;
+  const { layerGroupName } = ownProps;
   const componentLayers = layers[layerGroupName];
   const layerObj = getLayers(componentLayers, { proj: proj.id, group: 'all' });
 
@@ -56,12 +51,11 @@ function mapStateToProps(state, ownProps) {
     overlays: layerObj.overlays,
     layerSplit: layerObj.overlays.length,
     layerGroupName,
-    height,
-    isActive,
-    checkerBoardPattern,
   };
-}
+};
+
 const mapDispatchToProps = (dispatch) => ({});
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
@@ -69,7 +63,6 @@ export default connect(
 
 Layers.propTypes = {
   baselayers: PropTypes.array,
-  checkerBoardPattern: PropTypes.object,
   height: PropTypes.number,
   isActive: PropTypes.bool,
   layerGroupName: PropTypes.string,
