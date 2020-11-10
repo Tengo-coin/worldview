@@ -1,2 +1,1 @@
-In order to retrieve the data at higher spatial resolution, there is a tradeoff with the temporal resolution. In comparison to MODIS, it takes 2 to 3 days for global coverage (excluding Antarctica) and the swath width coverage is less wide.
-
+The other trade-off is with the temporal resolution. MODIS has near daily coverage of the Earth, but with  it takes 2 to 3 days for global coverage (excluding Antarctica)
