@@ -15,7 +15,9 @@ import util from '../util/util';
 import {
   hasSubDaily as hasSubDailySelector,
   getLayers,
+  getActiveLayers,
 } from '../modules/layers/selectors';
+import getSelectedDate from '../modules/date/selectors';
 import {
   resolutionsGeo,
   resolutionsPolar,
@@ -153,9 +155,6 @@ function mapStateToProps(state) {
     config,
     proj,
     browser,
-    layers,
-    compare,
-    date,
     map,
     imageDownload,
   } = state;
@@ -163,9 +162,8 @@ function mapStateToProps(state) {
     isWorldfile, fileType, resolution, boundaries,
   } = imageDownload;
   const { screenWidth, screenHeight } = browser;
-  const activeDateStr = compare.isCompareA ? 'selected' : 'selectedB';
-  const activeStr = compare.activeString;
-  const hasSubdailyLayers = hasSubDailySelector(layers[activeStr]);
+  const activeLayers = getActiveLayers(state);
+  const hasSubdailyLayers = hasSubDailySelector(activeLayers);
   let url = DEFAULT_URL;
   if (config.features.imageDownload && config.features.imageDownload.url) {
     url = config.features.imageDownload.url;
@@ -186,9 +184,9 @@ function mapStateToProps(state) {
     resolution,
     boundaries,
     hasSubdailyLayers,
-    date: date[activeDateStr],
+    date: getSelectedDate(state),
     getLayers: () => getLayers(
-      layers[compare.activeString],
+      getActiveLayers(state),
       {
         reverse: true,
         renderable: true,
