@@ -1,1 +1,1 @@
-Pivot irrigation in Egypt comes into view with this higher resolution imagery.
+Three burned areas in Oregon are clearly visible in this image from 29 September 2020. Turn on and off the Sentinel 2A & 2B Reflectance layer to see difference between that layer and the Terra/MODIS Corrected Reflectance layer.

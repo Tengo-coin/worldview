@@ -1,1 +1,1 @@
-Swipe left and right to compare and contrast the imagery from MODIS on the left (A) side, and the Sentinel 2A and B imagery on the right (B) side showing the Palm Islands in Dubai.
+The HLS project focuses on retrieving surface reflectance over land masses (excluding Antarctica), but will also include coastal zones and inland water. Each grid cell shown here represents an area with a potential satellite observation. Worldview will initially provide access to the Sentinel 2A and 2B layer; and the Landsat layer, will be available soon.

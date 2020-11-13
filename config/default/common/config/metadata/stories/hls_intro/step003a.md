@@ -1,1 +1,0 @@
-There are trade-offs when the imagery are obtained at higher resolutions. One is where less data can be collected. In comparison, MODIS swath width is 2330 km wide, whereas Sentinel 2A and 2B are 290 km and Landsat is 180 km.

@@ -1,1 +1,1 @@
-This image of Hong Kong's Chek Lap Kok Airport shows land reclamation under progress toward the north of the airport to create a new runway and passenger concourse for the airport expansion. Use the swipe to compare a Landsat image from the Web Enabled Landsat (WELD) Project and the Sentinel image from HLS.
+Sediments causing a change in the water color can be seen here off the tip of Fraser Island in Australia. Turn on and off the Sentinel 2A and 2B layer to see how much blurrier it is in the MODIS/Terra image!

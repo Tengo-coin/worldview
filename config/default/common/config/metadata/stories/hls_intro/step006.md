@@ -1,1 +1,1 @@
-The HLS project focuses on retrieving surface reflectance over land masses (excluding Antarctica), but will also include coastal zones and inland water. Each grid cell shown here represents an area with a potential satellite observation. Worldview will initially provide access to the Sentinel 2A and 2B layer, Landsat layer, L30 will come shortly thereafter.
+These satellites have a smililar overpass time as the Terra satellite (approximately 10:00 - 10:30am local time equatorial crossing), providing continuity to the Terra/MODIS surface reflectance layers.
