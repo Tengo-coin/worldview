@@ -12,7 +12,7 @@ import util from '../../util/util';
  * @param {String} coordinate
  * @returns {Number} parsed coordinate with modified precision
  */
-function getCoordinateDisplayPrecision(coordinate) {
+const getCoordinateDisplayPrecision = (coordinate) => {
   const coordinateNumber = Number(coordinate);
   const coordinatePrecision = Math.abs(coordinateNumber) > 100
     ? 7
@@ -21,7 +21,7 @@ function getCoordinateDisplayPrecision(coordinate) {
       : 6;
 
   return parseFloat(coordinateNumber.toPrecision(coordinatePrecision));
-}
+};
 
 /**
  * Create tooltip React DOM element
@@ -34,7 +34,7 @@ function getCoordinateDisplayPrecision(coordinate) {
  *
  * @returns {Void}
  */
-export function renderCoordinatesTooltip(map, config, coordinates, coordinatesMetadata, isMobile, clearCoordinates) {
+export const renderCoordinatesTooltip = (map, config, coordinates, coordinatesMetadata, isMobile, clearCoordinates) => {
   const { projections } = config;
   const { proj } = map;
   const { crs } = projections[proj];
@@ -42,7 +42,7 @@ export function renderCoordinatesTooltip(map, config, coordinates, coordinatesMe
 
   // create tooltip overlay
   const tooltipElement = document.createElement('div');
-  const tooltipId = `coordinates-map-marker-${latitude},${longitude}`;
+  const tooltipId = util.encodeId(`coordinates-map-marker_${latitude},${longitude}`);
   const tooltipOverlay = new Overlay({
     id: tooltipId,
     element: tooltipElement,
@@ -74,9 +74,10 @@ export function renderCoordinatesTooltip(map, config, coordinates, coordinatesMe
       toggleWithClose={removeTooltip}
       clearCoordinates={clearCoordinates}
       isMobile={isMobile}
+      tooltipId={tooltipId}
     />
   ), tooltipOverlay.getElement());
-}
+};
 
 /**
  * getCoordinatesMetadata for tooltip display
@@ -85,17 +86,26 @@ export function renderCoordinatesTooltip(map, config, coordinates, coordinatesMe
  *
  * @returns {Object} coordinatesMetadata
  */
-export function getCoordinatesMetadata(geocodeProperties) {
+export const getCoordinatesMetadata = (geocodeProperties) => {
   const { latitude, longitude, reverseGeocodeResults } = geocodeProperties;
   const { address, error } = reverseGeocodeResults;
 
   const parsedLatitude = getCoordinateDisplayPrecision(latitude);
   const parsedLongitude = getCoordinateDisplayPrecision(longitude);
 
+  // format coordinates based on localStorage preference
+  const format = util.getCoordinateFormat();
+  const coordinates = util.formatCoordinate(
+    [parsedLongitude, parsedLatitude],
+    format,
+  );
+  const formattedCoordinates = coordinates.split(',');
+  const [formattedLatitude, formattedLongitude] = formattedCoordinates;
+
   // build title and metadata based on available parameters
   let title;
   if (error) {
-    title = `${parsedLatitude}, ${parsedLongitude}`;
+    title = `${formattedLatitude.trim()}, ${formattedLongitude.trim()}`;
   } else if (address) {
     /* eslint-disable camelcase */
     const {
@@ -114,21 +124,12 @@ export function getCoordinatesMetadata(geocodeProperties) {
     }
   }
 
-  // format coordinates based on localStorage preference
-  const format = util.getCoordinateFormat();
-  const coordinates = util.formatCoordinate(
-    [parsedLongitude, parsedLatitude],
-    format,
-  );
-  const formattedCoordinates = coordinates.split(',');
-  const [formattedLatitude, formattedLongitude] = formattedCoordinates;
-
   return {
     latitude: formattedLatitude.trim(),
     longitude: formattedLongitude.trim(),
     title,
   };
-}
+};
 
 /**
  * Get coordinate dialog feature at clicked map pixel
@@ -140,7 +141,7 @@ export function getCoordinatesMetadata(geocodeProperties) {
  *
  * @returns {Void}
  */
-export function getCoordinatesDialogAtMapPixel(pixels, map, config, isMobile, clearCoordinates) {
+export const getCoordinatesDialogAtMapPixel = (pixels, map, config, isMobile, clearCoordinates) => {
   // check for existing coordinate marker tooltip overlay and prevent multiple renders
   const mapOverlays = map.getOverlays().getArray();
   const coordinatesTooltipOverlay = mapOverlays.filter((overlay) => {
@@ -164,4 +165,4 @@ export function getCoordinatesDialogAtMapPixel(pixels, map, config, isMobile, cl
       renderCoordinatesTooltip(map, config, [latitude, longitude], coordinatesMetadata, isMobile, clearCoordinates);
     }
   });
-}
+};
