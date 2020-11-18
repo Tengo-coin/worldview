@@ -77,7 +77,7 @@ class SearchComponent extends Component {
   }
 
   // handle selecting menu item in search results
-  onSelect=(value, item) => {
+  onSelect = (value, item) => {
     const {
       isCoordinatePairWithinExtent,
       selectCoordinatesToFly,
@@ -114,7 +114,7 @@ class SearchComponent extends Component {
   }
 
   // handle input value change including text/coordinates typing, pasting, cutting
-  onChange=(e, value) => {
+  onChange = (e, value) => {
     e.preventDefault();
     const {
       updateSearchResults, updateValue, updatePendingCoordinates,
