@@ -198,7 +198,7 @@ class SearchComponent extends Component {
       isTouchDevice,
       showReverseGeocodeAlert,
     } = this.state;
-    const message = `${isTouchDevice ? 'Tap' : 'Click'} on map to identify a location.`;
+    const message = `${isTouchDevice ? 'Tap' : 'Click'} on map to identify a location.${isTouchDevice ? '' : ' Right click to cancel.'}`;
 
     return showReverseGeocodeAlert && (
       <Alert
