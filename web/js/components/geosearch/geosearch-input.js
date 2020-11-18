@@ -218,7 +218,7 @@ class SearchBox extends Component {
         onKeyPress={this.handleKeyPress}
       >
         <Autocomplete
-          ref={(el) => { this.geosearchInput = el; } }
+          ref={(el) => { this.geosearchInput = el; }}
           inputProps={{
             className: 'form-control geosearch-autocomplete dark-input',
             id: 'geosearch-autocomplete',
