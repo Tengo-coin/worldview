@@ -218,8 +218,7 @@ class SearchBox extends Component {
         onKeyPress={this.handleKeyPress}
       >
         <Autocomplete
-          // eslint-disable-next-line no-return-assign
-          ref={(el) => this.geosearchInput = el}
+          ref={(el) => { this.geosearchInput = el; } }
           inputProps={{
             className: 'form-control geosearch-autocomplete dark-input',
             id: 'geosearch-autocomplete',
