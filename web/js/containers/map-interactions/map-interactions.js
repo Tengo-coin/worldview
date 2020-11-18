@@ -21,7 +21,6 @@ class MapInteractions extends PureComponent {
       isDistractionFreeModeActive,
       mouseEvents,
     } = this.props;
-    console.log(isDistractionFreeModeActive);
     const mapClasses = this.getMapClasses();
     return (
       <>
