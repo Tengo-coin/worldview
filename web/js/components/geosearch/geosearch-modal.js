@@ -204,7 +204,7 @@ class SearchComponent extends Component {
       <Alert
         id="geosearch-select-coordinates-alert"
         isOpen
-        iconClassName="faMapMarkerAlt"
+        icon="map-marker-alt"
         title="Geosearch Select Coordinates"
         timeout={6000}
         message={message}
