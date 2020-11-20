@@ -46,6 +46,7 @@ import {
   getActiveLayers,
   isRenderable as isRenderableLayer,
   getAllActiveLayers,
+  isGroupingEnabled,
 } from '../modules/layers/selectors';
 import getSelectedDate from '../modules/date/selectors';
 import { EXIT_ANIMATION, STOP_ANIMATION } from '../modules/animation/constants';
@@ -118,10 +119,12 @@ export default function mapui(models, config, store, ui) {
         }
         return;
       }
+      case layerConstants.REMOVE_GROUP:
       case layerConstants.REMOVE_LAYER:
-        return removeLayer(action);
+        return removeLayer(action.layersToRemove);
       case layerConstants.TOGGLE_LAYER_VISIBILITY:
-        return updateLayerVisibilities(action);
+      case layerConstants.TOGGLE_GROUP_VISIBILITY:
+        return updateLayerVisibilities();
       case layerConstants.UPDATE_OPACITY:
         return updateOpacity(action);
       case compareConstants.CHANGE_STATE:
@@ -129,6 +132,12 @@ export default function mapui(models, config, store, ui) {
           return reloadLayers();
         }
         return;
+      case layerConstants.TOGGLE_LAYER_GROUPS:
+        if (isGroupingEnabled(store.getState())) {
+          // Don't need to reloadlayers when turning groups off
+          return reloadLayers();
+        }
+        break;
       case layerConstants.REORDER_LAYERS:
       case layerConstants.REORDER_LAYER_GROUPS:
       case compareConstants.TOGGLE_ON_OFF:
@@ -534,28 +543,20 @@ export default function mapui(models, config, store, ui) {
 
     self.events.trigger('added-layer');
   }
-  /*
-   *Initiates the adding of a layer or Graticule
-   *
-   * @method removeLayer
-   * @static
-   *
-   * @param {object} def - layer Specs
-   *
-   * @returns {void}
-   */
-  function removeLayer(action) {
+
+  function removeLayer(layersToRemove) {
     const state = store.getState();
     const { compare } = state;
-    const { def } = action;
 
-    const layer = findLayer(def, compare.activeString);
-    if (compare && compare.active) {
-      const layerGroup = getActiveLayerGroup(self.selected, compare.activeString);
-      if (layerGroup) layerGroup.getLayers().remove(layer);
-    } else {
-      self.selected.removeLayer(layer);
-    }
+    layersToRemove.forEach((def) => {
+      const layer = findLayer(def, compare.activeString);
+      if (compare && compare.active) {
+        const layerGroup = getActiveLayerGroup(self.selected, compare.activeString);
+        if (layerGroup) layerGroup.getLayers().remove(layer);
+      } else {
+        self.selected.removeLayer(layer);
+      }
+    });
 
     updateLayerVisibilities();
   }
