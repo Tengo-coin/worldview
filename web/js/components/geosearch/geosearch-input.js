@@ -89,7 +89,6 @@ class SearchBox extends Component {
     } = this.props;
     const buttonId = 'geosearch-search-submit-button';
     const labelText = 'Submit and navigate to location';
-    const rightPositioning = '31px';
     const buttonStyle = inputValue
       ? { background: isMobile ? '#d54e21' : 'none', color: isMobile ? '#fff' : '#d54e21', cursor: 'pointer' }
       : {};
@@ -97,11 +96,8 @@ class SearchBox extends Component {
 
     return (
       <InputGroupAddon
-        className="geosearch-submit-input-group-addon"
+        className="geosearch-input-group-addon submit-group"
         addonType="prepend"
-        style={{
-          right: rightPositioning,
-        }}
       >
         <Button
           id={buttonId}
@@ -129,15 +125,15 @@ class SearchBox extends Component {
   // render alert icon
   renderAlertIcon = () => {
     const {
-      showExtentAlert,
+      activeAlert,
     } = this.props;
 
     return (
-      showExtentAlert && (
+      activeAlert && (
       <InputGroupAddon
-        className="geosearch-submit-input-group-addon geosearch-input-alert-icon"
+        className="geosearch-input-group-addon geosearch-input-alert-icon"
         addonType="append"
-        title="The entered location is outside of the current map extent."
+        title="The entered location is not avaialable."
       >
         <FontAwesomeIcon icon="exclamation-triangle" size="1x" />
       </InputGroupAddon>
@@ -157,7 +153,7 @@ class SearchBox extends Component {
     return (
       inputValue && (
       <InputGroupAddon
-        className="geosearch-submit-input-group-addon geosearch-input-clear-container"
+        className="geosearch-input-group-addon geosearch-input-clear-container"
         addonType="append"
       >
         <Button
@@ -187,12 +183,12 @@ class SearchBox extends Component {
     const {
       inputValue,
       isMobile,
-      showExtentAlert,
+      activeAlert,
     } = this.props;
 
     // handle mobile/desktop input padding with/without alert
     const paddingRightStyle = inputValue
-      ? showExtentAlert
+      ? activeAlert
         ? isMobile ? '68px' : '84px'
         : isMobile ? '42px' : '60px'
       : '0';
@@ -245,6 +241,7 @@ class SearchBox extends Component {
 }
 
 SearchBox.propTypes = {
+  activeAlert: PropTypes.bool,
   clearInput: PropTypes.func,
   coordinatesPending: PropTypes.array,
   geosearchMobileModalOpen: PropTypes.bool,
@@ -254,7 +251,6 @@ SearchBox.propTypes = {
   onChange: PropTypes.func,
   onCoordinateInputSelect: PropTypes.func,
   onSelect: PropTypes.func,
-  showExtentAlert: PropTypes.bool,
   suggestions: PropTypes.array,
 };
 

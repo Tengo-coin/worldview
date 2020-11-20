@@ -44,6 +44,7 @@ class Geosearch extends React.Component {
   renderSearchComponent = (isMobile) => {
     const {
       clearCoordinates,
+      clearSuggestions,
       coordinates,
       geosearchMobileModalOpen,
       getSuggestions,
@@ -66,6 +67,7 @@ class Geosearch extends React.Component {
     return (
       <GeosearchModal
         clearCoordinates={clearCoordinates}
+        clearSuggestions={clearSuggestions}
         coordinates={coordinates}
         coordinatesPending={coordinatesPending}
         geosearchMobileModalOpen={geosearchMobileModalOpen}
@@ -176,6 +178,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Geosearch.propTypes = {
   clearCoordinates: PropTypes.func,
+  clearSuggestions: PropTypes.func,
   coordinates: PropTypes.array,
   geosearchMobileModalOpen: PropTypes.bool,
   getSuggestions: PropTypes.func,
