@@ -46,7 +46,6 @@ import {
   getActiveLayers,
   isRenderable as isRenderableLayer,
   getAllActiveLayers,
-  isGroupingEnabled,
 } from '../modules/layers/selectors';
 import getSelectedDate from '../modules/date/selectors';
 import { EXIT_ANIMATION, STOP_ANIMATION } from '../modules/animation/constants';
@@ -133,11 +132,7 @@ export default function mapui(models, config, store, ui) {
         }
         return;
       case layerConstants.TOGGLE_OVERLAY_GROUPS:
-        if (isGroupingEnabled(store.getState())) {
-          // Don't need to reloadlayers when turning groups off
-          return reloadLayers();
-        }
-        break;
+        return reloadLayers();
       case layerConstants.REORDER_LAYERS:
       case layerConstants.REORDER_OVERLAY_GROUPS:
       case compareConstants.TOGGLE_ON_OFF:
