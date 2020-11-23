@@ -10,8 +10,9 @@ import Alert from '../util/alert';
 import { changeCursor as changeCursorActionCreator } from '../../modules/map/actions';
 import { getCoordinatesDialogAtMapPixel } from './ol-coordinates-marker-util';
 import { clearCoordinates, selectCoordinatesToFly, toggleReverseGeocodeActive } from '../../modules/geosearch/actions';
-import { areCoordinatesWithinExtent } from '../../modules/geosearch/selectors';
-import { reverseGeocode } from '../../modules/geosearch/util';
+import { areCoordinatesWithinExtent } from '../../modules/geosearch/util';
+import { reverseGeocode } from '../../modules/geosearch/util-api';
+import { getCoordinateFixedPrecision } from './util';
 
 export class CoordinatesMarker extends Component {
   constructor(props) {
@@ -71,7 +72,9 @@ export class CoordinatesMarker extends Component {
     } else if (!hasFeatures && isShowingClick) {
       changeCursor(false);
     }
-    this.setState({ latitude: lat, longitude: lon });
+    const latFormat = getCoordinateFixedPrecision(lat);
+    const lonFormat = getCoordinateFixedPrecision(lon);
+    this.setState({ latitude: latFormat, longitude: lonFormat });
   }
 
   rightClick(e) {

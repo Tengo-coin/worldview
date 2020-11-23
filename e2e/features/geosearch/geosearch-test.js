@@ -1,8 +1,8 @@
 const reuseables = require('../../reuseables/skip-tour.js');
 const localSelectors = require('../../reuseables/selectors.js');
 
-// encoded id; originally coordinates-map-marker_38.89037,-77.03196
-const testMarkerEncodedID = '.coordinates-map-marker_38__2E__89037__2C__-77__2E__03196';
+// encoded id; originally coordinates-map-marker_38.8904,-77.032
+const testMarkerEncodedID = '.coordinates-map-marker_38__2E__8904__2C__-77__2E__032';
 const testMarkerNoDetailsEncodedID = '.coordinates-map-marker_5__2C__-51__2E__5';
 const TIME_LIMIT = 10000;
 
@@ -40,7 +40,7 @@ module.exports = {
     c.expect.element(geosearchComponent).to.be.present;
   },
   'Coordinates dialog for permalink marker is visible by default on page load': (c) => {
-    c.url(`${c.globals.url}?v=-176.3167432493038,-16.70650759975561,-16.988618249303812,108.30938074294103&marker=-77.03196,38.89037`);
+    c.url(`${c.globals.url}?v=-176.3167432493038,-16.70650759975561,-16.988618249303812,108.30938074294103&marker=-77.032,38.8904`);
     c.waitForElementVisible(tooltipCoordinatesContainer, TIME_LIMIT);
     c.expect.element(testMarkerEncodedID).to.be.present;
   },

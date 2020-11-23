@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GeosearchModal from './geosearch-modal';
 import {
-  clearCoordinates,
   clearSuggestions,
   selectCoordinatesToFly,
   toggleShowGeosearch,
@@ -13,11 +12,11 @@ import {
 } from '../../modules/geosearch/actions';
 import {
   areCoordinatesWithinExtent,
-} from '../../modules/geosearch/selectors';
+} from '../../modules/geosearch/util';
 import {
   processMagicKey,
   reverseGeocode,
-} from '../../modules/geosearch/util';
+} from '../../modules/geosearch/util-api';
 
 class Geosearch extends React.Component {
   constructor(props) {
@@ -43,7 +42,6 @@ class Geosearch extends React.Component {
 
   renderSearchComponent = (isMobile) => {
     const {
-      clearCoordinates,
       clearSuggestions,
       coordinates,
       geosearchMobileModalOpen,
@@ -66,7 +64,6 @@ class Geosearch extends React.Component {
 
     return (
       <GeosearchModal
-        clearCoordinates={clearCoordinates}
         clearSuggestions={clearSuggestions}
         coordinates={coordinates}
         coordinatesPending={coordinatesPending}
@@ -153,9 +150,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  clearCoordinates: () => {
-    dispatch(clearCoordinates());
-  },
   selectCoordinatesToFly: (coordinates, addressAttributes) => {
     dispatch(selectCoordinatesToFly(coordinates, addressAttributes));
   },
@@ -177,7 +171,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Geosearch.propTypes = {
-  clearCoordinates: PropTypes.func,
   clearSuggestions: PropTypes.func,
   coordinates: PropTypes.array,
   geosearchMobileModalOpen: PropTypes.bool,

@@ -11,7 +11,7 @@ import googleTagManager from 'googleTagManager';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchBox from './geosearch-input';
 import Alert from '../util/alert';
-import isValidCoordinates from './util';
+import { getCoordinateFixedPrecision, isValidCoordinates } from './util';
 
 class GeosearchModal extends Component {
   constructor(props) {
@@ -136,8 +136,8 @@ class GeosearchModal extends Component {
         const addressAttributes = { address: attributes };
 
         const { x, y } = location;
-        const parsedX = parseFloat(x.toPrecision(9));
-        const parsedY = parseFloat(y.toPrecision(9));
+        const parsedX = getCoordinateFixedPrecision(x);
+        const parsedY = getCoordinateFixedPrecision(y);
 
         const coordinatesWithinExtent = isCoordinatePairWithinExtent([parsedX, parsedY]);
         if (coordinatesWithinExtent === false) {
@@ -323,7 +323,6 @@ class GeosearchModal extends Component {
 
   render() {
     const {
-      coordinates,
       geosearchMobileModalOpen,
       isExpanded,
       isMobile,
@@ -347,7 +346,6 @@ class GeosearchModal extends Component {
             {!isMobile && this.renderMinimizeButton()}
             <SearchBox
               clearInput={this.clearInput}
-              coordinates={coordinates}
               coordinatesPending={coordinatesPending}
               geosearchMobileModalOpen={geosearchMobileModalOpen}
               inputValue={inputValue}
@@ -373,6 +371,7 @@ GeosearchModal.propTypes = {
   coordinates: PropTypes.array,
   coordinatesPending: PropTypes.array,
   geosearchMobileModalOpen: PropTypes.bool,
+  getSuggestions: PropTypes.func,
   inputValue: PropTypes.string,
   isCoordinatePairWithinExtent: PropTypes.func,
   isCoordinateSearchActive: PropTypes.bool,
@@ -383,7 +382,6 @@ GeosearchModal.propTypes = {
   selectCoordinatesToFly: PropTypes.func,
   setSuggestion: PropTypes.func,
   suggestions: PropTypes.array,
-  getSuggestions: PropTypes.func,
   toggleReverseGeocodeActive: PropTypes.func,
   toggleShowGeosearch: PropTypes.func,
   updatePendingCoordinates: PropTypes.func,

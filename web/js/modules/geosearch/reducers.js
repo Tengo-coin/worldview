@@ -1,13 +1,12 @@
 import {
-  CLEAR_COORDINATES,
+  CLEAR_MARKER,
   CLEAR_SUGGESTIONS,
   REQUEST_SUGGEST_PLACE_FAILURE,
   REQUEST_SUGGEST_PLACE_SUCCESS,
-  SELECT_COORDINATES_TO_FLY,
+  SET_MARKER,
   SET_SUGGESTION,
-  TOGGLE_REVERSE_GEOCODE_ACTIVE,
+  TOGGLE_REVERSE_GEOCODE,
   TOGGLE_SHOW_GEOSEARCH,
-  UPDATE_ACTIVE_MARKER,
 } from './constants';
 import { getLocalStorageCollapseState } from './util';
 
@@ -23,41 +22,30 @@ export const geosearchState = {
 
 export function geosearchReducer(state = geosearchState, action) {
   switch (action.type) {
-    case UPDATE_ACTIVE_MARKER:
-      return {
-        ...state,
-        activeMarker: action.value,
-        reverseGeocodeResults: action.reverseGeocodeResults,
-      };
     case TOGGLE_SHOW_GEOSEARCH:
       return {
         ...state,
         isExpanded: action.value,
       };
-    case SELECT_COORDINATES_TO_FLY:
+    case TOGGLE_REVERSE_GEOCODE:
       return {
         ...state,
         isCoordinateSearchActive: action.value,
+      };
+    case SET_MARKER:
+      return {
+        ...state,
+        activeMarker: action.value,
         coordinates: action.coordinates,
-        activeMarker: action.activeMarker,
+        isCoordinateSearchActive: false,
         reverseGeocodeResults: action.reverseGeocodeResults,
       };
-    case CLEAR_COORDINATES:
+    case CLEAR_MARKER:
       return {
         ...state,
-        coordinates: [],
         activeMarker: null,
+        coordinates: [],
         reverseGeocodeResults: null,
-      };
-    case TOGGLE_REVERSE_GEOCODE_ACTIVE:
-      return {
-        ...state,
-        isCoordinateSearchActive: action.value,
-      };
-    case CLEAR_SUGGESTIONS:
-      return {
-        ...state,
-        suggestions: [],
       };
     case SET_SUGGESTION:
       return {
@@ -73,6 +61,11 @@ export function geosearchReducer(state = geosearchState, action) {
       return {
         ...state,
         suggestions: [],
+      };
+    case CLEAR_SUGGESTIONS:
+      return {
+        ...state,
+        suggestions: action.value,
       };
     default:
       return state;

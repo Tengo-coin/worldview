@@ -3,11 +3,10 @@ import {
   geosearchState,
 } from './reducers';
 import {
-  CLEAR_COORDINATES,
-  SELECT_COORDINATES_TO_FLY,
-  TOGGLE_REVERSE_GEOCODE_ACTIVE,
+  CLEAR_MARKER,
+  SET_MARKER,
+  TOGGLE_REVERSE_GEOCODE,
   TOGGLE_SHOW_GEOSEARCH,
-  UPDATE_ACTIVE_MARKER,
 } from './constants';
 
 // test variables
@@ -17,28 +16,11 @@ const reverseGeocodeResults = {
 };
 
 describe('geosearchReducer', () => {
-  test(' should return the initial state', () => {
+  test('geosearchReducer should return the initial state', () => {
     expect(geosearchReducer(undefined, {})).toEqual(
       geosearchState,
     );
   });
-  test(
-    `${CLEAR_COORDINATES
-    } resets cooridnates, activeMarker, and geocode results`
-      + 'should return new state',
-    () => {
-      expect(
-        geosearchReducer(geosearchState, {
-          type: CLEAR_COORDINATES,
-        }),
-      ).toEqual({
-        ...geosearchState,
-        coordinates: [],
-        activeMarker: null,
-        reverseGeocodeResults: null,
-      });
-    },
-  );
   test(
     `${TOGGLE_SHOW_GEOSEARCH
     } shows geosearch isExpanded and `
@@ -56,13 +38,13 @@ describe('geosearchReducer', () => {
     },
   );
   test(
-    `${TOGGLE_REVERSE_GEOCODE_ACTIVE
+    `${TOGGLE_REVERSE_GEOCODE
     } toggles isCoordinateSearchActive to true and `
       + 'should return new state',
     () => {
       expect(
         geosearchReducer(geosearchState, {
-          type: TOGGLE_REVERSE_GEOCODE_ACTIVE,
+          type: TOGGLE_REVERSE_GEOCODE,
           value: true,
         }),
       ).toEqual({
@@ -72,42 +54,40 @@ describe('geosearchReducer', () => {
     },
   );
   test(
-    `${UPDATE_ACTIVE_MARKER
-    } updates action value and reverseGeocodeResults objects and `
-      + 'should return new state',
+    `${SET_MARKER
+    } updates activeMarker, coordinates, reverseGeocodeResults `
+    + 'and sets isCoordinateSearchActive to false and should return new state',
     () => {
       expect(
         geosearchReducer(geosearchState, {
-          type: UPDATE_ACTIVE_MARKER,
+          type: SET_MARKER,
           value: {},
+          coordinates: [72, 40],
           reverseGeocodeResults,
         }),
       ).toEqual({
         ...geosearchState,
+        isCoordinateSearchActive: false,
+        coordinates: [72, 40],
         activeMarker: {},
         reverseGeocodeResults,
       });
     },
   );
   test(
-    `${SELECT_COORDINATES_TO_FLY
-    } updates activeMarker, coordinates, and reverseGeocodeResults `
-    + 'and sets isCoordinateSearchActive to false and should return new state',
+    `${CLEAR_MARKER
+    } resets cooridnates, activeMarker, and geocode results`
+      + 'should return new state',
     () => {
       expect(
         geosearchReducer(geosearchState, {
-          type: SELECT_COORDINATES_TO_FLY,
-          value: false,
-          coordinates: [],
-          activeMarker: {},
-          reverseGeocodeResults,
+          type: CLEAR_MARKER,
         }),
       ).toEqual({
         ...geosearchState,
-        isCoordinateSearchActive: false,
         coordinates: [],
-        activeMarker: {},
-        reverseGeocodeResults,
+        activeMarker: null,
+        reverseGeocodeResults: null,
       });
     },
   );

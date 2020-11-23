@@ -1,49 +1,10 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-nested-ternary */
 import Overlay from 'ol/Overlay';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CoordinatesDialog from './coordinates-dialog';
 import { coordinatesCRSTransform } from '../../modules/projection/util';
 import util from '../../util/util';
-
-/**
- * Get parsed precision coordinate number
- * @param {String} coordinate
- * @returns {Number} parsed coordinate with modified precision
- */
-const getCoordinateDisplayPrecision = (coordinate) => {
-  const coordinateNumber = Number(coordinate);
-  const coordinatePrecision = Math.abs(coordinateNumber) > 100
-    ? 7
-    : coordinateNumber < 0
-      ? 7
-      : 6;
-
-  return parseFloat(coordinateNumber.toPrecision(coordinatePrecision));
-};
-
-/**
- * getFormattedCoordinates
- *
- * @param {String} latitude
- * @param {String} longitude
- *
- * @returns {Array} formattedCoordinates
- */
-const getFormattedCoordinates = (latitude, longitude) => {
-  const parsedLatitude = getCoordinateDisplayPrecision(latitude);
-  const parsedLongitude = getCoordinateDisplayPrecision(longitude);
-
-  // format coordinates based on localStorage preference
-  const format = util.getCoordinateFormat();
-  const coordinates = util.formatCoordinate(
-    [parsedLongitude, parsedLatitude],
-    format,
-  );
-  const formattedCoordinates = coordinates.split(',');
-  return formattedCoordinates;
-};
+import { getFormattedCoordinates } from './util';
 
 /**
  * getCoordinatesDialogTitle
