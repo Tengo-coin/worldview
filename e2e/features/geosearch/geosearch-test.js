@@ -13,6 +13,9 @@ const {
   tooltipCoordinatesContainer,
   tooltipCoordinatesTitle,
   tooltipCoordinates,
+  tooltipCoordinatesMinimizeButton,
+  tooltipCoordinatesCloseButton,
+  coordinatesMapMarker,
 } = localSelectors;
 
 module.exports = {
@@ -49,7 +52,7 @@ module.exports = {
     c.assert.containsText(tooltipCoordinates, '38.8904°, -77.0320°');
   },
   'Clicking minimize tooltip hides the coordinates dialog': (c) => {
-    c.click('.minimize-coordinates-tooltip');
+    c.click(tooltipCoordinatesMinimizeButton);
     c.pause(500);
     c.expect.element(tooltipCoordinatesContainer).to.not.be.present;
   },
@@ -61,14 +64,14 @@ module.exports = {
     c.assert.containsText(tooltipCoordinates, '5.0000°, -51.5000°');
   },
   'Clicking close tooltip removes the marker and coordinates dialog': (c) => {
-    c.click('.close-coordinates-tooltip');
+    c.click(tooltipCoordinatesCloseButton);
     c.pause(500);
-    c.expect.element('.coordinates-map-marker').to.not.be.present;
+    c.expect.element(coordinatesMapMarker).to.not.be.present;
     c.assert.not.urlContains('marker');
   },
   'Invalid marker query string parameter prevents state update': (c) => {
     c.url(`${c.globals.url}?marker=-51.5,invalidtext`);
-    c.expect.element('.coordinates-map-marker').to.not.be.present;
+    c.expect.element(coordinatesMapMarker).to.not.be.present;
     c.assert.not.urlContains('marker');
   },
   after(c) {
