@@ -13,6 +13,13 @@
   }
 }
 
+.geosearch-autocomplete,
+.geosearch-autocomplete:focus {
+  background: none;
+  color: #fff;
+  box-shadow: none;
+}
+
 .geosearch-results-menu {
   position: absolute;
   width: 85%;
@@ -93,7 +100,7 @@
 }
 
 /* Geosearch Component Coordinate Buttons */
-.geosearch-coordinate-button-addpoint {
+.geosearch-add-coordinate-button {
   border-radius: 0;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -147,13 +154,6 @@
 }
 
 /* Additional Styling */
-.dark-input,
-.dark-input:focus {
-  background: none;
-  color: #fff;
-  box-shadow: none;
-}
-
 .geosearch-input-alert-icon {
   right: 120px;
 }

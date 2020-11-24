@@ -21,15 +21,6 @@ export const GEOSEARCH_REQUEST_OPTIONS = {
     'Primary Postal',
     'Airport',
   ],
-  // limit possible reverse geocode results to certain feature types for better place name consistency
-  // across the different API results
-  // GEOCODE_REVERSE_GEOCODE_FEATURE_TYPES: [
-  // 'Locality',
-  // 'POI',
-  // 'Postal',
-  // 'PointAddress',
-  // 'StreetAddress',
-  // ],
   // language code EN (English) and required f request format parameters
   CONSTANT_REQUEST_PARAMETERS: '&langCode=en&f=json',
 };
@@ -37,7 +28,6 @@ export const GEOSEARCH_REQUEST_OPTIONS = {
 const {
   REQUEST_OPTIONS,
   CONSTANT_REQUEST_PARAMETERS,
-  // GEOCODE_REVERSE_GEOCODE_FEATURE_TYPES,
 } = GEOSEARCH_REQUEST_OPTIONS;
 
 export async function processMagicKey(magicKey, config) {
@@ -55,8 +45,6 @@ export async function processMagicKey(magicKey, config) {
 
 export async function reverseGeocode(coordinates, config) {
   const { features: { geocodeSearch: { url: requestUrl } } } = config;
-  // const encodedFeatureTypes = encodeURIComponent(GEOCODE_REVERSE_GEOCODE_FEATURE_TYPES.join(','));
-  // const request = `${requestUrl}reverseGeocode?featureTypes=${encodedFeatureTypes}&location=${coordinates}${CONSTANT_REQUEST_PARAMETERS}`;
   const request = `${requestUrl}reverseGeocode?location=${coordinates}${CONSTANT_REQUEST_PARAMETERS}`;
 
   try {

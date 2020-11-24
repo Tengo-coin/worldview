@@ -49,7 +49,6 @@ class SearchBox extends Component {
     if (entered) {
       e.preventDefault();
       e.stopPropagation();
-
       if (coordinatesPending.length > 0) {
         onCoordinateInputSelect();
       }
@@ -104,7 +103,7 @@ class SearchBox extends Component {
           style={buttonStyle}
           disabled={!inputValue}
           onClick={this.handleSubmitClick}
-          className="geosearch-search-submit-button"
+          className={buttonId}
         >
           {tooltipVisibilityCondition && (
           <UncontrolledTooltip
@@ -159,7 +158,7 @@ class SearchBox extends Component {
         <Button
           id={buttonId}
           onClick={clearInput}
-          className="geosearch-search-clear-button"
+          className={buttonId}
         >
           {tooltipVisibilityCondition && (
           <UncontrolledTooltip
@@ -219,7 +218,7 @@ class SearchBox extends Component {
         <Autocomplete
           ref={(el) => { this.geosearchInput = el; }}
           inputProps={{
-            className: 'form-control geosearch-autocomplete dark-input',
+            className: 'form-control geosearch-autocomplete',
             id: 'geosearch-autocomplete',
             placeholder: placeHolderText,
           }}

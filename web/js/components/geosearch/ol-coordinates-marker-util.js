@@ -139,9 +139,10 @@ export const getCoordinatesMetadata = (geocodeProperties) => {
 export const getCoordinatesDialogAtMapPixel = (pixels, map, config, isMobile, clearCoordinates, toggleDialogVisible) => {
   // check for existing coordinate marker tooltip overlay and prevent multiple renders
   const mapOverlays = map.getOverlays().getArray();
+  const mapMarkerId = 'coordinates-map-marker';
   const coordinatesTooltipOverlay = mapOverlays.filter((overlay) => {
     const { id } = overlay;
-    return id && id.includes('coordinates-map-marker');
+    return id && id.includes(mapMarkerId);
   });
   if (coordinatesTooltipOverlay.length > 0) {
     return;
@@ -149,7 +150,7 @@ export const getCoordinatesDialogAtMapPixel = (pixels, map, config, isMobile, cl
 
   map.forEachFeatureAtPixel(pixels, (feature) => {
     const featureId = feature.getId();
-    if (featureId === 'coordinates-map-marker') {
+    if (featureId === mapMarkerId) {
       const featureProperties = feature.getProperties();
       const { latitude, longitude } = featureProperties;
 

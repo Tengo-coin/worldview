@@ -291,11 +291,11 @@ class GeosearchModal extends Component {
       <InputGroupAddon addonType="prepend">
         <Button
           id={buttonId}
-          className="geosearch-search-minimize-button"
+          className={buttonId}
           onClick={toggleShowGeosearch}
         >
           {this.renderTooltip(buttonId, labelText)}
-          <div className="geosearch-search-minimize-button-chevron" />
+          <div className={`${buttonId}-chevron`} />
         </Button>
       </InputGroupAddon>
     );
@@ -303,18 +303,18 @@ class GeosearchModal extends Component {
 
   // render add coordinate marker button for reverse geocode
   renderAddCoordinateButton = () => {
-    const addCoordinateButtonId = 'geosearch-coordinate-button-addpoint';
-    const addCoordinateLabelText = 'Add marker on map';
+    const buttonId = 'geosearch-add-coordinate-button';
+    const labelText = 'Add marker on map';
 
     return (
       <InputGroupAddon addonType="append">
         <Button
-          id={addCoordinateButtonId}
+          id={buttonId}
           onTouchEnd={this.initReverseGeocode}
           onMouseDown={this.initReverseGeocode}
-          className="geosearch-coordinate-button-addpoint"
+          className={buttonId}
         >
-          {this.renderTooltip(addCoordinateButtonId, addCoordinateLabelText)}
+          {this.renderTooltip(buttonId, labelText)}
           <FontAwesomeIcon icon="map-marker-alt" size="1x" />
         </Button>
       </InputGroupAddon>
