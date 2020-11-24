@@ -5,6 +5,7 @@ import {
   REQUEST_SUGGEST_PLACE_SUCCESS,
   SET_MARKER,
   SET_SUGGESTION,
+  TOGGLE_DIALOG_VISIBLE,
   TOGGLE_REVERSE_GEOCODE,
   TOGGLE_SHOW_GEOSEARCH,
 } from './constants';
@@ -15,6 +16,7 @@ export const geosearchState = {
   activeMarker: null,
   coordinates: [],
   isCoordinateSearchActive: false,
+  isCoordinatesDialogOpen: false,
   isExpanded: !localStorageCollapseState,
   reverseGeocodeResults: null,
   suggestions: [],
@@ -22,6 +24,11 @@ export const geosearchState = {
 
 export function geosearchReducer(state = geosearchState, action) {
   switch (action.type) {
+    case TOGGLE_DIALOG_VISIBLE:
+      return {
+        ...state,
+        isCoordinatesDialogOpen: action.value,
+      };
     case TOGGLE_SHOW_GEOSEARCH:
       return {
         ...state,
@@ -39,6 +46,7 @@ export function geosearchReducer(state = geosearchState, action) {
         coordinates: action.coordinates,
         isCoordinateSearchActive: false,
         reverseGeocodeResults: action.reverseGeocodeResults,
+        isCoordinatesDialogOpen: action.isCoordinatesDialogOpen,
       };
     case CLEAR_MARKER:
       return {
@@ -46,6 +54,7 @@ export function geosearchReducer(state = geosearchState, action) {
         activeMarker: null,
         coordinates: [],
         reverseGeocodeResults: null,
+        isCoordinatesDialogOpen: false,
       };
     case SET_SUGGESTION:
       return {

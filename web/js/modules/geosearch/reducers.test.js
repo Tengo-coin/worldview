@@ -7,6 +7,7 @@ import {
   CLEAR_SUGGESTIONS,
   SET_MARKER,
   SET_SUGGESTION,
+  TOGGLE_DIALOG_VISIBLE,
   TOGGLE_REVERSE_GEOCODE,
   TOGGLE_SHOW_GEOSEARCH,
 } from './constants';
@@ -62,6 +63,22 @@ describe('geosearchReducer', () => {
     },
   );
   test(
+    `${TOGGLE_DIALOG_VISIBLE
+    } sets coordinate dialog visiblity and `
+      + 'should return new state',
+    () => {
+      expect(
+        geosearchReducer(geosearchState, {
+          type: TOGGLE_DIALOG_VISIBLE,
+          value: true,
+        }),
+      ).toEqual({
+        ...geosearchState,
+        isCoordinatesDialogOpen: true,
+      });
+    },
+  );
+  test(
     `${SET_MARKER
     } updates activeMarker, coordinates, reverseGeocodeResults `
     + 'and sets isCoordinateSearchActive to false and should return new state',
@@ -72,6 +89,7 @@ describe('geosearchReducer', () => {
           value: {},
           coordinates,
           reverseGeocodeResults,
+          isCoordinatesDialogOpen: true,
         }),
       ).toEqual({
         ...geosearchState,
@@ -79,6 +97,7 @@ describe('geosearchReducer', () => {
         coordinates,
         activeMarker: {},
         reverseGeocodeResults,
+        isCoordinatesDialogOpen: true,
       });
     },
   );
@@ -96,6 +115,7 @@ describe('geosearchReducer', () => {
         coordinates: [],
         activeMarker: null,
         reverseGeocodeResults: null,
+        isCoordinatesDialogOpen: false,
       });
     },
   );

@@ -3,6 +3,7 @@ import {
   CLEAR_SUGGESTIONS,
   SET_MARKER,
   SET_SUGGESTION,
+  TOGGLE_DIALOG_VISIBLE,
   TOGGLE_REVERSE_GEOCODE,
   TOGGLE_SHOW_GEOSEARCH,
 } from './constants';
@@ -79,6 +80,7 @@ export function selectCoordinatesToFly(coordinates, reverseGeocodeResults) {
         type: SET_MARKER,
         value: null,
         coordinates: [],
+        isCoordinatesDialogOpen: false,
       });
     }
 
@@ -102,13 +104,20 @@ export function selectCoordinatesToFly(coordinates, reverseGeocodeResults) {
         type: CLEAR_MARKER,
       });
     };
-    renderCoordinatesTooltip(map.ui.selected, config, [latitude, longitude], coordinatesMetadata, isMobile, clearMarker);
+    const toggleDialog = (isVisible) => {
+      dispatch({
+        type: TOGGLE_DIALOG_VISIBLE,
+        value: isVisible,
+      });
+    };
+    renderCoordinatesTooltip(map.ui.selected, config, [latitude, longitude], coordinatesMetadata, isMobile, clearMarker, toggleDialog);
 
     dispatch({
       type: SET_MARKER,
       reverseGeocodeResults,
       coordinates,
       value: marker,
+      isCoordinatesDialogOpen: true,
     });
   };
 }
@@ -125,6 +134,16 @@ export function clearCoordinates() {
     }
     dispatch({
       type: CLEAR_MARKER,
+    });
+  };
+}
+
+// clear place suggestions
+export function toggleDialogVisible(isVisible) {
+  return (dispatch) => {
+    dispatch({
+      type: TOGGLE_DIALOG_VISIBLE,
+      value: isVisible,
     });
   };
 }
