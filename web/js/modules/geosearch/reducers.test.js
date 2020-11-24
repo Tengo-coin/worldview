@@ -4,7 +4,9 @@ import {
 } from './reducers';
 import {
   CLEAR_MARKER,
+  CLEAR_SUGGESTIONS,
   SET_MARKER,
+  SET_SUGGESTION,
   TOGGLE_REVERSE_GEOCODE,
   TOGGLE_SHOW_GEOSEARCH,
 } from './constants';
@@ -14,6 +16,12 @@ const reverseGeocodeResults = {
   address: {},
   location: {},
 };
+const suggestion = [{
+  isCollection: false,
+  magicKey: 'test1234=',
+  text: 'New York, NY, USA',
+}];
+const coordinates = [72, 40];
 
 describe('geosearchReducer', () => {
   test('geosearchReducer should return the initial state', () => {
@@ -62,13 +70,13 @@ describe('geosearchReducer', () => {
         geosearchReducer(geosearchState, {
           type: SET_MARKER,
           value: {},
-          coordinates: [72, 40],
+          coordinates,
           reverseGeocodeResults,
         }),
       ).toEqual({
         ...geosearchState,
         isCoordinateSearchActive: false,
-        coordinates: [72, 40],
+        coordinates,
         activeMarker: {},
         reverseGeocodeResults,
       });
@@ -88,6 +96,38 @@ describe('geosearchReducer', () => {
         coordinates: [],
         activeMarker: null,
         reverseGeocodeResults: null,
+      });
+    },
+  );
+  test(
+    `${SET_SUGGESTION
+    } updates suggestions with value and `
+      + 'should return new state',
+    () => {
+      expect(
+        geosearchReducer(geosearchState, {
+          type: SET_SUGGESTION,
+          value: suggestion,
+        }),
+      ).toEqual({
+        ...geosearchState,
+        suggestions: suggestion,
+      });
+    },
+  );
+  test(
+    `${CLEAR_SUGGESTIONS
+    } updates suggestions with clear value and `
+      + 'should return new state',
+    () => {
+      expect(
+        geosearchReducer(geosearchState, {
+          type: CLEAR_SUGGESTIONS,
+          value: [],
+        }),
+      ).toEqual({
+        ...geosearchState,
+        suggestions: [],
       });
     },
   );

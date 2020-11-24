@@ -60,6 +60,17 @@ module.exports = {
     c.assert.containsText(tooltipCoordinatesTitle, '5.0000°, -51.5000°');
     c.assert.containsText(tooltipCoordinates, '5.0000°, -51.5000°');
   },
+  'Clicking close tooltip removes the marker and coordinates dialog': (c) => {
+    c.click('.close-coordinates-tooltip');
+    c.pause(500);
+    c.expect.element('.coordinates-map-marker').to.not.be.present;
+    c.assert.not.urlContains('marker');
+  },
+  'Invalid marker query string parameter prevents state update': (c) => {
+    c.url(`${c.globals.url}?marker=-51.5,invalidtext`);
+    c.expect.element('.coordinates-map-marker').to.not.be.present;
+    c.assert.not.urlContains('marker');
+  },
   after(c) {
     c.end();
   },
