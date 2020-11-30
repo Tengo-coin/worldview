@@ -1,24 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GeosearchModal from './geosearch-modal';
-import {
-  clearSuggestions,
-  selectCoordinatesToFly,
-  toggleShowGeosearch,
-  toggleReverseGeocodeActive,
-  setSuggestion,
-  getSuggestions,
-} from '../../modules/geosearch/actions';
-import {
-  areCoordinatesWithinExtent,
-} from '../../modules/geosearch/util';
-import {
-  processMagicKey,
-  reverseGeocode,
-} from '../../modules/geosearch/util-api';
 
-class Geosearch extends React.Component {
+class Geosearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,23 +25,7 @@ class Geosearch extends React.Component {
   // update array of pending coordinates
   updatePendingCoordinates = (coordinatesPending) => this.setState({ coordinatesPending });
 
-  renderSearchComponent = (isMobile) => {
-    const {
-      clearSuggestions,
-      coordinates,
-      geosearchMobileModalOpen,
-      getSuggestions,
-      isCoordinatePairWithinExtent,
-      isCoordinateSearchActive,
-      isExpanded,
-      processMagicKey,
-      reverseGeocode,
-      selectCoordinatesToFly,
-      setSuggestion,
-      suggestions,
-      toggleReverseGeocodeActive,
-      toggleShowGeosearch,
-    } = this.props;
+  renderSearchComponent = () => {
     const {
       coordinatesPending,
       inputValue,
@@ -64,23 +33,8 @@ class Geosearch extends React.Component {
 
     return (
       <GeosearchModal
-        clearSuggestions={clearSuggestions}
-        coordinates={coordinates}
         coordinatesPending={coordinatesPending}
-        geosearchMobileModalOpen={geosearchMobileModalOpen}
-        getSuggestions={getSuggestions}
         inputValue={inputValue}
-        isCoordinatePairWithinExtent={isCoordinatePairWithinExtent}
-        isCoordinateSearchActive={isCoordinateSearchActive}
-        isExpanded={isExpanded}
-        isMobile={isMobile}
-        processMagicKey={processMagicKey}
-        reverseGeocode={reverseGeocode}
-        selectCoordinatesToFly={selectCoordinatesToFly}
-        setSuggestion={setSuggestion}
-        suggestions={suggestions}
-        toggleReverseGeocodeActive={toggleReverseGeocodeActive}
-        toggleShowGeosearch={toggleShowGeosearch}
         updatePendingCoordinates={this.updatePendingCoordinates}
         updateValue={this.updateValue}
       />
@@ -98,12 +52,10 @@ class Geosearch extends React.Component {
       return null;
     }
 
-    const shouldShowComponent = isExpanded && !shouldCollapseFromOtherUI;
+    const shouldShowComponent = isMobile || (isExpanded && !shouldCollapseFromOtherUI);
     return (
       <>
-        {isMobile
-          ? this.renderSearchComponent(true)
-          : shouldShowComponent && this.renderSearchComponent(false)}
+        {shouldShowComponent && this.renderSearchComponent()}
       </>
     );
   }
@@ -113,7 +65,6 @@ const mapStateToProps = (state) => {
   const {
     browser,
     config,
-    map,
     modal,
     measure,
     animation,
@@ -125,72 +76,30 @@ const mapStateToProps = (state) => {
   const { isActive } = measure;
   const { gifActive } = animation;
   const {
-    coordinates, isCoordinateSearchActive, isExpanded, suggestions,
+    isExpanded,
   } = geosearch;
   const { isDistractionFreeModeActive } = ui;
   const isMobile = browser.lessThan.medium;
   const snapshotModalOpen = modal.isOpen && modal.id === 'TOOLBAR_SNAPSHOT';
-  const geosearchMobileModalOpen = modal.isOpen && modal.id === 'TOOLBAR_GEOSEARCH_MOBILE';
   // Collapse when image download, GIF, measure tool, or distraction free mode is active
   const shouldCollapseFromOtherUI = snapshotModalOpen || isActive || gifActive || isDistractionFreeModeActive;
 
   return {
-    coordinates,
-    geosearchMobileModalOpen,
-    isCoordinatePairWithinExtent: (targetCoordinates) => areCoordinatesWithinExtent(map, config, targetCoordinates),
-    isCoordinateSearchActive,
     isExpanded,
     isFeatureEnabled,
     isMobile,
-    processMagicKey: (magicKey) => processMagicKey(magicKey, config),
-    reverseGeocode: (coords) => reverseGeocode(coords, config),
     shouldCollapseFromOtherUI,
-    suggestions,
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  selectCoordinatesToFly: (coordinates, addressAttributes) => {
-    dispatch(selectCoordinatesToFly(coordinates, addressAttributes));
-  },
-  toggleReverseGeocodeActive: (isActive) => {
-    dispatch(toggleReverseGeocodeActive(isActive));
-  },
-  toggleShowGeosearch: () => {
-    dispatch(toggleShowGeosearch());
-  },
-  getSuggestions: (val) => {
-    dispatch(getSuggestions(val));
-  },
-  clearSuggestions: () => {
-    dispatch(clearSuggestions());
-  },
-  setSuggestion: (suggestion) => {
-    dispatch(setSuggestion(suggestion));
-  },
-});
-
 Geosearch.propTypes = {
-  clearSuggestions: PropTypes.func,
-  coordinates: PropTypes.array,
-  geosearchMobileModalOpen: PropTypes.bool,
-  getSuggestions: PropTypes.func,
-  isCoordinatePairWithinExtent: PropTypes.func,
-  isCoordinateSearchActive: PropTypes.bool,
   isExpanded: PropTypes.bool,
   isFeatureEnabled: PropTypes.bool,
   isMobile: PropTypes.bool,
-  processMagicKey: PropTypes.func,
-  reverseGeocode: PropTypes.func,
-  selectCoordinatesToFly: PropTypes.func,
-  setSuggestion: PropTypes.func,
   shouldCollapseFromOtherUI: PropTypes.bool,
-  suggestions: PropTypes.array,
-  toggleReverseGeocodeActive: PropTypes.func,
   toggleShowGeosearch: PropTypes.func,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
 )(Geosearch);

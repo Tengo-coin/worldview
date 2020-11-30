@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Button, InputGroup, InputGroupAddon, UncontrolledTooltip,
 } from 'reactstrap';
@@ -12,6 +13,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchBox from './geosearch-input';
 import Alert from '../util/alert';
 import { getCoordinateFixedPrecision, isValidCoordinates } from './util';
+import {
+  clearSuggestions,
+  selectCoordinatesToFly,
+  toggleShowGeosearch,
+  toggleReverseGeocodeActive,
+  setSuggestion,
+  getSuggestions,
+} from '../../modules/geosearch/actions';
+import {
+  areCoordinatesWithinExtent,
+} from '../../modules/geosearch/util';
+import {
+  processMagicKey,
+  reverseGeocode,
+} from '../../modules/geosearch/util-api';
 
 class GeosearchModal extends Component {
   constructor(props) {
@@ -366,6 +382,55 @@ class GeosearchModal extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  const {
+    browser,
+    config,
+    map,
+    modal,
+    geosearch,
+  } = state;
+  const {
+    coordinates, isCoordinateSearchActive, isExpanded, suggestions,
+  } = geosearch;
+  const isMobile = browser.lessThan.medium;
+  const geosearchMobileModalOpen = modal.isOpen && modal.id === 'TOOLBAR_GEOSEARCH_MOBILE';
+  // Collapse when image download, GIF, measure tool, or distraction free mode is active
+
+  return {
+    coordinates,
+    geosearchMobileModalOpen,
+    isCoordinatePairWithinExtent: (targetCoordinates) => areCoordinatesWithinExtent(map, config, targetCoordinates),
+    isCoordinateSearchActive,
+    isExpanded,
+    isMobile,
+    processMagicKey: (magicKey) => processMagicKey(magicKey, config),
+    reverseGeocode: (coords) => reverseGeocode(coords, config),
+    suggestions,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  selectCoordinatesToFly: (coordinates, addressAttributes) => {
+    dispatch(selectCoordinatesToFly(coordinates, addressAttributes));
+  },
+  toggleReverseGeocodeActive: (isActive) => {
+    dispatch(toggleReverseGeocodeActive(isActive));
+  },
+  toggleShowGeosearch: () => {
+    dispatch(toggleShowGeosearch());
+  },
+  getSuggestions: (val) => {
+    dispatch(getSuggestions(val));
+  },
+  clearSuggestions: () => {
+    dispatch(clearSuggestions());
+  },
+  setSuggestion: (suggestion) => {
+    dispatch(setSuggestion(suggestion));
+  },
+});
+
 GeosearchModal.propTypes = {
   clearSuggestions: PropTypes.func,
   coordinates: PropTypes.array,
@@ -388,4 +453,7 @@ GeosearchModal.propTypes = {
   updateValue: PropTypes.func,
 };
 
-export default GeosearchModal;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(GeosearchModal);
