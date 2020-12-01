@@ -44,15 +44,12 @@ export function areCoordinatesWithinExtent(map, config, coordinates) {
   return coordinatesWithinExtent;
 }
 
-// add coordinates marker
-export function addCoordinatesMarker(activeMarker, config, map, coordinates, reverseGeocodeResults) {
+// get coordinates marker
+export function getCoordinatesMarker(config, map, coordinates, reverseGeocodeResults) {
   const { projections } = config;
   const { selected } = map.ui;
   const { proj } = selected;
   const { crs } = projections[proj];
-
-  // remove any markers
-  removeCoordinatesMarker(activeMarker, map);
 
   // only add marker within current map extent
   const coordinatesWithinExtent = areCoordinatesWithinExtent(map, config, coordinates);
@@ -68,36 +65,7 @@ export function addCoordinatesMarker(activeMarker, config, map, coordinates, rev
 
   // create Ol vector layer map pin
   const marker = createPin(coordinates, transformedCoordinates, reverseGeocodeResults);
-  selected.addLayer(marker);
-  selected.renderSync();
   return marker;
-}
-
-// remove coordinates tooltip from all projections
-export function removeCoordinatesOverlayFromAllProjections(proj) {
-  const mapProjections = Object.keys(proj);
-  mapProjections.forEach((mapProjection) => {
-    const mapOverlays = proj[mapProjection].getOverlays().getArray();
-    const coordinatesTooltipOverlay = mapOverlays.filter((overlay) => {
-      const { id } = overlay;
-      return id && id.includes('coordinates-map-marker');
-    });
-    if (coordinatesTooltipOverlay.length > 0) {
-      proj[mapProjection].removeOverlay(coordinatesTooltipOverlay[0]);
-    }
-  });
-}
-
-// remove coordinates marker
-export function removeCoordinatesMarker(activeMarker, map) {
-  const { selected, proj } = map.ui;
-  // remove marker
-  if (activeMarker) {
-    activeMarker.setMap(null);
-    selected.removeLayer(activeMarker);
-  }
-  // remove tooltip from all projections
-  removeCoordinatesOverlayFromAllProjections(proj);
 }
 
 // create Ol vector layer map pin

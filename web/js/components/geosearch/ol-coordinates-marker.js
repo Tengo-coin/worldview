@@ -8,9 +8,9 @@ import PropTypes from 'prop-types';
 import { transform } from 'ol/proj';
 import Alert from '../util/alert';
 import { changeCursor as changeCursorActionCreator } from '../../modules/map/actions';
-import { getCoordinatesDialogAtMapPixel } from './ol-coordinates-marker-util';
+import { isCoordinatesDialogAvailableAtPixel } from './ol-coordinates-marker-util';
 import {
-  clearCoordinates, selectCoordinatesToFly, toggleDialogVisible, toggleReverseGeocodeActive,
+  selectCoordinatesToFly, toggleDialogVisible, toggleReverseGeocodeActive,
 } from '../../modules/geosearch/actions';
 import { areCoordinatesWithinExtent } from '../../modules/geosearch/util';
 import { reverseGeocode } from '../../modules/geosearch/util-api';
@@ -60,14 +60,8 @@ export class CoordinatesMarker extends Component {
     }
     const hasFeatures = map.hasFeatureAtPixel(pixels);
     if (hasFeatures && !isShowingClick && !measureIsActive) {
-      let isActiveLayer = false;
-      map.forEachFeatureAtPixel(pixels, (feature) => {
-        const featureId = feature.getId();
-        const isMarker = featureId === 'coordinates-map-marker';
-        if (isMarker) {
-          isActiveLayer = true;
-        }
-      });
+      const featureCheck = (feature) => feature.getId() === 'coordinates-map-marker';
+      const isActiveLayer = map.forEachFeatureAtPixel(pixels, featureCheck);
       if (isActiveLayer) {
         changeCursor(true);
       }
@@ -129,12 +123,13 @@ export class CoordinatesMarker extends Component {
 
   getCoordinatesDialog = (pixels, olMap) => {
     const {
-      config,
-      clearCoordinates,
-      isMobile,
       toggleDialogVisible,
     } = this.props;
-    getCoordinatesDialogAtMapPixel(pixels, olMap, config, isMobile, clearCoordinates, toggleDialogVisible);
+    const isMarker = isCoordinatesDialogAvailableAtPixel(pixels, olMap);
+
+    if (isMarker) {
+      toggleDialogVisible(true);
+    }
   }
 
   // render geosearch extent alert for selecting points outside of the current map extent
@@ -154,9 +149,7 @@ export class CoordinatesMarker extends Component {
 
   render() {
     const { showExtentAlert } = this.state;
-    return showExtentAlert
-      ? this.renderExtentAlert()
-      : null;
+    return showExtentAlert && this.renderExtentAlert();
   }
 }
 
@@ -192,9 +185,6 @@ const mapDispatchToProps = (dispatch) => ({
   changeCursor: (bool) => {
     dispatch(changeCursorActionCreator(bool));
   },
-  clearCoordinates: () => {
-    dispatch(clearCoordinates());
-  },
   toggleDialogVisible: (isVisible) => {
     dispatch(toggleDialogVisible(isVisible));
   },
@@ -202,9 +192,7 @@ const mapDispatchToProps = (dispatch) => ({
 CoordinatesMarker.propTypes = {
   changeCursor: PropTypes.func.isRequired,
   config: PropTypes.object.isRequired,
-  clearCoordinates: PropTypes.func.isRequired,
   isCoordinateSearchActive: PropTypes.bool.isRequired,
-  isMobile: PropTypes.bool.isRequired,
   isShowingClick: PropTypes.bool.isRequired,
   measureIsActive: PropTypes.bool.isRequired,
   mouseEvents: PropTypes.object.isRequired,

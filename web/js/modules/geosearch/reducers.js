@@ -3,6 +3,7 @@ import {
   CLEAR_SUGGESTIONS,
   REQUEST_SUGGEST_PLACE_FAILURE,
   REQUEST_SUGGEST_PLACE_SUCCESS,
+  SET_REVERSE_GEOCODE_RESULTS,
   SET_MARKER,
   SET_SUGGESTION,
   TOGGLE_DIALOG_VISIBLE,
@@ -38,6 +39,11 @@ export function geosearchReducer(state = geosearchState, action) {
       return {
         ...state,
         isCoordinateSearchActive: action.value,
+      };
+    case SET_REVERSE_GEOCODE_RESULTS:
+      return {
+        ...state,
+        reverseGeocodeResults: action.value,
       };
     case SET_MARKER:
       return {

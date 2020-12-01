@@ -112,7 +112,7 @@ class GeosearchModal extends Component {
     } = this.props;
 
     const coordinatesWithinExtent = isCoordinatePairWithinExtent(coordinatesPending);
-    if (coordinatesWithinExtent === false) {
+    if (!coordinatesWithinExtent) {
       this.setExtentAlert(true);
       this.setInputAlertIcon(true);
     } else {
@@ -156,7 +156,7 @@ class GeosearchModal extends Component {
         const parsedY = getCoordinateFixedPrecision(y);
 
         const coordinatesWithinExtent = isCoordinatePairWithinExtent([parsedX, parsedY]);
-        if (coordinatesWithinExtent === false) {
+        if (!coordinatesWithinExtent) {
           this.setExtentAlert(true);
           this.setInputAlertIcon(true);
         } else {
