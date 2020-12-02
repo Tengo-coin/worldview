@@ -123,9 +123,10 @@ export class CoordinatesMarker extends Component {
 
   getCoordinatesDialog = (pixels, olMap) => {
     const {
+      isMobile,
       toggleDialogVisible,
     } = this.props;
-    const isMarker = isCoordinatesDialogAvailableAtPixel(pixels, olMap);
+    const isMarker = isCoordinatesDialogAvailableAtPixel(pixels, olMap, isMobile);
 
     if (isMarker) {
       toggleDialogVisible(true);
@@ -193,6 +194,7 @@ CoordinatesMarker.propTypes = {
   changeCursor: PropTypes.func.isRequired,
   config: PropTypes.object.isRequired,
   isCoordinateSearchActive: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   isShowingClick: PropTypes.bool.isRequired,
   measureIsActive: PropTypes.bool.isRequired,
   mouseEvents: PropTypes.object.isRequired,

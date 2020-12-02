@@ -122,10 +122,11 @@ export const getCoordinatesMetadata = (geocodeProperties) => {
  *
  * @param {Array} pixels
  * @param {Object} map
+ * @param {Boolean} isMobile
  *
  * @returns {Void}
  */
-export const isCoordinatesDialogAvailableAtPixel = (pixels, map) => {
+export const isCoordinatesDialogAvailableAtPixel = (pixels, map, isMobile) => {
   // check for existing coordinate marker tooltip overlay and prevent multiple renders
   const mapOverlays = map.getOverlays().getArray();
   const mapMarkerId = 'coordinates-map-marker';
@@ -137,6 +138,7 @@ export const isCoordinatesDialogAvailableAtPixel = (pixels, map) => {
     return;
   }
 
+  const featureOptions = isMobile ? { hitTolerance: 5 } : {};
   const featureCheck = (feature) => feature.getId() === mapMarkerId;
-  return map.forEachFeatureAtPixel(pixels, featureCheck);
+  return map.forEachFeatureAtPixel(pixels, featureCheck, featureOptions);
 };
