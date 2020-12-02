@@ -30,6 +30,10 @@ const {
   CONSTANT_REQUEST_PARAMETERS,
 } = GEOSEARCH_REQUEST_OPTIONS;
 
+/**
+ * @param {String} magicKey
+ * @param {Object} config
+ */
 export async function processMagicKey(magicKey, config) {
   const { features: { geocodeSearch: { url: requestUrl } } } = config;
   const request = `${requestUrl}findAddressCandidates?${CONSTANT_REQUEST_PARAMETERS}&outFields=*&magicKey=${magicKey}=`;
@@ -43,6 +47,10 @@ export async function processMagicKey(magicKey, config) {
   }
 }
 
+/**
+ * @param {Array} coordinates
+ * @param {Object} config
+ */
 export async function reverseGeocode(coordinates, config) {
   const { features: { geocodeSearch: { url: requestUrl } } } = config;
   const request = `${requestUrl}reverseGeocode?${CONSTANT_REQUEST_PARAMETERS}&location=${coordinates}`;

@@ -9,7 +9,6 @@ import {
 } from './constants';
 import { requestAction } from '../core/actions';
 import {
-  getCoordinatesMarker,
   areCoordinatesWithinExtent,
   setLocalStorageCollapseState,
 } from './util';
@@ -23,7 +22,9 @@ const {
   CONSTANT_REQUEST_PARAMETERS,
 } = GEOSEARCH_REQUEST_OPTIONS;
 
-// toggle show geosearch component
+/**
+ * Toggle show geosearch component
+ */
 export function toggleShowGeosearch() {
   return (dispatch, getState) => {
     const state = getState();
@@ -41,7 +42,10 @@ export function toggleShowGeosearch() {
   };
 }
 
-// toggle reverse geocode - if active, next click on map will add marker and get coordinates
+/**
+ * Toggle reverse geocode
+ * @param {Boolean} isActive
+ */
 export function toggleReverseGeocodeActive(isActive) {
   return {
     type: TOGGLE_REVERSE_GEOCODE,
@@ -49,8 +53,12 @@ export function toggleReverseGeocodeActive(isActive) {
   };
 }
 
-// use given coordinates to fly to that point, add marker, and display initial coordinates dialog
-export function selectCoordinatesToFly(coordinates, reverseGeocodeResults) {
+/**
+ * Set coordinates and reverse geocode results for place
+ * @param {Array} coordinates
+ * @param {Object} reverseGeocodeResults
+ */
+export function setPlaceMarker(coordinates, reverseGeocodeResults) {
   return (dispatch, getState) => {
     const state = getState();
     const {
@@ -68,25 +76,23 @@ export function selectCoordinatesToFly(coordinates, reverseGeocodeResults) {
     if (!coordinatesWithinExtent) {
       return dispatch({
         type: SET_MARKER,
-        value: null,
         coordinates: [],
         isCoordinatesDialogOpen: false,
       });
     }
 
-    const marker = getCoordinatesMarker(config, map, coordinates, reverseGeocodeResults);
-
     dispatch({
       type: SET_MARKER,
       reverseGeocodeResults,
       coordinates,
-      value: marker,
       isCoordinatesDialogOpen: true,
     });
   };
 }
 
-// clear coordinates including marker and dialog (if open)
+/**
+ * Clear coordinates including marker and dialog (if open)
+ */
 export function clearCoordinates() {
   return (dispatch) => {
     dispatch({
@@ -95,7 +101,10 @@ export function clearCoordinates() {
   };
 }
 
-// clear place suggestions
+/**
+ * Toggle show coordinates dialog
+ * @param {Boolean} isVisible
+ */
 export function toggleDialogVisible(isVisible) {
   return (dispatch) => {
     dispatch({
@@ -105,7 +114,9 @@ export function toggleDialogVisible(isVisible) {
   };
 }
 
-// clear place suggestions
+/**
+ * Clear place suggestions
+ */
 export function clearSuggestions() {
   return (dispatch) => {
     dispatch({
@@ -115,7 +126,10 @@ export function clearSuggestions() {
   };
 }
 
-// set place suggestion
+/**
+ * Set place suggestion
+ * @param {Array} suggestion | suggestion object
+ */
 export function setSuggestion(suggestion) {
   return (dispatch) => {
     dispatch({
@@ -125,7 +139,10 @@ export function setSuggestion(suggestion) {
   };
 }
 
-// get place suggestions using ArcGIS suggest API
+/**
+ * Get place suggestions using ArcGIS suggest API
+ * @param {String} val | input text to suggest places
+ */
 export function getSuggestions(val) {
   return (dispatch, getState) => {
     const { config } = getState();

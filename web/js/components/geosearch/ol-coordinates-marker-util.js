@@ -9,18 +9,14 @@ import { getFormattedCoordinates } from './util';
 /**
  * getCoordinatesDialogTitle
  *
- * @param {Object} address
- * @param {Object} error
- * @param {String} formattedLatitude
- * @param {String} formattedLongitude
+ * @param {Object} geocodeProperties | address, error
  *
- * @returns {String} title
+ * @returns {String | undefined} title
  */
-const getCoordinatesDialogTitle = (address, error, formattedLatitude, formattedLongitude) => {
+const getCoordinatesDialogTitle = (geocodeProperties) => {
+  const { address, error } = geocodeProperties;
   let title;
-  if (error) {
-    title = `${formattedLatitude.trim()}, ${formattedLongitude.trim()}`;
-  } else if (address) {
+  if (address && !error) {
     /* eslint-disable camelcase */
     const {
       Addr_type,
@@ -107,18 +103,17 @@ export const renderCoordinatesTooltip = (map, config, coordinates, coordinatesMe
  */
 export const getCoordinatesMetadata = (geocodeProperties) => {
   const { latitude, longitude, reverseGeocodeResults } = geocodeProperties;
-  const { address, error } = reverseGeocodeResults;
 
   // get formatted coordinates
   const [formattedLatitude, formattedLongitude] = getFormattedCoordinates(latitude, longitude);
 
   // build title based on available parameters
-  const title = getCoordinatesDialogTitle(address, error, formattedLatitude, formattedLongitude);
+  const title = getCoordinatesDialogTitle(reverseGeocodeResults, formattedLatitude, formattedLongitude);
   const coordinates = `${formattedLatitude.trim()}, ${formattedLongitude.trim()}`;
 
   return {
     coordinates,
-    title,
+    title: title || coordinates,
   };
 };
 

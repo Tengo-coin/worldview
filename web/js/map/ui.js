@@ -328,7 +328,7 @@ export default function mapui(models, config, store, ui) {
       geosearch, layers, proj,
     } = state;
     const {
-      activeMarker, coordinates, isCoordinatesDialogOpen, reverseGeocodeResults,
+      coordinates, isCoordinatesDialogOpen, reverseGeocodeResults,
     } = geosearch;
     const results = geocodeResults || reverseGeocodeResults;
     const { sources } = config;
@@ -336,7 +336,7 @@ export default function mapui(models, config, store, ui) {
 
     // clear previous marker (if present) and get new marker
     removeCoordinatesMarker();
-    const marker = getCoordinatesMarker(config, { ui: self }, coordinates, results);
+    const marker = getCoordinatesMarker({ ui: self }, config, coordinates, results);
 
     // prevent marker if outside of extent
     if (!marker) {
@@ -356,7 +356,7 @@ export default function mapui(models, config, store, ui) {
     }
 
     // handle render initial tooltip
-    const isDialogOpen = !activeMarker || (activeMarker && isCoordinatesDialogOpen);
+    const isDialogOpen = isInit || isCoordinatesDialogOpen;
     if (isDialogOpen) {
       addCoordinatesTooltip(results);
     }
@@ -545,11 +545,10 @@ export default function mapui(models, config, store, ui) {
   const reloadLayers = self.reloadLayers = function(map) {
     map = map || self.selected;
     const state = store.getState();
-    const { geosearch, layers, proj } = state;
+    const { layers, proj } = state;
     const compareState = state.compare;
     const layerGroupStr = compareState.activeString;
     const activeLayers = layers[layerGroupStr];
-    const { activeMarker } = geosearch;
     if (!config.features.compare || !compareState.active) {
       const compareMapDestroyed = !compareState.active && compareMapUi.active;
       if (compareMapDestroyed) {
@@ -567,7 +566,7 @@ export default function mapui(models, config, store, ui) {
         map.addLayer(createLayer(def));
       });
       // add active map marker back after destroying from layer/compare change
-      if (activeMarker) {
+      if (self.activeMarker) {
         addMarkerAndUpdateStore();
       }
     } else {
@@ -585,7 +584,7 @@ export default function mapui(models, config, store, ui) {
       });
       compareMapUi.create(map, compareState.mode);
       // add active map marker back in compare mode post createLayer
-      if (activeMarker) {
+      if (self.activeMarker) {
         addMarkerAndUpdateStore();
       }
     }

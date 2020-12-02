@@ -14,7 +14,13 @@ import safeLocalStorage from '../../util/local-storage';
 
 const { GEOSEARCH_COLLAPSED } = safeLocalStorage.keys;
 
-// animate coordinates marker
+/**
+ * Animate coordinates marker
+ * @param {Object} map
+ * @param {Object} config
+ * @param {Array} coordinates
+ * @param {Number} zoom
+ */
 export function animateCoordinates(map, config, coordinates, zoom) {
   const { projections } = config;
   const { selected } = map.ui;
@@ -28,7 +34,12 @@ export function animateCoordinates(map, config, coordinates, zoom) {
   map.ui.animate.fly([x, y], zoom);
 }
 
-// check if coordinates are within selected map extent
+/**
+ * Check if coordinates are within selected map extent
+ * @param {Object} map
+ * @param {Object} config
+ * @param {Array} coordinates
+ */
 export function areCoordinatesWithinExtent(map, config, coordinates) {
   const { projections } = config;
   const { selected } = map.ui;
@@ -44,8 +55,14 @@ export function areCoordinatesWithinExtent(map, config, coordinates) {
   return coordinatesWithinExtent;
 }
 
-// get coordinates marker
-export function getCoordinatesMarker(config, map, coordinates, reverseGeocodeResults) {
+/**
+ * Get coordinates marker
+ * @param {Object} map
+ * @param {Object} config
+ * @param {Array} coordinates
+ * @param {Object} reverseGeocodeResults
+ */
+export function getCoordinatesMarker(map, config, coordinates, reverseGeocodeResults) {
   const { projections } = config;
   const { selected } = map.ui;
   const { proj } = selected;
@@ -68,7 +85,12 @@ export function getCoordinatesMarker(config, map, coordinates, reverseGeocodeRes
   return marker;
 }
 
-// create Ol vector layer map pin
+/**
+ * Create Ol vector layer map pin
+ * @param {Array} coordinates
+ * @param {Array} transformedCoordinates
+ * @param {Object} reverseGeocodeResults
+ */
 const createPin = function(coordinates, transformedCoordinates = false, reverseGeocodeResults = {}) {
   const [longitude, latitude] = coordinates;
   const iconFeature = new OlFeature({
@@ -104,8 +126,9 @@ const createPin = function(coordinates, transformedCoordinates = false, reverseG
 
 /**
  *
- * @param {*} parameters
- * @param {*} stateFromLocation
+ * @param {Object} parameters
+ * @param {Object} stateFromLocation
+ * @param {Object} state
  */
 export function mapLocationToGeosearchState(
   parameters,
@@ -118,7 +141,8 @@ export function mapLocationToGeosearchState(
       .map((coord) => Number(coord))
       .filter((coord) => !lodashIsNaN(parseFloat(coord)))
     : [];
-  const coordinates = validCoordinates.length === 2
+  const isValid = validCoordinates.length === 2;
+  const coordinates = isValid
     ? validCoordinates
     : [];
 
@@ -130,6 +154,7 @@ export function mapLocationToGeosearchState(
     geosearch: {
       coordinates: { $set: coordinates },
       isExpanded: { $set: isExpanded },
+      isCoordinatesDialogOpen: { $set: isValid },
     },
   });
 

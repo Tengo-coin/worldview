@@ -14,7 +14,6 @@ import { getLocalStorageCollapseState } from './util';
 
 const localStorageCollapseState = getLocalStorageCollapseState();
 export const geosearchState = {
-  activeMarker: null,
   coordinates: [],
   isCoordinateSearchActive: false,
   isCoordinatesDialogOpen: false,
@@ -48,7 +47,6 @@ export function geosearchReducer(state = geosearchState, action) {
     case SET_MARKER:
       return {
         ...state,
-        activeMarker: action.value,
         coordinates: action.coordinates,
         isCoordinateSearchActive: false,
         reverseGeocodeResults: action.reverseGeocodeResults,
@@ -57,7 +55,6 @@ export function geosearchReducer(state = geosearchState, action) {
     case CLEAR_MARKER:
       return {
         ...state,
-        activeMarker: null,
         coordinates: [],
         reverseGeocodeResults: null,
         isCoordinatesDialogOpen: false,

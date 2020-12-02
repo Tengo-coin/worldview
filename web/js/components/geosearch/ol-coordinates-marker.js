@@ -10,7 +10,7 @@ import Alert from '../util/alert';
 import { changeCursor as changeCursorActionCreator } from '../../modules/map/actions';
 import { isCoordinatesDialogAvailableAtPixel } from './ol-coordinates-marker-util';
 import {
-  selectCoordinatesToFly, toggleDialogVisible, toggleReverseGeocodeActive,
+  setPlaceMarker, toggleDialogVisible, toggleReverseGeocodeActive,
 } from '../../modules/geosearch/actions';
 import { areCoordinatesWithinExtent } from '../../modules/geosearch/util';
 import { reverseGeocode } from '../../modules/geosearch/util-api';
@@ -87,9 +87,9 @@ export class CoordinatesMarker extends Component {
   singleclick(e, map) {
     const {
       config,
-      measureIsActive,
-      selectCoordinatesToFly,
       isCoordinateSearchActive,
+      measureIsActive,
+      setPlaceMarker,
       toggleReverseGeocodeActive,
     } = this.props;
     const {
@@ -110,7 +110,7 @@ export class CoordinatesMarker extends Component {
       }
       // get available reverse geocoding for coordinates and fly to point
       reverseGeocode([longitude, latitude], config).then((results) => {
-        selectCoordinatesToFly([longitude, latitude], results);
+        setPlaceMarker([longitude, latitude], results);
       });
       this.setState({ showExtentAlert: false });
     } else {
@@ -176,17 +176,17 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  selectCoordinatesToFly: (coordinates, reverseGeocodeResults) => {
-    dispatch(selectCoordinatesToFly(coordinates, reverseGeocodeResults));
-  },
-  toggleReverseGeocodeActive: (isActive) => {
-    dispatch(toggleReverseGeocodeActive(isActive));
-  },
   changeCursor: (bool) => {
     dispatch(changeCursorActionCreator(bool));
   },
+  setPlaceMarker: (coordinates, reverseGeocodeResults) => {
+    dispatch(setPlaceMarker(coordinates, reverseGeocodeResults));
+  },
   toggleDialogVisible: (isVisible) => {
     dispatch(toggleDialogVisible(isVisible));
+  },
+  toggleReverseGeocodeActive: (isActive) => {
+    dispatch(toggleReverseGeocodeActive(isActive));
   },
 });
 CoordinatesMarker.propTypes = {
@@ -196,7 +196,7 @@ CoordinatesMarker.propTypes = {
   isShowingClick: PropTypes.bool.isRequired,
   measureIsActive: PropTypes.bool.isRequired,
   mouseEvents: PropTypes.object.isRequired,
-  selectCoordinatesToFly: PropTypes.func.isRequired,
+  setPlaceMarker: PropTypes.func.isRequired,
   toggleDialogVisible: PropTypes.func.isRequired,
   toggleReverseGeocodeActive: PropTypes.func.isRequired,
 };
