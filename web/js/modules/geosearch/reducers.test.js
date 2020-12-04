@@ -128,7 +128,7 @@ describe('geosearchReducer', () => {
         }),
       ).toEqual({
         ...geosearchState,
-        suggestions: suggestion,
+        suggestedPlace: suggestion,
       });
     },
   );
