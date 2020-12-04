@@ -120,6 +120,7 @@ class CoordinatesDialog extends Component {
       coordinatesMetadata, tooltipId,
     } = this.props;
     const {
+      showTooltips,
       tooltipToggleTime,
     } = this.state;
     const {
@@ -129,9 +130,11 @@ class CoordinatesDialog extends Component {
 
     return (
       <div className={`tooltip-custom-black tooltip-static tooltip-coordinates-container ${tooltipId}`}>
+        {showTooltips && (
         <CopyClipboardTooltip
           tooltipToggleTime={tooltipToggleTime}
         />
+        )}
         <div className="tooltip-coordinates-title">{title}</div>
         <div className="tooltip-coordinates">{coordinates}</div>
         {this.renderDialogButtonControls()}
