@@ -10,7 +10,7 @@
       "layergroup": [
         "hls"
       ],
-      "product": "",
+      "product": "HLSS30",
       "tracks": [
         "OrbitTracks_Sentinel-2B_Descending"
       ],
